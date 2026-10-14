@@ -1,29 +1,27 @@
-"""Validate and copy a generated standalone demo for GitHub Pages."""
+"""Import a standalone demo's dataset, then rebuild with local presentation and role evidence."""
 
 import argparse
-import hashlib
 import json
-import re
 from pathlib import Path
 
-parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("source", type=Path, help="Generated ai-talent-network.html")
-args = parser.parse_args()
-payload = args.source.read_bytes()
-html = payload.decode("utf-8")
-match = re.search(r'<script type="application/json" id="data">(.*?)</script>', html, re.S)
-if not match:
-    parser.error("Source is missing the embedded talent dataset")
-data = json.loads(match.group(1))
-if not isinstance(data.get("people"), list) or not data["people"]:
-    parser.error("Source dataset has no people records")
-for anchor in ("roster", "shortlist", "method"):
-    if f'id="{anchor}"' not in html:
-        parser.error(f"Source is missing the {anchor} section")
-destination = Path(__file__).resolve().parent / "index.html"
-destination.write_bytes(payload)
-print(json.dumps({
-    "records": len(data["people"]),
-    "generated": data.get("generated"),
-    "sha256": hashlib.sha256(payload).hexdigest(),
-}, ensure_ascii=False))
+import build_page
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("source", type=Path, help="Generated standalone HTML to import")
+    args = parser.parse_args()
+    try:
+        data = build_page.import_dataset(build_page.extract_dataset(args.source.read_text(encoding="utf-8")))
+        # Validate the complete local build before replacing the source dataset.
+        build_page.prepare_page(data)
+        build_page.DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
+        build_page.DATA_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        result = build_page.build()
+    except (OSError, ValueError) as error:
+        parser.error(str(error))
+    print(json.dumps(result, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()

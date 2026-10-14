@@ -1,0 +1,741 @@
+<meta charset="utf-8">
+<title>AI Talent Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* Follows the InferenceNet Challenge site: white paper, 1px rules, no shadows, Inter, one navy accent.
+   Layout: sticky header, centred paper-style hero, stats strip, then numbered sections. */
+:root {
+  --paper: #fff; --surface: #fff; --ink: #191919; --soft: #555; --muted: #666;
+  --line: #dedede; --strong-line: #bbb; --tint: #f5f5f5; --inverse: #fff;
+  --brand: #264873; --brand-tint: #edf2fb; --caution: #8a5a00;
+  --chart-1: #264873; --chart-2: #929292; --chart-3: #3a6aa7; --chart-4: #484848; --chart-5: #5d8ece;
+  --radius: 4px; --header-h: 72px;
+  --sans: Inter, "Noto Sans SC", "PingFang SC", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111; --surface: #181818; --ink: #eee; --soft: #bdbdbd; --muted: #aaa;
+    --line: #363636; --strong-line: #666; --tint: #222; --inverse: #111;
+    --brand: #8fadd6; --brand-tint: #233047; --caution: #e0b35a;
+    --chart-1: #8fadd6; --chart-2: #696969; --chart-3: #b3d4ff; --chart-4: #989898; --chart-5: #3f6aa1;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #111; --surface: #181818; --ink: #eee; --soft: #bdbdbd; --muted: #aaa;
+  --line: #363636; --strong-line: #666; --tint: #222; --inverse: #111;
+  --brand: #8fadd6; --brand-tint: #233047; --caution: #e0b35a;
+  --chart-1: #8fadd6; --chart-2: #696969; --chart-3: #b3d4ff; --chart-4: #989898; --chart-5: #3f6aa1;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 24px); }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-weight: 650; letter-spacing: -.025em; text-wrap: balance; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.container { width: min(1180px, calc(100% - 96px)); margin-inline: auto; }
+@media (max-width: 860px) { .container { width: calc(100% - 48px); } }
+@media (max-width: 520px) { .container { width: calc(100% - 32px); } }
+.section { padding-block: 68px; }
+.ruled { border-top: 1px solid var(--line); }
+
+/* Header */
+.site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--paper); border-bottom: 1px solid var(--line); }
+.nav { display: flex; align-items: center; min-height: var(--header-h); gap: 28px; }
+.wordmark { display: inline-flex; align-items: baseline; white-space: nowrap; font-size: 21px; font-weight: 650; letter-spacing: -.035em; line-height: 1; }
+.wordmark span { font-weight: 400; margin-left: 5px; }
+.nav-links { display: flex; gap: 22px; margin-left: auto; }
+.nav-links a { font-size: 14px; color: var(--soft); padding-block: 24px; position: relative; }
+.nav-links a:hover, .nav-links a[aria-current="true"] { color: var(--ink); }
+.nav-links a[aria-current="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 17px; height: 1px; background: var(--ink); }
+.theme-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; border: 1px solid var(--line); background: var(--paper); padding: 6px 12px; border-radius: 3px; font-size: 13px; }
+.theme-toggle:hover { background: var(--tint); border-color: var(--strong-line); }
+.theme-icon { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 50%; background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+@media (max-width: 760px) {
+  .nav { flex-wrap: wrap; gap: 0; padding-block: 12px; justify-content: space-between; }
+  .nav-links { order: 3; width: 100%; justify-content: center; margin: 8px 0 0; gap: 6px 20px; flex-wrap: wrap; }
+  .nav-links a { padding-block: 6px; }
+  .nav-links a[aria-current="true"]::after { bottom: 2px; }
+}
+
+/* Hero */
+.hero { text-align: center; padding-block: 56px 40px; }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 20px; }
+h1 { font-size: clamp(36px, 4.6vw, 60px); line-height: 1.15; }
+.hero-subtitle { font-size: clamp(19px, 2.2vw, 23px); margin-top: 18px; }
+.hero-description { font-size: 16px; color: var(--soft); max-width: 720px; margin: 10px auto 0; }
+.hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.button { display: inline-flex; align-items: center; gap: 14px; min-height: 46px; border: 1px solid var(--strong-line); padding: 10px 18px; border-radius: 3px; font-size: 14px; font-weight: 500; background: var(--paper); transition: background .18s, border-color .18s; }
+.button span { font-size: 18px; font-weight: 400; line-height: 1; }
+.button.primary { background: var(--ink); color: var(--inverse); border-color: var(--ink); }
+.button:hover { background: var(--tint); border-color: var(--ink); }
+.button.primary:hover { background: var(--soft); border-color: var(--soft); }
+.launch-note { margin-top: 20px; font-size: 12px; color: var(--muted); }
+.status-mark { display: inline-block; width: 6px; height: 6px; border: 1px solid currentColor; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+.sep { margin-inline: 10px; color: var(--strong-line); }
+
+/* Stats strip */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); padding-block: 26px; }
+.stats > div { display: flex; flex-direction: column; gap: 8px; padding-inline: 24px; min-width: 0; }
+.stats > div:first-child { padding-left: 0; }
+.stats > div + div { border-left: 1px solid var(--line); }
+.stats strong { font-size: 40px; line-height: 1; font-weight: 600; letter-spacing: -.03em; }
+.stats strong small { font-size: 16px; font-weight: 400; color: var(--muted); margin-left: 4px; letter-spacing: 0; }
+.stats span { font-size: 12px; color: var(--soft); }
+.stats-source { color: var(--muted); font-size: 11px; line-height: 1.8; margin-top: 14px; }
+@media (max-width: 760px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; }
+  .stats > div { padding: 20px 16px !important; }
+  .stats > div:nth-child(3) { border-left: 0; }
+  .stats > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .stats strong { font-size: 32px; }
+}
+
+/* Section heading */
+.section-heading { display: grid; grid-template-columns: 1.05fr 1fr; gap: 70px; align-items: start; margin-bottom: 30px; }
+.kicker { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 13px; }
+h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
+.lead { font-size: 15px; line-height: 1.75; color: var(--soft); max-width: 520px; }
+@media (max-width: 860px) { .section-heading { grid-template-columns: 1fr; gap: 16px; } }
+
+/* Distribution charts */
+.dist { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; margin-bottom: 30px; }
+@media (max-width: 860px) { .dist { grid-template-columns: 1fr; } }
+.dist figure { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); min-width: 0; }
+.dist-head { display: flex; justify-content: space-between; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); font-size: 11px; color: var(--muted); font-family: var(--mono); letter-spacing: .02em; }
+.dist-body { padding: 14px 20px 18px; display: grid; gap: 4px; }
+.bar-row { display: grid; grid-template-columns: 128px minmax(0, 1fr) 44px; gap: 14px; align-items: center; background: none; border: 0; padding: 7px 8px; margin-inline: -8px; border-radius: 3px; text-align: left; font-size: 13px; }
+.bar-row:hover { background: var(--tint); }
+.bar-row[aria-pressed="true"] { background: var(--brand-tint); }
+.bar-row .track { height: 12px; background: var(--tint); border-radius: 2px; overflow: hidden; }
+.bar-row[aria-pressed="true"] .track { background: var(--paper); }
+.bar-row .track i { display: block; height: 100%; }
+.bar-row .n { text-align: right; font-family: var(--mono); font-size: 13px; }
+.bar-row .lab b { font-family: var(--mono); font-weight: 500; color: var(--muted); margin-right: 8px; }
+
+/* Controls */
+.controls { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; margin-bottom: 18px; }
+.controls label { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--soft); }
+.controls select, .controls input[type="search"] { font-size: 14px; min-height: 42px; padding: 8px 12px; border: 1px solid var(--strong-line); border-radius: 4px; background: var(--paper); color: var(--ink); max-width: 100%; }
+.controls input[type="search"] { width: 260px; }
+.controls .check { gap: 8px; }
+.controls .grow { margin-left: auto; }
+.text-button { background: none; border: 0; padding: 0; font-size: 13px; text-decoration: underline; text-decoration-color: var(--strong-line); text-underline-offset: 4px; color: var(--ink); }
+.text-button:hover { text-decoration-color: var(--ink); }
+.result-meta { font-size: 12px; color: var(--muted); margin: 0 0 10px; }
+@media (max-width: 680px) { .controls label { width: 100%; justify-content: space-between; } .controls input[type="search"] { width: 100%; } .controls .grow { margin-left: 0; } }
+
+/* Roster table */
+.table-scroll { overflow-x: auto; }
+.roster { width: 100%; min-width: 980px; border-collapse: collapse; font-size: 14px; }
+.roster th, .roster td { padding: 14px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.roster thead th { font-size: 12px; line-height: 1.5; color: var(--soft); font-weight: 500; white-space: nowrap; border-bottom-color: var(--strong-line); }
+.roster .r { text-align: right; }
+.roster td.r { font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+.roster .is-sorted { background: var(--brand-tint); color: var(--ink); font-weight: 600; }
+.roster thead .sort { background: none; border: 0; padding: 0; color: inherit; font: inherit; white-space: nowrap; }
+.roster thead .sort::after { content: " ↓"; color: var(--strong-line); }
+.roster thead .is-sorted .sort::after { color: var(--brand); }
+.roster tbody th { min-width: 230px; }
+.roster .rank { width: 44px; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.roster tbody tr.is-open > * { background: var(--tint); }
+.roster tbody tr.is-open > .is-sorted { background: var(--brand-tint); }
+.roster tbody tr.is-open > th { box-shadow: inset 3px 0 0 var(--brand); }
+.person { display: inline-flex; align-items: center; gap: 8px; border: 0; background: none; padding: 2px 0; font-weight: 500; text-align: left; text-decoration: underline; text-decoration-color: var(--strong-line); text-underline-offset: 4px; }
+.person::after { content: "+"; min-width: 18px; border: 1px solid var(--strong-line); border-radius: 3px; font-family: var(--mono); font-size: 11px; line-height: 1.4; text-align: center; color: var(--muted); text-decoration: none; }
+.person[aria-expanded="true"]::after { content: "−"; border-color: var(--brand); color: var(--brand); }
+.person:hover { text-decoration-color: var(--ink); }
+.unit { display: block; font-size: 12px; color: var(--muted); font-weight: 400; }
+.tag { display: inline-block; white-space: nowrap; font-size: 12px; line-height: 1.5; padding: 3px 7px; border-radius: 3px; background: var(--tint); color: var(--soft); }
+.tag.t1 { background: var(--brand); color: var(--inverse); }
+.tag.t2 { background: var(--brand-tint); color: var(--brand); }
+.tag.t3 { background: var(--tint); color: var(--ink); }
+.tag.t4 { background: transparent; color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); }
+.tag.warn { font-size: 11px; padding: 0 5px; margin-left: 6px; background: transparent; box-shadow: inset 0 0 0 1px var(--caution); color: var(--caution); }
+.zh { font-weight: 400; color: var(--soft); }
+.tag.manual { font-size: 11px; padding: 0 5px; margin-left: 6px; background: var(--brand-tint); color: var(--brand); }
+.tag.ok { font-size: 11px; padding: 0 5px; margin-left: 6px; background: transparent; box-shadow: inset 0 0 0 1px var(--brand); color: var(--brand); }
+.tag.bad { font-size: 11px; padding: 0 5px; margin-left: 6px; background: var(--caution); color: var(--paper); }
+.check-list { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.check-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.check-list li:last-child { border-bottom: 0; }
+.check-list .who { font-weight: 500; }
+.check-list .what { grid-column: 1 / -1; color: var(--soft); font-size: 12px; }
+.tag.early { font-size: 11px; padding: 0 5px; margin-left: 6px; background: transparent; box-shadow: inset 0 0 0 1px var(--line); color: var(--muted); }
+.disc { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; font-size: 13px; color: var(--soft); }
+.disc i { width: 8px; height: 8px; border-radius: 1px; }
+.fitbar { display: inline-grid; grid-template-columns: 52px 26px; gap: 8px; align-items: center; justify-content: end; }
+.fitbar .track { height: 5px; background: var(--tint); border-radius: 2px; overflow: hidden; }
+.fitbar .track i { display: block; height: 100%; background: var(--brand); }
+.topics { font-size: 12px; color: var(--muted); max-width: 260px; line-height: 1.5; }
+.star { border: 0; background: none; padding: 2px 4px; font-size: 16px; line-height: 1; color: var(--strong-line); }
+.star[aria-pressed="true"] { color: var(--brand); }
+.star:hover { color: var(--brand); }
+@media (max-width: 760px) { .c-topics { display: none; } .roster { min-width: 760px; } }
+.empty { text-align: center; padding: 40px 16px; color: var(--muted); font-size: 14px; }
+
+.affiliation { min-width: 180px; max-width: 240px; }
+.position { min-width: 210px; max-width: 290px; font-size: 13px; }
+.affiliation strong { font-size: 14px; font-weight: 500; }
+.tag.pending { font-size: 11px; background: transparent; padding: 0; color: var(--muted); }
+.position .tag { margin-left: 0; }
+.legacy-note { margin-top: 20px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+.legacy-note summary { cursor: pointer; }
+.legacy-note p { margin-block: 8px; }
+/* Dossier card (opens under the row) */
+.roster tr.card-row > td { padding: 0 0 18px; background: var(--paper); }
+.card { margin-top: 12px; padding: 22px 24px; border: 1px solid var(--strong-line); border-top: 3px solid var(--brand); border-radius: var(--radius); background: var(--surface); }
+.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.card-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.card h3 { font-size: 22px; line-height: 1.3; }
+.card-meta { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.card-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.small-btn { min-height: 34px; padding: 5px 12px; border: 1px solid var(--strong-line); border-radius: 4px; background: var(--paper); font-size: 13px; }
+.small-btn:hover { border-color: var(--ink); }
+.small-btn.on { border-color: var(--brand); color: var(--brand); }
+.card-body { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); gap: 24px 36px; margin-top: 18px; }
+@media (max-width: 860px) { .card-body { grid-template-columns: 1fr; } .card { padding: 18px; } }
+.facts { margin: 0; font-size: 13px; line-height: 1.55; }
+.facts div { display: grid; grid-template-columns: minmax(96px, .7fr) minmax(0, 1.3fr); gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.facts dt { color: var(--soft); }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.facts dd.num { font-size: 13px; }
+.mix { display: grid; gap: 6px; margin-top: 4px; }
+.mix-row { display: grid; grid-template-columns: 64px minmax(0, 1fr) 38px; gap: 10px; align-items: center; font-size: 12px; color: var(--soft); }
+.mix-row .track { height: 5px; background: var(--tint); border-radius: 2px; overflow: hidden; }
+.mix-row .track i { display: block; height: 100%; }
+.mix-row .num { text-align: right; color: var(--ink); }
+.sub-h { font-size: 12px; color: var(--muted); font-weight: 500; margin: 0 0 8px; }
+.papers { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.papers li { font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.papers a { text-decoration: underline; text-decoration-color: var(--strong-line); text-underline-offset: 3px; }
+.papers a:hover { text-decoration-color: var(--ink); }
+.papers .meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.ai-mark { font-family: var(--mono); font-size: 10px; color: var(--brand); border: 1px solid var(--brand); border-radius: 3px; padding: 0 4px; margin-left: 6px; vertical-align: 1px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.chip { font-size: 12px; background: var(--tint); color: var(--soft); border-radius: 3px; padding: 2px 7px; }
+.card-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 16px; font-size: 13px; }
+.card-links a, .text-link { text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 4px; }
+.card-links a:hover, .text-link:hover { text-decoration-color: var(--ink); }
+.card-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+/* Shortlist */
+.sl-group + .sl-group { margin-top: 34px; }
+.sl-group-h { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 13px; color: var(--muted); }
+.sl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 1000px) { .sl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .sl-grid { grid-template-columns: 1fr; } }
+.resource { display: flex; flex-direction: column; padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius); min-width: 0; text-align: left; background: var(--paper); transition: background .2s, border-color .2s; }
+.resource:hover { background: var(--tint); border-color: var(--strong-line); }
+.resource-top { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.resource-type { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .02em; }
+.resource h3 { font-size: 19px; line-height: 1.3; }
+.resource .where { font-size: 13px; color: var(--soft); margin-top: 4px; }
+.resource .paper-line { font-size: 13px; color: var(--soft); margin-top: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.resource .metrics { display: flex; gap: 18px; margin-top: auto; padding-top: 16px; font-size: 12px; color: var(--muted); }
+.resource .metrics b { font-family: var(--mono); font-weight: 500; color: var(--ink); margin-left: 4px; }
+.sl-bar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; border-block: 1px solid var(--line); padding-block: 14px; margin-bottom: 28px; font-size: 13px; color: var(--soft); }
+.sl-bar .acts { display: flex; gap: 18px; }
+
+/* Method */
+.steps li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 22px; padding: 22px 0; border-top: 1px solid var(--line); align-items: start; }
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+.steps { list-style: none; margin: 0; padding: 0; }
+.step-index { font-size: 26px; color: var(--muted); line-height: 1.3; font-weight: 400; }
+.steps h3 { font-size: 18px; line-height: 1.4; }
+.steps p { color: var(--soft); font-size: 14px; margin-top: 5px; max-width: 680px; }
+.availability { white-space: nowrap; border: 1px solid var(--line); border-radius: var(--radius); padding: 4px 9px; font-size: 11px; color: var(--muted); font-family: var(--mono); }
+.availability.done { border-color: var(--strong-line); color: var(--ink); }
+@media (max-width: 620px) { .steps li { grid-template-columns: 30px minmax(0, 1fr); gap: 12px; } .steps .availability { grid-column: 2; justify-self: start; } .step-index { font-size: 20px; } }
+.method-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; margin-top: 44px; }
+@media (max-width: 860px) { .method-grid { grid-template-columns: 1fr; } }
+.box { border: 1px solid var(--line); border-radius: var(--radius); min-width: 0; }
+.box-head { padding: 14px 20px; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 600; }
+.box-body { padding: 4px 20px 18px; }
+.box .mini { width: 100%; border-collapse: collapse; font-size: 13px; }
+.mini th, .mini td { padding: 10px 6px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.mini thead th { font-size: 12px; font-weight: 500; color: var(--soft); }
+.mini .r { text-align: right; }
+.mini td.r { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.mini tr:last-child td { border-bottom: 0; }
+.box-note { font-size: 12px; color: var(--muted); line-height: 1.75; margin-top: 12px; }
+.facts.est div { grid-template-columns: minmax(0, 1fr) auto; }
+.facts.est dd { text-align: right; font-family: var(--mono); }
+.facts.est .hl dt, .facts.est .hl dd { color: var(--brand); font-weight: 600; }
+.notes { border-top: 1px solid var(--line); padding-top: 22px; margin-top: 40px; }
+.notes summary { cursor: pointer; font-size: 14px; font-weight: 600; }
+.notes ul { padding-left: 20px; margin: 12px 0 0; }
+.notes li { font-size: 14px; line-height: 1.8; color: var(--soft); }
+
+/* Footer, toast */
+.site-footer { border-top: 1px solid var(--strong-line); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 20px; padding-block: 28px; margin-bottom: 20px; }
+.site-footer .wordmark { font-size: 18px; }
+.site-footer p { font-size: 12px; color: var(--muted); }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 9px 14px; border-radius: 3px; font-size: 13px; z-index: 40; }
+.copybox { width: 100%; height: 120px; font-family: var(--mono); font-size: 11px; border: 1px solid var(--strong-line); border-radius: 4px; background: var(--paper); margin-top: 8px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+
+<header class="site-header">
+  <nav class="nav container" aria-label="主导航">
+    <a class="wordmark" href="#top">AI Talent<span>Network</span></a>
+    <div class="nav-links">
+      <a href="#roster" data-nav="roster">人才库</a>
+      <a href="#shortlist" data-nav="shortlist">Shortlist</a>
+      <a href="#method" data-nav="method">方法与进度</a>
+    </div>
+    <button class="theme-toggle" id="theme" type="button" aria-label="切换明暗主题"><span class="theme-icon" aria-hidden="true"></span><span id="theme-label">Light</span></button>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero container">
+    <p class="eyebrow">AI × 金融经济 · 人才库试点</p>
+    <h1>AI Talent Network</h1>
+    <p class="hero-subtitle">谁在经济金融里做 AI，谁在计算机里研究经济金融问题？</p>
+    <p class="hero-description" id="hero-desc"></p>
+    <div class="hero-actions">
+      <a class="button primary" href="#roster">查看人才库 <span>→</span></a>
+      <a class="button" href="#shortlist">Shortlist <span class="num" id="hero-sl"></span></a>
+    </div>
+    <p class="launch-note" id="launch-note"></p>
+  </section>
+
+  <div class="container">
+    <div class="stats" id="stats"></div>
+    <p class="stats-source" id="stats-source"></p>
+  </div>
+
+  <section class="section container" id="roster">
+    <div class="section-heading">
+      <div>
+        <p class="kicker">01 · 人才库</p>
+        <h2>先看学校与职位，再看项目分层</h2>
+      </div>
+      <p class="lead">学校与职位只有获得任职来源支持后才填入；未确认的写“待核实”。L1–L4 是本项目的研究筛选分层，不是学校职称。点击姓名查看来源、核验日期、历史关联和分层依据。</p>
+    </div>
+
+    <div class="dist">
+      <figure>
+        <div class="dist-head"><span>我们的分层（初分）</span><span>点击筛选</span></div>
+        <div class="dist-body" id="dist-tier"></div>
+      </figure>
+      <figure>
+        <div class="dist-head"><span>学科来源</span><span>点击筛选</span></div>
+        <div class="dist-body" id="dist-home"></div>
+      </figure>
+    </div>
+
+    <div class="controls">
+      <label>搜索 <input id="q" type="search" placeholder="姓名、现任学校、职位、主题…"></label>
+      <label>检索区域 <select id="region"></select></label>
+      <label>检索关联学校 <select id="school"></select></label>
+      <label>当前学校/机构 <select id="current-school"></select></label>
+      <label>现职证据 <select id="vfilter"><option value="all">全部</option><option value="ok">本轮来源确认</option><option value="bad">来源表述不一致</option><option value="legacy">仅有旧记录</option><option value="none">待官网核实</option></select></label>
+      <label class="check"><input type="checkbox" id="hide-early"> 隐藏 h&lt;12 记录</label>
+      <span class="grow"></span>
+      <button class="text-button" id="copy" type="button">复制当前结果（可粘贴到 Excel）</button>
+    </div>
+    <p class="result-meta" id="meta"></p>
+    <div class="table-scroll">
+      <table class="roster">
+        <thead><tr id="thead"></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div id="copy-fallback"></div>
+  </section>
+
+  <section class="section container ruled" id="shortlist">
+    <div class="section-heading">
+      <div>
+        <p class="kicker">02 · Shortlist</p>
+        <h2>研究候选清单，按项目分层分组</h2>
+      </div>
+      <p class="lead">保留试点版 30 人初选清单，供继续核验；入选不代表现职已确认或适合招聘。学校、职位与项目标签分开显示。在人才库或这里点 ☆ 增删，改动只保存在当前浏览器。</p>
+    </div>
+    <div class="sl-bar">
+      <span id="sl-count"></span>
+      <span class="acts"><button class="text-button" id="copy-sl" type="button">复制 Shortlist</button><button class="text-button" id="reset-sl" type="button">恢复默认</button></span>
+    </div>
+    <div id="sl"></div>
+  </section>
+
+  <section class="section container ruled" id="method">
+    <div class="section-heading">
+      <div>
+        <p class="kicker">03 · 方法与进度</p>
+        <h2>从论文出发找人，再用官网和主页核实</h2>
+      </div>
+      <p class="lead" id="method-lead"></p>
+    </div>
+    <ol class="steps" id="steps"></ol>
+
+    <div class="method-grid">
+      <div class="box">
+        <div class="box-head">我们的分层定义（非学校职称）</div>
+        <div class="box-body">
+          <table class="mini"><thead><tr><th>分层</th><th>口径</th><th class="r">人数</th></tr></thead><tbody id="tier-def"></tbody></table>
+          <p class="box-note">以下是项目内部的初筛规则，结合奖项、OpenAlex 指标和人工指定；不是官方职称、学界统一排名或招聘结论。L4 只表示未达到前三层条件，不能据此推断年龄、资历或“新锐”。每人的分层依据在详情中展示。</p><p class="box-note">AI×金融相关性 = 55% 交叉论文证据（金融论文计 1、一般经济论文计 0.7、博弈论/投票等计 0.35；非 AI 的交叉论文再乘 0.4）+ 25% 研究主题中金融的占比 + 20% AI 强度。综合分 = 0.6 × 相关性 + 0.4 × 分层分（L1 100、L2 85、L3 60、L4 35）。</p>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-head">工作量估算</div>
+        <div class="box-body">
+          <dl class="facts est" id="estimate"></dl>
+          <p class="box-note">机器抓取只占小头，主要工作量在身份核验和人工复核。60 所约需 900 次接口调用，超过匿名额度（1000 次/天）时需要申请免费 API key。</p>
+        </div>
+      </div>
+      <div class="box" style="grid-column: 1 / -1">
+        <div class="box-head">各校抓取实测</div>
+        <div class="box-body table-scroll">
+          <table class="mini" style="min-width:560px"><thead><tr><th>学校</th><th>区域</th><th class="r">交叉论文</th><th class="r">候选作者</th><th class="r">入库</th><th class="r">耗时</th><th class="r">接口调用</th></tr></thead><tbody id="timing"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" style="margin-top:28px">
+      <div class="box-head" id="check-head">历史归属与身份备注</div>
+      <div class="box-body"><ul class="check-list" id="check-list"></ul>
+      <p class="box-note">这里保留初版“已调离／非本校”等备注用于追溯，它们相对于检索关联学校，不能代替当前任职信息。旧记录中的“未单独检索”不计为已核实；学校或职位缺乏证据时仍显示待核实。本轮新来源优先于旧备注。</p></div>
+    </div>
+
+    <details class="notes">
+      <summary>已知局限</summary>
+      <ul>
+        <li>OpenAlex 的作者消歧偶有错误，个别人的单位或指标可能有误。每个人都附了 OpenAlex 链接，可以核对。</li>
+        <li>“检索关联学校”来自论文署名和 OpenAlex 最近关联机构，可能包含历史任职、访问、兼职或关联校区。它与当前主聘学校分开保存；当前学校与职位须查任职来源。</li>
+        <li>h 指数和被引跨学科不可直接比较：计算机偏高，经济金融偏低。扩校后分层阈值会按学科校准。</li>
+        <li>只看 2018 年以来的论文，更早开始做交叉研究、近年转向的学者分数可能偏低。</li>
+        <li>OpenAlex 对中文期刊（如《经济研究》《管理世界》）覆盖有限，内地高校主要发中文期刊的学者会被漏掉，内地学校入库人数因此偏少。扩校时用官网教师名录补全。</li>
+        <li>同名学者偶尔被 OpenAlex 合并成一个档案（标“指标待核”），或一人被拆成多个档案（已按姓名和研究主题合并，详情里保留重复档案链接）。</li>
+      </ul>
+    </details>
+  </section>
+
+  <footer class="site-footer container">
+    <span class="wordmark">AI Talent<span>Network</span></span>
+    <p id="foot"></p>
+  </footer>
+</main>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("data").textContent);
+  const P = D.people;
+  const TIERS = { 1: "顶级奖项", 2: "高影响力候选", 3: "领域骨干候选", 4: "其他候选" };
+  const TIER_DEF = { 1: "诺贝尔经济学奖或图灵奖得主", 2: "克拉克奖、奈望林纳奖等顶级奖项；或经济金融 h≥45 / 被引≥1.5 万，计算机与交叉 h≥60 / 被引≥2.5 万；或人工标注的领域带头人", 3: "经济金融 20≤h<45；计算机与交叉 25≤h<60", 4: "未达到 L1–L3 规则；不据此判断年龄或真实职称（h<12 可单独筛选）" };
+  const TIER_COLOR = { 1: "--chart-1", 2: "--chart-3", 3: "--chart-5", 4: "--chart-2" };
+  const HOMES = ["金融/经济", "交叉（统计/运筹/管理等）", "计算机/AI"];
+  const HOME_SHORT = { "金融/经济": "金融/经济", "交叉（统计/运筹/管理等）": "交叉学科", "计算机/AI": "计算机/AI" };
+  const HOME_COLOR = { "金融/经济": "--chart-1", "交叉（统计/运筹/管理等）": "--chart-2", "计算机/AI": "--chart-5" };
+  const REGIONS = ["亚洲", "欧洲", "北美"];
+  const TARGET = 20;
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmt = n => Number(n).toLocaleString("en-US");
+  const key = p => p.id + "@" + p.school;
+
+  // Per-viewer shortlist edits
+  const LS = "atn-shortlist-v1";
+  let overrides = {};
+  try { overrides = JSON.parse(localStorage.getItem(LS) || "{}") || {}; } catch (e) { overrides = {}; }
+  const saveOv = () => { try { localStorage.setItem(LS, JSON.stringify(overrides)); } catch (e) {} };
+  const inSL = p => (key(p) in overrides ? overrides[key(p)] : p.shortlist);
+
+  const state = { q: "", region: "全部", school: "全部", currentSchool: "全部", tier: null, home: null, sort: "fit", hideEarly: false, vf: "all", open: null };
+  const vst = p => p.verify ? p.verify.status : null;
+  const vok = p => p.current_role?.evidence_status === "official_verified";
+  const roleState = p => p.current_role ? (vok(p) ? "ok" : p.current_role.evidence_status === "conflicting" ? "bad" : "none") : p.verify && !/未单独检索/.test(p.verify.title || "") && p.verify.url ? "legacy" : "none";
+  const institutionKnown = p => Boolean(p.current_role?.institution && (vok(p) || p.current_role.institution_evidence_status === "official_verified"));
+  const institution = p => institutionKnown(p) ? p.current_role.institution : "待核实";
+  const department = p => institutionKnown(p) ? p.current_role.department || "待核实" : "待核实";
+  const position = p => vok(p) ? p.current_role.position : "待核实";
+  const evidenceLabel = p => ({ok: "来源已核实", bad: "任职待核实", legacy: "旧记录待复核", none: "待官网核实"})[roleState(p)];
+  const sourceLink = p => p.current_role?.source_url ? `<a class="text-link" href="${esc(p.current_role.source_url)}" target="_blank" rel="noopener">任职来源 ↗</a>` : "";
+
+  // Theme toggle (explicit choice wins over system)
+  const root = document.documentElement;
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const syncTheme = () => { $("#theme-label").textContent = isDark() ? "Dark" : "Light"; };
+  $("#theme").addEventListener("click", () => { root.dataset.theme = isDark() ? "light" : "dark"; syncTheme(); });
+  syncTheme();
+
+  // Hero, stats
+  const schools = D.stats;
+  const T = D.timing;
+  const avgS = T.reduce((a, s) => a + s.seconds, 0) / T.length;
+  const avgC = T.reduce((a, s) => a + s.api_calls, 0) / T.length;
+  const avgKept = P.length / schools.length;
+  $("#hero-desc").textContent = `从公开论文发现 AI 与经济金融交叉研究候选，再核实学校和职位。奖项、研究证据与计量指标用于项目初分；候选入库不等于现任教职已确认。`;
+  $("#launch-note").innerHTML = `<span class="status-mark"></span>试点 ${schools.length} / ${TARGET * 3} 所学校<span class="sep">·</span>${REGIONS.map(r => `${r} ${schools.filter(s => s.region === r).length}/${TARGET}`).join("<span class=\"sep\">·</span>")}<span class="sep">·</span>生成于 ${esc(D.generated)}`;
+  const slCount = () => P.filter(inSL).length;
+  $("#stats").innerHTML = `
+    <div><strong class="num">${P.length}</strong><span>候选记录（含跨校重复）</span></div>
+    <div><strong class="num">${schools.length}<small>/ ${TARGET * 3}</small></strong><span>检索关联学校</span></div>
+    <div><strong class="num">${P.filter(p => p.current_role).length}<small>条</small></strong><span>本轮查任职来源（${P.filter(p => roleState(p) === "bad").length} 条任职待核）</span></div>
+    <div><strong class="num">${P.filter(p => !p.current_role).length}<small>条</small></strong><span>尚待本轮现职复核</span></div>`;
+  $("#stats-source").textContent = `学校、职位与项目分层分开记录。任职资料核验于 ${D.role_checked_at || "待核实"}；未复核的旧说明保留在详情。分层与相关性是项目初分，不能当作学校职称或最终招聘结论。`;
+  $("#foot").innerHTML = `Demo · 数据来源 <a class="text-link" href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> · 生成于 ${esc(D.generated)}`;
+
+  // Distribution bars (also filters)
+  function drawDist() {
+    const tc = [1, 2, 3, 4].map(t => P.filter(p => p.tier === t).length), tmax = Math.max(...tc);
+    $("#dist-tier").innerHTML = [1, 2, 3, 4].map((t, i) => `<button class="bar-row" data-tier="${t}" aria-pressed="${state.tier === t}"><span class="lab"><b>L${t}</b>${TIERS[t]}</span><span class="track"><i style="width:${Math.max(1.5, tc[i] / tmax * 100)}%;background:var(${TIER_COLOR[t]})"></i></span><span class="n">${tc[i]}</span></button>`).join("");
+    const hc = HOMES.map(h => P.filter(p => p.home === h).length), hmax = Math.max(...hc);
+    $("#dist-home").innerHTML = HOMES.map((h, i) => `<button class="bar-row" data-home="${esc(h)}" aria-pressed="${state.home === h}"><span class="lab">${esc(HOME_SHORT[h])}</span><span class="track"><i style="width:${hc[i] / hmax * 100}%;background:var(${HOME_COLOR[h]})"></i></span><span class="n">${hc[i]}</span></button>`).join("");
+  }
+  $("#dist-tier").addEventListener("click", e => { const b = e.target.closest("[data-tier]"); if (!b) return; const t = +b.dataset.tier; state.tier = state.tier === t ? null : t; render(); });
+  $("#dist-home").addEventListener("click", e => { const b = e.target.closest("[data-home]"); if (!b) return; state.home = state.home === b.dataset.home ? null : b.dataset.home; render(); });
+
+  // Controls
+  $("#region").innerHTML = ["全部", ...REGIONS].map(r => `<option value="${r}">${r === "全部" ? "全部区域" : r}</option>`).join("");
+  function fillSchools() {
+    const list = schools.filter(s => state.region === "全部" || s.region === state.region);
+    $("#school").innerHTML = `<option value="全部">全部学校</option>` + list.map(s => `<option value="${esc(s.school)}">${esc(s.school_zh)}（${esc(s.school)}）</option>`).join("");
+    $("#school").value = state.school;
+  }
+  $("#region").addEventListener("change", e => { state.region = e.target.value; state.school = "全部"; fillSchools(); render(); });
+  $("#school").addEventListener("change", e => { state.school = e.target.value; render(); });
+  const currentSchools = [...new Set(P.map(institution).filter(s => s !== "待核实"))].sort((a, b) => a.localeCompare(b, "zh"));
+  $("#current-school").innerHTML = `<option value="全部">全部当前机构</option><option value="待核实">待核实</option>` + currentSchools.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+  $("#current-school").addEventListener("change", e => { state.currentSchool = e.target.value; render(); });
+  $("#hide-early").addEventListener("change", e => { state.hideEarly = e.target.checked; render(); });
+  $("#vfilter").addEventListener("change", e => { state.vf = e.target.value; render(); });
+  $("#q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
+
+  // Table
+  const COLS = [
+    { id: "rank", label: "#", cls: "rank" },
+    { id: "star", label: "", aria: "Shortlist" },
+    { id: "name", label: "学者" },
+    { id: "school", label: "当前学校 / 机构" },
+    { id: "position", label: "职位 / 职称" },
+    { id: "tier", label: "我们的分层（初分）" },
+    { id: "home", label: "学科来源" },
+    { id: "fit", label: "相关性", sort: p => p.fit, r: true },
+    { id: "score", label: "综合分", sort: p => p.score, r: true },
+    { id: "ai", label: "AI / 交叉论文", sort: p => p.ai_papers, r: true },
+    { id: "h", label: "h 指数", sort: p => p.h, r: true },
+    { id: "cites", label: "总被引", sort: p => p.cites, r: true },
+    { id: "topics", label: "研究主题", cls: "c-topics" },
+  ];
+  function drawHead() {
+    $("#thead").innerHTML = COLS.map(c => {
+      const cls = [c.cls, c.r && "r", state.sort === c.id && "is-sorted"].filter(Boolean).join(" ");
+      const inner = c.sort ? `<button class="sort" data-sort="${c.id}">${c.label}</button>` : c.label;
+      return `<th class="${cls}" ${c.aria ? `aria-label="${c.aria}"` : ""} ${state.sort === c.id ? 'aria-sort="descending"' : ""}>${inner}</th>`;
+    }).join("");
+  }
+  $("#thead").addEventListener("click", e => { const b = e.target.closest("[data-sort]"); if (!b) return; state.sort = b.dataset.sort; render(); });
+
+  function filtered() {
+    const q = state.q, by = COLS.find(c => c.id === state.sort).sort;
+    return P.filter(p =>
+      (state.region === "全部" || p.region === state.region) &&
+      (state.school === "全部" || p.school === state.school) &&
+      (state.currentSchool === "全部" || institution(p) === state.currentSchool) &&
+      (!state.tier || p.tier === state.tier) &&
+      (!state.home || p.home === state.home) &&
+      (!state.hideEarly || !p.early) &&
+      (state.vf === "all" || roleState(p) === state.vf) &&
+      (!q || [p.name, p.name_zh, p.school, p.school_zh, p.unit, institution(p), p.current_role?.institution_en, position(p), p.current_role?.department, p.home, TIERS[p.tier], ...p.topics, ...p.papers.map(w => w.title)].join(" ").toLowerCase().includes(q))
+    ).sort((a, b) => by(b) - by(a) || b.score - a.score);
+  }
+
+  const vtag = p => `<span class="tag ${vok(p) ? "ok" : roleState(p) === "bad" ? "warn" : "pending"}">${evidenceLabel(p)}</span>`;
+  const tierTag = t => `<span class="tag t${t}" title="本项目定义，非学校职称：${esc(TIER_DEF[t])}">L${t} ${TIERS[t]}</span>`;
+  const disc = p => `<span class="disc"><i style="background:var(${HOME_COLOR[p.home]})"></i>${esc(HOME_SHORT[p.home])}</span>`;
+  const star = p => `<button class="star" data-star="${esc(key(p))}" aria-pressed="${inSL(p)}" aria-label="${inSL(p) ? "移出" : "加入"} Shortlist：${esc(p.name)}">${inSL(p) ? "★" : "☆"}</button>`;
+  const sc = id => state.sort === id ? " is-sorted" : "";
+
+  function mixRow(label, v, color) {
+    return `<div class="mix-row"><span>${label}</span><span class="track"><i style="width:${Math.min(100, v * 100)}%;background:var(${color})"></i></span><span class="num">${Math.round(v * 100)}%</span></div>`;
+  }
+  function card(p) {
+    const scholar = "https://scholar.google.com/scholar?q=" + encodeURIComponent(`author:"${p.name}" ${p.current_role?.institution_en || p.school}`);
+    return `<div class="card" id="card-${esc(p.id)}">
+      <div class="card-head">
+        <div>
+          <p class="card-kicker">我们的分层 · L${p.tier} ${TIERS[p.tier]}</p>
+          <h3>${esc(p.name)}${p.name_zh ? `<span class="zh"> ${esc(p.name_zh)}</span>` : ""}</h3>
+          <p class="card-meta">${esc(institution(p))} · ${esc(position(p))}</p>
+        </div>
+        <div class="card-actions">
+          <button class="small-btn${inSL(p) ? " on" : ""}" data-star="${esc(key(p))}" aria-pressed="${inSL(p)}">${inSL(p) ? "★ 已在 Shortlist" : "☆ 加入 Shortlist"}</button>
+          <button class="small-btn" data-close="1">收起</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <dl class="facts">
+            <div><dt>当前学校 / 机构</dt><dd>${esc(institution(p))}${institutionKnown(p) && p.current_role?.department ? `<span class="unit">${esc(department(p))}</span>` : ""}</dd></div>
+            <div><dt>职位 / 职称</dt><dd>${esc(position(p))}</dd></div>
+            <div><dt>任职证据</dt><dd>${vtag(p)} ${sourceLink(p)}${p.current_role?.checked_at ? `<span class="unit">核验日期：${esc(p.current_role.checked_at)}</span>` : ""}</dd></div>
+            ${p.current_role?.note ? `<div><dt>核验说明</dt><dd>${esc(p.current_role.note)}</dd></div>` : ""}
+            <div><dt>检索关联学校</dt><dd>${esc(p.school_zh)}（${esc(p.school)}）<span class="unit">论文 / OpenAlex 关联，不等于当前任职。</span></dd></div>
+            <div><dt>我们的分层</dt><dd>${tierTag(p.tier)}<span class="unit">项目初分，非学校职称${p.manual_tier ? "；含人工指定" : ""}。</span></dd></div>
+            <div><dt>分层依据</dt><dd>${esc(p.tier_why)}</dd></div>
+            ${p.honours.length ? `<div><dt>奖项</dt><dd>${p.honours.map(esc).join("、")}</dd></div>` : ""}
+            <div><dt>学科来源</dt><dd>${esc(p.home)}</dd></div>
+            ${p.source === "人工补录" ? `<div><dt>来源</dt><dd>${esc(p.source_why)}</dd></div>` : ""}
+            <div><dt>相关性 / 综合分</dt><dd class="num">${p.fit} / ${p.score}</dd></div>
+            <div><dt>AI / 交叉论文</dt><dd class="num">${p.ai_papers} / ${p.cross}（${D.since.slice(0, 4)}+）</dd></div>
+            <div><dt>h / i10 / 被引</dt><dd class="num">${p.h} / ${p.i10 ?? "–"} / ${fmt(p.cites)}</dd></div>
+            <div><dt>论文总数</dt><dd class="num">${fmt(p.works)}${p.suspect ? ' <span class="tag warn">疑似同名合并，指标待核</span>' : ""}</dd></div>
+          </dl>
+          <p class="sub-h" style="margin-top:16px">研究构成</p>
+          <div class="mix">${mixRow("金融", p.fin_share ?? 0, "--chart-1")}${mixRow("经济金融", p.econ_share, "--chart-4")}${mixRow("计算机", p.cs_share, "--chart-5")}${mixRow("AI 强度", p.ai_share, "--chart-3")}</div>
+        </div>
+        <div>
+          <p class="sub-h">代表性交叉论文</p>
+          <ul class="papers">${p.papers.map(w => `<li><a href="${esc(w.doi || "https://openalex.org/" + w.oa)}" target="_blank" rel="noopener">${esc(w.title)}</a>${w.ai ? '<span class="ai-mark" title="AI、机器学习、区块链或金融科技相关">AI/科技</span>' : ""}<div class="meta num">${w.year} · 被引 ${fmt(w.cites)}</div></li>`).join("")}</ul>
+          <div class="chips">${p.topics.map(t => `<span class="chip">${esc(t)}</span>`).join("")}</div>
+          <div class="card-links">
+            <a href="https://openalex.org/${esc(p.id)}" target="_blank" rel="noopener">OpenAlex 档案</a>
+            ${(p.alt_ids || []).map((a, i) => `<a href="https://openalex.org/${esc(a)}" target="_blank" rel="noopener">重复档案 ${i + 1}</a>`).join("")}
+            ${p.orcid ? `<a href="${esc(p.orcid)}" target="_blank" rel="noopener">ORCID</a>` : ""}
+            <a href="${esc(scholar)}" target="_blank" rel="noopener">Google Scholar 搜索</a>
+          </div>
+          <details class="legacy-note"><summary>旧核对记录（仅供溯源，可能已过时）</summary><p>${p.verify ? `${esc(p.verify.status)} · ${esc(p.verify.title)}` : "没有旧核对记录"}</p>${p.verify?.url ? `<a class="text-link" href="${esc(p.verify.url)}" target="_blank" rel="noopener">旧来源 ↗</a>` : ""}<p>旧记录未经本轮复核时，不据此填入当前职位。“已调离 / 非本校”相对于原检索关联学校。</p></details>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function render() {
+    drawDist(); drawHead();
+    const rows = filtered();
+    const chips = [state.tier && `L${state.tier} ${TIERS[state.tier]}`, state.home && HOME_SHORT[state.home]].filter(Boolean);
+    $("#meta").innerHTML = `显示 ${rows.length} / ${P.length} 人` + (chips.length ? `，已筛选：${chips.map(esc).join("、")} · <button class="text-button" id="clear" type="button">清除筛选</button>` : "");
+    const clr = $("#clear"); if (clr) clr.onclick = () => { state.tier = null; state.home = null; render(); };
+    $("#rows").innerHTML = rows.length ? rows.map((p, i) => {
+      const open = state.open === key(p);
+      return `<tr class="${open ? "is-open" : ""}">
+        <td class="rank">${i + 1}</td>
+        <td>${star(p)}</td>
+        <th scope="row"><button class="person" data-open="${esc(key(p))}" aria-expanded="${open}">${esc(p.name)}${p.name_zh ? `<span class="zh"> ${esc(p.name_zh)}</span>` : ""}</button>${p.source === "人工补录" ? '<span class="tag manual">人工补录</span>' : ""}${p.suspect ? '<span class="tag warn">指标待核</span>' : ""}</th>
+        <td class="affiliation"><strong>${esc(institution(p))}</strong>${p.current_role && !vok(p) ? `<span class="unit">${institutionKnown(p) ? "学校来源已核，职位待核" : "机构关联线索：" + esc(p.current_role.institution || p.school_zh)}</span>` : ""}<span class="unit">检索关联：${esc(p.school_zh)}</span></td>
+        <td class="position"><span>${esc(position(p))}</span><span class="unit">${vtag(p)} ${sourceLink(p)}</span></td>
+        <td>${tierTag(p.tier)}</td>
+        <td>${disc(p)}</td>
+        <td class="r${sc("fit")}"><span class="fitbar"><span class="track"><i style="width:${p.fit}%"></i></span><span>${p.fit}</span></span></td>
+        <td class="r${sc("score")}">${p.score}</td>
+        <td class="r${sc("ai")}">${p.ai_papers} / ${p.cross}</td>
+        <td class="r${sc("h")}">${p.h}</td>
+        <td class="r${sc("cites")}">${fmt(p.cites)}</td>
+        <td class="c-topics"><div class="topics">${esc(p.topics.slice(0, 2).join(" · "))}</div></td>
+      </tr>` + (open ? `<tr class="card-row"><td colspan="${COLS.length}">${card(p)}</td></tr>` : "");
+    }).join("") : `<tr><td colspan="${COLS.length}" class="empty">没有符合条件的学者。试试清除筛选或换个关键词。</td></tr>`;
+    renderShortlist();
+  }
+
+  function renderShortlist() {
+    const sl = P.filter(inSL).sort((a, b) => a.tier - b.tier || b.score - a.score);
+    $("#hero-sl").textContent = sl.length;
+    $("#sl-count").textContent = `共 ${sl.length} 条初选记录 · 以下按检索区域统计：` + REGIONS.map(r => `${r} ${sl.filter(p => p.region === r).length}`).join(" · ");
+    $("#sl").innerHTML = sl.length ? [1, 2, 3, 4].map(t => {
+      const g = sl.filter(p => p.tier === t); if (!g.length) return "";
+      return `<div class="sl-group"><div class="sl-group-h">${tierTag(t)}<span class="num">${g.length} 人</span></div><div class="sl-grid">` + g.map(p => `
+        <article class="resource">
+          <div class="resource-top"><span class="resource-type">${esc(HOME_SHORT[p.home])} · ${vok(p) ? "现职来源已核实" : evidenceLabel(p)}</span>${star(p)}</div>
+          <h3><button class="person" data-open="${esc(key(p))}" data-jump="1" aria-expanded="false">${esc(p.name)}${p.name_zh ? `<span class="zh"> ${esc(p.name_zh)}</span>` : ""}</button></h3>
+          <p class="where"><b>学校：</b>${esc(institution(p))}<br><b>职位：</b>${esc(position(p))}</p><p class="unit">检索关联：${esc(p.school_zh)}${p.current_role?.source_url ? " · " + sourceLink(p) : ""}</p>
+          ${p.papers[0] ? `<p class="paper-line">${esc(p.papers[0].title)}（${p.papers[0].year}）</p>` : ""}
+          <div class="metrics"><span>相关性<b>${p.fit}</b></span><span>综合分<b>${p.score}</b></span><span>h<b>${p.h}</b></span></div>
+        </article>`).join("") + `</div></div>`;
+    }).join("") : `<p class="empty">Shortlist 为空。在人才库里点 ☆ 加入。</p>`;
+  }
+
+  // Interactions
+  document.addEventListener("click", e => {
+    const s = e.target.closest("[data-star]");
+    if (s) {
+      const p = P.find(x => key(x) === s.dataset.star);
+      const next = !inSL(p);
+      if (next === p.shortlist) delete overrides[key(p)]; else overrides[key(p)] = next;
+      saveOv(); render();
+      toast(next ? `已加入 Shortlist：${p.name}` : `已移出 Shortlist：${p.name}`);
+      return;
+    }
+    if (e.target.closest("[data-close]")) { state.open = null; render(); return; }
+    const o = e.target.closest("[data-open]");
+    if (o) {
+      const k = o.dataset.open;
+      if (o.dataset.jump) {
+        // from a shortlist card: clear filters that would hide this person, then open in the roster
+        const p = P.find(x => key(x) === k);
+        Object.assign(state, { q: "", region: "全部", school: "全部", currentSchool: "全部", tier: null, home: null, hideEarly: false, vf: "all" });
+        $("#q").value = ""; $("#region").value = "全部"; $("#current-school").value = "全部"; $("#hide-early").checked = false; $("#vfilter").value = "all"; fillSchools();
+        state.open = k; render();
+        document.getElementById("card-" + p.id)?.scrollIntoView({ block: "center" });
+        return;
+      }
+      state.open = state.open === k ? null : k; render();
+    }
+  });
+  $("#reset-sl").addEventListener("click", () => { overrides = {}; saveOv(); render(); toast("已恢复默认 Shortlist"); });
+
+  // Copy as TSV (pastes straight into Excel)
+  const OUT = [["姓名", p => p.name], ["中文名", p => p.name_zh || ""], ["当前学校/机构", institution], ["当前职位", position], ["当前院系/部门", department], ["任职核验说明", p => p.current_role?.note || "未核实"], ["机构关联线索（不代表现职）", p => p.current_role?.institution || p.school_zh], ["现职证据状态", evidenceLabel], ["任职来源", p => p.current_role?.source_url || ""], ["核验日期", p => p.current_role?.checked_at || ""], ["检索关联学校", p => p.school], ["检索区域", p => p.region], ["原关联单位", p => p.unit || ""], ["项目分层", p => `L${p.tier} ${TIERS[p.tier]}`], ["分层依据", p => p.tier_why], ["奖项", p => p.honours.join("、")], ["学科来源", p => p.home], ["相关性", p => p.fit], ["综合分", p => p.score], ["AI论文", p => p.ai_papers], ["交叉论文", p => p.cross], ["h", p => p.h], ["总被引", p => p.cites], ["研究主题", p => p.topics.join("; ")], ["代表作", p => p.papers[0] ? p.papers[0].title : ""], ["旧核对状态（未复核）", p => p.verify ? p.verify.status : "未核对"], ["旧核对说明（未复核）", p => p.verify ? p.verify.title : ""], ["OpenAlex", p => "https://openalex.org/" + p.id]];
+  const tsv = rows => [OUT.map(c => c[0]), ...rows.map(p => OUT.map(c => String(c[1](p)).replace(/[\t\n]/g, " ")))].map(r => r.join("\t")).join("\n");
+  function copy(text, n, where) {
+    const fb = () => { $("#copy-fallback").innerHTML = `<p class="result-meta" style="margin-top:12px">浏览器不允许直接写剪贴板。下面的文本已选中，请按 ⌘C / Ctrl+C 复制。</p><textarea class="copybox" id="cb" readonly></textarea>`; const t = $("#cb"); t.value = text; t.select(); if (where === "sl") t.scrollIntoView({ block: "center" }); };
+    try { navigator.clipboard.writeText(text).then(() => toast(`已复制 ${n} 行，可直接粘贴到 Excel`), fb); } catch (e) { fb(); }
+  }
+  $("#copy").addEventListener("click", () => { const r = filtered(); copy(tsv(r), r.length); });
+  $("#copy-sl").addEventListener("click", () => { const r = P.filter(inSL).sort((a, b) => b.score - a.score); copy(tsv(r), r.length, "sl"); });
+
+  let tt;
+  function toast(msg) {
+    let el = $(".toast"); if (!el) { el = document.createElement("div"); el.className = "toast"; el.setAttribute("role", "status"); document.body.appendChild(el); }
+    el.textContent = msg; el.hidden = false; clearTimeout(tt); tt = setTimeout(() => { el.hidden = true; }, 2200);
+  }
+
+  // Method section
+  const STEPS = [
+    ["选校", `亚洲、欧洲、北美各取前 20 所，排名口径待定。目前已跑：${REGIONS.map(r => `${r} ${schools.filter(s => s.region === r).length} 所`).join("，")}。`, true],
+    ["抓论文", `从 OpenAlex 拉取该校 ${D.since.slice(0, 4)} 年以来两类论文：经济金融领域中用 AI/ML 的论文，以及计算机与经济金融交叉的论文。`, true],
+    ["归并作者", "只统计署名单位属于该校的作者，至少 2 篇交叉论文进入候选。", true],
+    ["候选过滤", "按 OpenAlex 最近关联机构、h 指数和研究主题发现候选；这些条件不能证明当前学校或正式教职，仍须核实任职来源。", true],
+    ["分层与打分", "奖项名单优先，其余按 h 指数和被引分层，经济金融与计算机分两套门槛；计算 AI×金融相关性与综合分，生成 Shortlist。", true],
+    ["人工补录与标注", "OpenAlex 把单位记错的学者按论文署名补录（如黄益平、张晓燕）；部分学者按旧人工规则指定为 L2（如丛林），该标签属于项目判断。名单可以随时补充。", true],
+    ["对齐字段", "按王旭老师现有数据库的样本补齐字段和格式，Excel 版与之一致。", false],
+    ["核身份", `原有 ${P.filter(p => p.verify).length} 条核对备注（含未单独检索的旧判断），不能视为全部现职已确认。本轮查阅 ${P.filter(p => p.current_role).length} 条任职来源；${P.filter(vok).length} 条学校与职位有来源支持，其余保留待核实。`, "doing"],
+    ["读主页", "用 LLM 阅读个人主页或 CV，确认研究方向，补充奖项、学会会士等头衔。", false],
+    ["扩校与复核", "扩到 60 所，人工复核 L1、L2 和 Shortlist。", false],
+  ];
+  $("#method-lead").textContent = `不逐个下载简历，而是从公开论文库里找出 AI 与经济金融交叉的论文，归并到作者，再分层打分。前 ${STEPS.filter(x => x[2] === true).length} 步已在 ${schools.length} 所试点学校跑通，后四步是扩到 60 所前要做的。`;
+  $("#steps").innerHTML = STEPS.map(([h, p, done], i) => `<li><span class="step-index num">${String(i + 1).padStart(2, "0")}</span><div><h3>${h}</h3><p>${esc(p)}</p></div><span class="availability${done === true ? " done" : ""}">${done === true ? "已完成" : done === "doing" ? "进行中" : "待做"}</span></li>`).join("");
+  const bad = P.filter(p => p.verify && !["在职", "在职·职称待核"].includes(vst(p))).sort((a, b) => b.fit - a.fit);
+  $("#check-head").textContent = `历史备注：${bad.length} 条需注意归属、身份或方向（非当前现职结论）`;
+  $("#check-list").innerHTML = bad.map(p => `<li><span class="who">${esc(p.name)}${p.name_zh ? " " + esc(p.name_zh) : ""} · ${esc(p.school)}</span><span class="tag bad">旧标注：${esc(p.verify.status)}</span><span class="what">${p.current_role ? `本轮：${esc(institution(p))} · ${esc(position(p))}。${esc(p.current_role.note)}<br>` : ""}旧说明：${esc(p.verify.title)}${p.verify.url ? ` · <a class="text-link" href="${esc(p.verify.url)}" target="_blank" rel="noopener">来源</a>` : ""}</span></li>`).join("");
+  $("#tier-def").innerHTML = [1, 2, 3, 4].map(t => `<tr><td>${tierTag(t)}</td><td>${TIER_DEF[t]}</td><td class="r">${P.filter(p => p.tier === t).length}</td></tr>`).join("");
+  $("#estimate").innerHTML = `
+    <div><dt>60 所预计入库</dt><dd>约 ${fmt(Math.round(avgKept * 60 / 100) * 100)} 人</dd></div>
+    <div><dt>机器抓取（60 所，单线程）</dt><dd>约 ${Math.round(avgS)} 分钟</dd></div>
+    <div><dt>单校接口调用</dt><dd>约 ${avgC.toFixed(0)} 次</dd></div>
+    <div><dt>官网身份核验（LLM 辅助）</dt><dd>约 2–3 天</dd></div>
+    <div><dt>人工复核 L1–L2 与 Shortlist</dt><dd>约 1 天</dd></div>
+    <div><dt>LLM 读主页（每人约 5k tokens）</dt><dd>约 ${fmt(Math.round(avgKept * 60 * 0.5 / 100) * 100)} 万 tokens</dd></div>
+    <div class="hl"><dt>第一版（60 所）</dt><dd>10 月 26 日前</dd></div>`;
+  $("#timing").innerHTML = T.map(s => `<tr><td>${esc(s.school_zh)}（${esc(s.school)}）</td><td>${esc(s.region)}</td><td class="r">${fmt(s.works)}</td><td class="r">${s.candidates}</td><td class="r">${schools.find(x => x.school === s.school).kept}</td><td class="r">${s.seconds.toFixed(0)} 秒</td><td class="r">${s.api_calls}</td></tr>`).join("");
+
+  // Nav highlight follows the section in view
+  const navs = [...document.querySelectorAll("[data-nav]")];
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) navs.forEach(a => a.setAttribute("aria-current", a.dataset.nav === en.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
+  ["roster", "shortlist", "method"].forEach(id => io.observe(document.getElementById(id)));
+
+  fillSchools(); render();
+})();
+</script>
