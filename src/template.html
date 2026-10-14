@@ -107,6 +107,16 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
 .lead { font-size: 15px; line-height: 1.75; color: var(--soft); max-width: 520px; }
 @media (max-width: 860px) { .section-heading { grid-template-columns: 1fr; gap: 16px; } }
 
+/* Region tabs: the three continents are the top-level split */
+.region-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--strong-line); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
+.region-tabs button { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; border: 0; background: var(--tint); padding: 14px 18px; text-align: left; position: relative; min-width: 0; }
+.region-tabs button + button { border-left: 1px solid var(--line); }
+.region-tabs button[aria-selected="true"] { background: var(--paper); }
+.region-tabs button[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--ink); }
+.region-tabs .rt-name { font-size: 17px; font-weight: 600; }
+.region-tabs .rt-meta { font-size: 12px; color: var(--muted); }
+@media (max-width: 620px) { .region-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .region-tabs button:nth-child(3) { border-left: 0; } .region-tabs button:nth-child(n+3) { border-top: 1px solid var(--line); } }
+
 /* Distribution charts */
 .dist { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; margin-bottom: 30px; }
 @media (max-width: 860px) { .dist { grid-template-columns: 1fr; } }
@@ -230,7 +240,8 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
 
 /* Shortlist */
 .sl-group + .sl-group { margin-top: 34px; }
-.sl-group-h { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 13px; color: var(--muted); }
+.sl-group-h { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.sl-region { font-size: 20px; font-weight: 650; color: var(--ink); letter-spacing: -.02em; }
 .sl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 @media (max-width: 1000px) { .sl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .sl-grid { grid-template-columns: 1fr; } }
@@ -299,7 +310,6 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
 
 <main id="top">
   <section class="hero container">
-    <p class="eyebrow">AI × 金融经济 · 人才库试点</p>
     <h1>AI Talent Network</h1>
     <p class="hero-subtitle">谁在经济金融里做 AI，谁在计算机里研究经济金融问题？</p>
     <p class="hero-description" id="hero-desc"></p>
@@ -324,6 +334,8 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
       <p class="lead">学校与职位只有获得任职来源支持后才填入；未确认的写“待核实”。L1–L4 是本项目的研究筛选分层，不是学校职称。点击姓名查看来源、核验日期、历史关联和分层依据。</p>
     </div>
 
+    <div class="region-tabs" id="region-tabs" role="tablist" aria-label="区域"></div>
+
     <div class="dist">
       <figure>
         <div class="dist-head"><span>我们的分层（初分）</span><span>点击筛选</span></div>
@@ -337,7 +349,6 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
 
     <div class="controls">
       <label>搜索 <input id="q" type="search" placeholder="姓名、现任学校、职位、主题…"></label>
-      <label>检索区域 <select id="region"></select></label>
       <label>检索关联学校 <select id="school"></select></label>
       <label>当前学校/机构 <select id="current-school"></select></label>
       <label>现职证据 <select id="vfilter"><option value="all">全部</option><option value="ok">本轮来源确认</option><option value="bad">来源表述不一致</option><option value="legacy">仅有旧记录</option><option value="none">待官网核实</option></select></label>
@@ -361,7 +372,7 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
         <p class="kicker">02 · Shortlist</p>
         <h2>研究候选清单，按项目分层分组</h2>
       </div>
-      <p class="lead">保留试点版 30 人初选清单，供继续核验；入选不代表现职已确认或适合招聘。学校、职位与项目标签分开显示。在人才库或这里点 ☆ 增删，改动只保存在当前浏览器。</p>
+      <p class="lead">按亚洲、北美、欧洲分组，每个大洲取综合分最高的 10 人，只从核对没有发现问题的学者中选。入选不代表现职已确认或适合招聘；学校、职位与项目标签分开显示。在人才库或这里点 ☆ 增删，改动只保存在当前浏览器。</p>
     </div>
     <div class="sl-bar">
       <span id="sl-count"></span>
@@ -439,8 +450,7 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
   const HOMES = ["金融/经济", "交叉（统计/运筹/管理等）", "计算机/AI"];
   const HOME_SHORT = { "金融/经济": "金融/经济", "交叉（统计/运筹/管理等）": "交叉学科", "计算机/AI": "计算机/AI" };
   const HOME_COLOR = { "金融/经济": "--chart-1", "交叉（统计/运筹/管理等）": "--chart-2", "计算机/AI": "--chart-5" };
-  const REGIONS = ["亚洲", "欧洲", "北美"];
-  const TARGET = 20;
+  const REGIONS = ["亚洲", "北美", "欧洲"];
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmt = n => Number(n).toLocaleString("en-US");
@@ -477,12 +487,13 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
   const avgS = T.reduce((a, s) => a + s.seconds, 0) / T.length;
   const avgC = T.reduce((a, s) => a + s.api_calls, 0) / T.length;
   const avgKept = P.length / schools.length;
-  $("#hero-desc").textContent = `从公开论文发现 AI 与经济金融交叉研究候选，再核实学校和职位。奖项、研究证据与计量指标用于项目初分；候选入库不等于现任教职已确认。`;
-  $("#launch-note").innerHTML = `<span class="status-mark"></span>试点 ${schools.length} / ${TARGET * 3} 所学校<span class="sep">·</span>${REGIONS.map(r => `${r} ${schools.filter(s => s.region === r).length}/${TARGET}`).join("<span class=\"sep\">·</span>")}<span class="sep">·</span>生成于 ${esc(D.generated)}`;
+  $("#hero-desc").textContent = "我们搭建了 AI × 金融经济 Talent Network，希望检索到在经济金融与 AI 交叉方向做研究的学者，为这一方向建立人才储备。";
+  const SCOPE = { "亚洲": "中国大陆、香港、新加坡", "北美": "U.S. News 前 20", "欧洲": "暂缓" };
+  $("#launch-note").innerHTML = `<span class="status-mark"></span>${schools.length} 所学校<span class="sep">·</span>${REGIONS.map(r => `${r} ${schools.filter(s => s.region === r).length} 所（${SCOPE[r]}）`).join('<span class="sep">·</span>')}<span class="sep">·</span>生成于 ${esc(D.generated)}`;
   const slCount = () => P.filter(inSL).length;
   $("#stats").innerHTML = `
-    <div><strong class="num">${P.length}</strong><span>候选记录（含跨校重复）</span></div>
-    <div><strong class="num">${schools.length}<small>/ ${TARGET * 3}</small></strong><span>检索关联学校</span></div>
+    <div><strong class="num">${P.length}</strong><span>候选学者</span></div>
+    <div><strong class="num">${schools.length}<small>所</small></strong><span>检索学校（亚洲 ${schools.filter(x => x.region === "亚洲").length} · 北美 ${schools.filter(x => x.region === "北美").length} · 欧洲 ${schools.filter(x => x.region === "欧洲").length}）</span></div>
     <div><strong class="num">${P.filter(p => p.current_role).length}<small>条</small></strong><span>本轮查任职来源（${P.filter(p => roleState(p) === "bad").length} 条任职待核）</span></div>
     <div><strong class="num">${P.filter(p => !p.current_role).length}<small>条</small></strong><span>尚待本轮现职复核</span></div>`;
   $("#stats-source").textContent = `学校、职位与项目分层分开记录。任职资料核验于 ${D.role_checked_at || "待核实"}；未复核的旧说明保留在详情。分层与相关性是项目初分，不能当作学校职称或最终招聘结论。`;
@@ -490,22 +501,32 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
 
   // Distribution bars (also filters)
   function drawDist() {
-    const tc = [1, 2, 3, 4].map(t => P.filter(p => p.tier === t).length), tmax = Math.max(...tc);
-    $("#dist-tier").innerHTML = [1, 2, 3, 4].map((t, i) => `<button class="bar-row" data-tier="${t}" aria-pressed="${state.tier === t}"><span class="lab"><b>L${t}</b>${TIERS[t]}</span><span class="track"><i style="width:${Math.max(1.5, tc[i] / tmax * 100)}%;background:var(${TIER_COLOR[t]})"></i></span><span class="n">${tc[i]}</span></button>`).join("");
-    const hc = HOMES.map(h => P.filter(p => p.home === h).length), hmax = Math.max(...hc);
+    const R = P.filter(p => state.region === "全部" || p.region === state.region);
+    const tc = [1, 2, 3, 4].map(t => R.filter(p => p.tier === t).length), tmax = Math.max(1, ...tc);
+    $("#dist-tier").innerHTML = [1, 2, 3, 4].map((t, i) => `<button class="bar-row" data-tier="${t}" aria-pressed="${state.tier === t}"><span class="lab"><b>L${t}</b>${TIERS[t]}</span><span class="track"><i style="width:${tc[i] ? Math.max(1.5, tc[i] / tmax * 100) : 0}%;background:var(${TIER_COLOR[t]})"></i></span><span class="n">${tc[i]}</span></button>`).join("");
+    const hc = HOMES.map(h => R.filter(p => p.home === h).length), hmax = Math.max(1, ...hc);
     $("#dist-home").innerHTML = HOMES.map((h, i) => `<button class="bar-row" data-home="${esc(h)}" aria-pressed="${state.home === h}"><span class="lab">${esc(HOME_SHORT[h])}</span><span class="track"><i style="width:${hc[i] / hmax * 100}%;background:var(${HOME_COLOR[h]})"></i></span><span class="n">${hc[i]}</span></button>`).join("");
   }
   $("#dist-tier").addEventListener("click", e => { const b = e.target.closest("[data-tier]"); if (!b) return; const t = +b.dataset.tier; state.tier = state.tier === t ? null : t; render(); });
   $("#dist-home").addEventListener("click", e => { const b = e.target.closest("[data-home]"); if (!b) return; state.home = state.home === b.dataset.home ? null : b.dataset.home; render(); });
 
   // Controls
-  $("#region").innerHTML = ["全部", ...REGIONS].map(r => `<option value="${r}">${r === "全部" ? "全部区域" : r}</option>`).join("");
+  function drawRegionTabs() {
+    $("#region-tabs").innerHTML = ["全部", ...REGIONS].map(r => {
+      const n = r === "全部" ? P.length : P.filter(p => p.region === r).length;
+      const k = r === "全部" ? schools.length : schools.filter(x => x.region === r).length;
+      return `<button role="tab" data-region="${r}" aria-selected="${state.region === r}"><span class="rt-name">${r === "全部" ? "全部" : r}</span><span class="rt-meta num">${n} 人 · ${k} 所${r === "欧洲" ? "（暂缓）" : ""}</span></button>`;
+    }).join("");
+  }
+  $("#region-tabs").addEventListener("click", e => {
+    const b = e.target.closest("[data-region]"); if (!b) return;
+    state.region = b.dataset.region; state.school = "全部"; fillSchools(); render();
+  });
   function fillSchools() {
     const list = schools.filter(s => state.region === "全部" || s.region === state.region);
     $("#school").innerHTML = `<option value="全部">全部学校</option>` + list.map(s => `<option value="${esc(s.school)}">${esc(s.school_zh)}（${esc(s.school)}）</option>`).join("");
     $("#school").value = state.school;
   }
-  $("#region").addEventListener("change", e => { state.region = e.target.value; state.school = "全部"; fillSchools(); render(); });
   $("#school").addEventListener("change", e => { state.school = e.target.value; render(); });
   const currentSchools = [...new Set(P.map(institution).filter(s => s !== "待核实"))].sort((a, b) => a.localeCompare(b, "zh"));
   $("#current-school").innerHTML = `<option value="全部">全部当前机构</option><option value="待核实">待核实</option>` + currentSchools.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
@@ -614,7 +635,7 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
   }
 
   function render() {
-    drawDist(); drawHead();
+    drawRegionTabs(); drawDist(); drawHead();
     const rows = filtered();
     const chips = [state.tier && `L${state.tier} ${TIERS[state.tier]}`, state.home && HOME_SHORT[state.home]].filter(Boolean);
     $("#meta").innerHTML = `显示 ${rows.length} / ${P.length} 人` + (chips.length ? `，已筛选：${chips.map(esc).join("、")} · <button class="text-button" id="clear" type="button">清除筛选</button>` : "");
@@ -643,14 +664,15 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
   function renderShortlist() {
     const sl = P.filter(inSL).sort((a, b) => a.tier - b.tier || b.score - a.score);
     $("#hero-sl").textContent = sl.length;
-    $("#sl-count").textContent = `共 ${sl.length} 条初选记录 · 以下按检索区域统计：` + REGIONS.map(r => `${r} ${sl.filter(p => p.region === r).length}`).join(" · ");
-    $("#sl").innerHTML = sl.length ? [1, 2, 3, 4].map(t => {
-      const g = sl.filter(p => p.tier === t); if (!g.length) return "";
-      return `<div class="sl-group"><div class="sl-group-h">${tierTag(t)}<span class="num">${g.length} 人</span></div><div class="sl-grid">` + g.map(p => `
+    $("#sl-count").textContent = `共 ${sl.length} 人 · ` + REGIONS.map(r => `${r} ${sl.filter(p => p.region === r).length}`).join(" · ");
+    $("#sl").innerHTML = sl.length ? REGIONS.map(r => {
+      const g = sl.filter(p => p.region === r); if (!g.length) return "";
+      return `<div class="sl-group"><div class="sl-group-h"><span class="sl-region">${r}</span><span class="num">${g.length} 人</span></div><div class="sl-grid">` + g.map(p => `
         <article class="resource">
           <div class="resource-top"><span class="resource-type">${esc(HOME_SHORT[p.home])} · ${vok(p) ? "现职来源已核实" : evidenceLabel(p)}</span>${star(p)}</div>
           <h3><button class="person" data-open="${esc(key(p))}" data-jump="1" aria-expanded="false">${esc(p.name)}${p.name_zh ? `<span class="zh"> ${esc(p.name_zh)}</span>` : ""}</button></h3>
           <p class="where"><b>学校：</b>${esc(institution(p))}<br><b>职位：</b>${esc(position(p))}</p><p class="unit">检索关联：${esc(p.school_zh)}${p.current_role?.source_url ? " · " + sourceLink(p) : ""}</p>
+          <div style="margin-top:10px">${tierTag(p.tier)}</div>
           ${p.papers[0] ? `<p class="paper-line">${esc(p.papers[0].title)}（${p.papers[0].year}）</p>` : ""}
           <div class="metrics"><span>相关性<b>${p.fit}</b></span><span>综合分<b>${p.score}</b></span><span>h<b>${p.h}</b></span></div>
         </article>`).join("") + `</div></div>`;
@@ -676,7 +698,7 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
         // from a shortlist card: clear filters that would hide this person, then open in the roster
         const p = P.find(x => key(x) === k);
         Object.assign(state, { q: "", region: "全部", school: "全部", currentSchool: "全部", tier: null, home: null, hideEarly: false, vf: "all" });
-        $("#q").value = ""; $("#region").value = "全部"; $("#current-school").value = "全部"; $("#hide-early").checked = false; $("#vfilter").value = "all"; fillSchools();
+        $("#q").value = ""; $("#current-school").value = "全部"; $("#hide-early").checked = false; $("#vfilter").value = "all"; fillSchools();
         state.open = k; render();
         document.getElementById("card-" + p.id)?.scrollIntoView({ block: "center" });
         return;
@@ -704,16 +726,16 @@ h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.25; }
 
   // Method section
   const STEPS = [
-    ["选校", `亚洲、欧洲、北美各取前 20 所，排名口径待定。目前已跑：${REGIONS.map(r => `${r} ${schools.filter(s => s.region === r).length} 所`).join("，")}。`, true],
+    ["选校", `亚洲只看中国大陆、香港和新加坡：取 QS 2026 亚洲排名前 20 里这三地的学校，另加中科大。北美取 U.S. News 2026 全美大学排名前 20，并列第 20 的 4 所都收。欧洲暂缓，目前只有牛津和 LSE。目前已跑：${REGIONS.map(r => `${r} ${schools.filter(s => s.region === r).length} 所`).join("，")}。`, true],
     ["抓论文", `从 OpenAlex 拉取该校 ${D.since.slice(0, 4)} 年以来两类论文：经济金融领域中用 AI/ML 的论文，以及计算机与经济金融交叉的论文。`, true],
     ["归并作者", "只统计署名单位属于该校的作者，至少 2 篇交叉论文进入候选。", true],
     ["候选过滤", "按 OpenAlex 最近关联机构、h 指数和研究主题发现候选；这些条件不能证明当前学校或正式教职，仍须核实任职来源。", true],
     ["分层与打分", "奖项名单优先，其余按 h 指数和被引分层，经济金融与计算机分两套门槛；计算 AI×金融相关性与综合分，生成 Shortlist。", true],
     ["人工补录与标注", "OpenAlex 把单位记错的学者按论文署名补录（如黄益平、张晓燕）；部分学者按旧人工规则指定为 L2（如丛林），该标签属于项目判断。名单可以随时补充。", true],
-    ["对齐字段", "按王旭老师现有数据库的样本补齐字段和格式，Excel 版与之一致。", false],
+    ["对齐字段", "按现有数据库的样本补齐字段和格式，Excel 版与之一致。", false],
     ["核身份", `原有 ${P.filter(p => p.verify).length} 条核对备注（含未单独检索的旧判断），不能视为全部现职已确认。本轮查阅 ${P.filter(p => p.current_role).length} 条任职来源；${P.filter(vok).length} 条学校与职位有来源支持，其余保留待核实。`, "doing"],
     ["读主页", "用 LLM 阅读个人主页或 CV，确认研究方向，补充奖项、学会会士等头衔。", false],
-    ["扩校与复核", "扩到 60 所，人工复核 L1、L2 和 Shortlist。", false],
+    ["扩校与复核", "欧洲按 QS 2026 欧洲排名前 20 扩校（暂缓）；继续为候选补当前学校、职位和中文名，人工复核 L1、L2 和 Shortlist。", false],
   ];
   $("#method-lead").textContent = `不逐个下载简历，而是从公开论文库里找出 AI 与经济金融交叉的论文，归并到作者，再分层打分。前 ${STEPS.filter(x => x[2] === true).length} 步已在 ${schools.length} 所试点学校跑通，后四步是扩到 60 所前要做的。`;
   $("#steps").innerHTML = STEPS.map(([h, p, done], i) => `<li><span class="step-index num">${String(i + 1).padStart(2, "0")}</span><div><h3>${h}</h3><p>${esc(p)}</p></div><span class="availability${done === true ? " done" : ""}">${done === true ? "已完成" : done === "doing" ? "进行中" : "待做"}</span></li>`).join("");

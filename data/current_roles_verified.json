@@ -386,5 +386,183 @@
     "checked_at": "2026-10-15",
     "note": "港大法学院官方个人页抬头和简介一致列嘉里集团法学讲席教授；另有金融科技学院副主任等职务，本次以主要教职为展示字段。",
     "evidence_status": "official_verified"
+  },
+  "A5005262715": {
+    "institution": "宾夕法尼亚大学",
+    "institution_en": "University of Pennsylvania",
+    "department": "Department of Economics",
+    "position": "Howard Marks Presidential Professor of Economics",
+    "region": "北美",
+    "source_url": "https://economics.sas.upenn.edu/people/jesus-fernandez-villaverde",
+    "checked_at": "2026-10-15",
+    "note": "宾大经济系官方人员页列出现任职位。",
+    "evidence_status": "official_verified"
+  },
+  "A5088627183": {
+    "institution": "杜克大学",
+    "institution_en": "Duke University",
+    "department": "The Fuqua School of Business, Finance",
+    "position": "J. Paul Sticht Professor",
+    "region": "北美",
+    "source_url": "https://www.fuqua.duke.edu/faculty/campbell-harvey",
+    "checked_at": "2026-10-15",
+    "note": "Fuqua 官方教师页页首职位；页内简介另写 Distinguished Professor of Finance，以页首为准。",
+    "evidence_status": "official_verified"
+  },
+  "A5089753355": {
+    "institution": "芝加哥大学",
+    "institution_en": "The University of Chicago",
+    "department": "Kenneth C. Griffin Department of Economics",
+    "position": "Bruce Allen and Barbara Ritzenthaler Professor in Economics and the College",
+    "region": "北美",
+    "source_url": "https://voices.uchicago.edu/haralduhlig",
+    "checked_at": "2026-10-15",
+    "note": "芝加哥大学域名下本人主页。",
+    "evidence_status": "official_verified"
+  },
+  "A5012239666": {
+    "institution": "圣路易斯华盛顿大学",
+    "institution_en": "Washington University in St. Louis",
+    "department": "Olin Business School, Finance",
+    "position": "Frederick Bierman & James E. Spears Professor of Finance",
+    "region": "北美",
+    "source_url": "https://olin.washu.edu/faculty/guofu-zhou",
+    "checked_at": "2026-10-15",
+    "note": "Olin 官方教师页。",
+    "evidence_status": "official_verified"
+  },
+  "A5101435735": {
+    "institution": "耶鲁大学",
+    "institution_en": "Yale University",
+    "department": "Yale School of Management, Finance",
+    "position": "Frederick Frank '54 and Mary C. Tanner Professor of Finance; Associate Director, International Center for Finance",
+    "region": "北美",
+    "source_url": "https://som.yale.edu/bryan-t-kelly",
+    "checked_at": "2026-10-15",
+    "note": "Yale SOM 官方教师页；另任 AQR 机器学习负责人（业界职务，未在本页核验）。",
+    "evidence_status": "official_verified"
+  },
+  "A5029249775": {
+    "institution": "康奈尔大学",
+    "institution_en": "Cornell University",
+    "department": "Computer Science (Cornell Tech)",
+    "position": "Weill Family Foundation and Joan and Sanford I. Weill Professor of Computer Science",
+    "region": "北美",
+    "source_url": "https://www.cs.cornell.edu/people/ari-juels",
+    "checked_at": "2026-10-15",
+    "note": "康奈尔计算机系官方人员页。",
+    "evidence_status": "official_verified"
+  },
+  "A5100341868": {
+    "institution": "香港理工大学",
+    "institution_en": "The Hong Kong Polytechnic University",
+    "department": "Department of Applied Mathematics",
+    "position": "Professor",
+    "region": "亚洲",
+    "source_url": "https://www.polyu.edu.hk/ama/people/academic-staff/prof-li-xun/",
+    "checked_at": "2026-10-15",
+    "note": "理大应用数学系官方人员页，页面中文名为李迅。",
+    "evidence_status": "official_verified"
+  },
+  "A5067662147": {
+    "institution": "牛津大学",
+    "institution_en": "University of Oxford",
+    "department": "Department of Computer Science",
+    "position": "Professor of Computer Science",
+    "region": "欧洲",
+    "source_url": "https://www.cs.ox.ac.uk/people/paul.goldberg/index.html",
+    "checked_at": "2026-10-15",
+    "note": "牛津计算机系官方人员页；另任 MSc in MFoCS 项目主任。",
+    "evidence_status": "official_verified"
+  },
+  "A5043537207": {
+    "institution": "加州大学伯克利分校",
+    "institution_en": "University of California, Berkeley",
+    "department": "Department of Economics",
+    "position": "George C. Pardee and Helen N. Pardee Chair and Distinguished Professor of Economics and Political Science",
+    "region": "北美",
+    "source_url": "https://eml.berkeley.edu/~eichengr/",
+    "checked_at": "2026-10-15",
+    "note": "伯克利域名下本人主页。",
+    "evidence_status": "official_verified"
+  },
+  "A5060270542": {
+    "institution": "牛津大学",
+    "institution_en": "University of Oxford",
+    "department": "Mathematical Institute",
+    "position": "Professor of Mathematics",
+    "region": "欧洲",
+    "source_url": "https://www.maths.ox.ac.uk/people/samuel.cohen",
+    "checked_at": "2026-10-15",
+    "note": "牛津数学研究所官方人员页。",
+    "evidence_status": "official_verified"
+  },
+  "A5011490173": {
+    "institution": "牛津大学",
+    "institution_en": "University of Oxford",
+    "department": "Mathematical Institute",
+    "position": "Professor (Academic Faculty)",
+    "region": "欧洲",
+    "source_url": "https://www.maths.ox.ac.uk/people/blanka.horvath",
+    "checked_at": "2026-10-15",
+    "note": "牛津数学研究所官方人员页写 Prof. Blanka Nora Horvath，状态 Academic Faculty；页面未写具体职级。",
+    "evidence_status": "official_verified"
+  },
+  "A5034175798": {
+    "institution": "牛津大学",
+    "institution_en": "University of Oxford",
+    "department": "Mathematical Institute",
+    "position": "Professor (Academic Faculty)",
+    "region": "欧洲",
+    "source_url": "https://www.maths.ox.ac.uk/people/leandro.sanchezbetancourt",
+    "checked_at": "2026-10-15",
+    "note": "牛津数学研究所官方人员页写 Prof.，状态 Academic Faculty；本人 2026 年 1 月 CV 写 Associate Professor（2025 起）。",
+    "evidence_status": "official_verified"
+  },
+  "A5050150656": {
+    "institution": "西北大学",
+    "institution_en": "Northwestern University",
+    "department": "Computer Science",
+    "position": "Ginni Rometty Professor of Computer Science",
+    "region": "北美",
+    "source_url": "https://www.mccormick.northwestern.edu/research-faculty/directory/profiles/elkind-edith.html",
+    "checked_at": "2026-10-15",
+    "note": "西北大学 McCormick 官方教师页；2024 年 11 月由牛津转入。原抓取学校牛津为历史任职。",
+    "evidence_status": "official_verified"
+  },
+  "A5089595588": {
+    "institution": "斯坦福大学",
+    "institution_en": "Stanford University",
+    "department": "Stanford Graduate School of Business, Finance",
+    "position": "James Irvin Miller Professor of Finance",
+    "region": "北美",
+    "source_url": "https://gsb.stanford.edu/faculty-research/faculty/zhiguo-he",
+    "checked_at": "2026-10-15",
+    "note": "斯坦福商学院官方教师页；2024 年起由芝加哥布斯转入，原抓取学校芝加哥为历史任职。",
+    "evidence_status": "official_verified"
+  },
+  "A5055304783": {
+    "institution": "约翰斯·霍普金斯大学",
+    "institution_en": "Johns Hopkins University",
+    "department": "Carey Business School",
+    "position": null,
+    "region": "北美",
+    "source_url": "https://carey.jhu.edu/sites/default/files/2025-07/frank-fabozzi-cv-7-12-2025.pdf",
+    "checked_at": "2026-10-15",
+    "note": "Carey 官方 CV 与教师页均返回 403，本次未读到全文；检索摘要写 Professor of Practice（2021 起），暂不确认职位。",
+    "evidence_status": "unknown",
+    "institution_evidence_status": "unverified"
+  },
+  "A5077020574": {
+    "institution": "香港城市大学",
+    "institution_en": "City University of Hong Kong",
+    "department": "Department of Economics and Finance",
+    "position": null,
+    "region": "亚洲",
+    "source_url": "https://www.cityu.edu.hk/named-professorship/named-professorship-scheme/named-chair-professorships/hung-hing-ying-chair-professorship-in-international-economics-and-finance",
+    "checked_at": "2026-10-15",
+    "note": "检索摘要显示城大页面写其 2026 年任经济及金融系系主任、讲座教授，但本次页面未渲染出正文；理大 2026 年 7 月新闻仍称其为理大讲座教授。两处表述不一致，待核实。",
+    "evidence_status": "conflicting",
+    "institution_evidence_status": "unverified"
   }
 }
