@@ -1,4 +1,4 @@
-# AI Talent Network publication
+# PBCSF AI Talent Dashboard publication
 
 This repository publishes an existing standalone demo to GitHub Pages.
 

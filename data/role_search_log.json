@@ -1,0 +1,2759 @@
+{
+  "A5001708196": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。HTTP 403，web.run同址正文可读；研究领域与输入金融数据论文一致。",
+    "attempted_urls": [
+      "https://business.columbia.edu/faculty/people/laura-veldkamp",
+      "https://business.columbia.edu/lveldkamp",
+      "https://news.columbia.edu/people/laura-veldkamp"
+    ],
+    "searches": [
+      {
+        "query": "site.business.columbia.edu Laura Veldkamp faculty professor",
+        "result": "已执行真实web检索并打开所引官方页面"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://business.columbia.edu/faculty/people/laura-veldkamp",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://business.columbia.edu/lveldkamp",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://news.columbia.edu/people/laura-veldkamp",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5002102744": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。",
+    "attempted_urls": [
+      "https://midas.umich.edu/directory/michael-wellman/"
+    ],
+    "searches": [
+      {
+        "query": "site.umich.edu \"Michael Wellman\" professor",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://midas.umich.edu/directory/michael-wellman/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5002104655": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：学校人员目录仍列Postdoctoral Research Fellow，但其所在实验室当前官网明确列校友、已到Surge Labs；现雇主官方页缺失，不能把旧Princeton目录当确定现任。",
+    "attempted_urls": [
+      "https://psychology.princeton.edu/people/research-staff",
+      "https://www.crockettlab.org/people"
+    ],
+    "searches": [
+      {
+        "query": "\"Adam Morris\" Princeton current psychologist official",
+        "result": "Princeton旧人员URL403；新research-staff目录可读"
+      },
+      {
+        "query": "\"Adam Morris\" \"Surge Labs\" Princeton",
+        "result": "Princeton指向的Crockett Lab官网列Alumni，now Surge Labs；无公司官方人员页"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://psychology.princeton.edu/people/research-staff",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://www.crockettlab.org/people",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5002152531": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。新staff-directory实际可web.run完整读取。curl HTTP200空白不得称HTTP核验通过。",
+    "attempted_urls": [
+      "https://lkyspp.nus.edu.sg/our-people/staff-directory/academic-affairs/saravana-ravindran"
+    ],
+    "searches": [
+      {
+        "query": "\"Saravana Ravindran\" NUS faculty",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://lkyspp.nus.edu.sg/our-people/staff-directory/academic-affairs/saravana-ravindran",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "access_challenge_instead_of_page",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5003156608": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：导师官方Students页已定位，但实际web.run打开403、curl403。搜索线索称Graduated Students，Kun Jin (PhD, April 2024. Machine Learning Scientist, TikTok.)，未以摘要写入已核实字段。旧ORCID博士在读需谨慎，当前高校任职读取受阻。",
+    "attempted_urls": [
+      "https://liu.engin.umich.edu/students/"
+    ],
+    "searches": [
+      {
+        "query": "\"Kun Jin\" \"University of Michigan\"",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Kun Jin\" site:umich.edu \"PhD\"",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://liu.engin.umich.edu/students/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5003177544": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：Columbia magazine旧profile已定位，但实际读取timeout/curl403；旧2019新闻亦不能证明2026现职。未获得当前人员目录。不能用Auckland Marketing/IFC同名人替代。",
+    "attempted_urls": [
+      "https://magazine.engineering.columbia.edu/faculty/van-anh-truong"
+    ],
+    "searches": [
+      {
+        "query": "\"Van-Anh Truong\" current professor university",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Van-Anh Truong\" site:columbia.edu \"2026\"",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Van-Anh Truong\" \"faculty\" \"2025\"",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://magazine.engineering.columbia.edu/faculty/van-anh-truong",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5004082658": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。CBS and SIPA explicitly label emeritus; undated Columbia Center on Capitalism current directory still gives unqualified Henry Kaufman Professor and Professor of International/Public Affairs. Keep each page's current/emeritus wording as observed; do not use 2020/2023 archived CV to settle current status. Institution Columbia is certain. Hoover own page says WAS a Distinguished Visiting Fellow, so no current Stanford appointment.",
+    "attempted_urls": [
+      "https://business.columbia.edu/staff/people/charles-calomiris",
+      "https://capitalism.columbia.edu/directory/charles-w-calomiris"
+    ],
+    "searches": [
+      {
+        "query": "Charles Calomiris Columbia emeritus official",
+        "result": "CBS current directory explicitly labels emeritus."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://business.columbia.edu/staff/people/charles-calomiris",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://capitalism.columbia.edu/directory/charles-w-calomiris",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5005762641": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。Verbatim title is substring of bio. Local urllib returned 200 empty body; actual evidence read through web.run. web04.json.",
+    "attempted_urls": [
+      "https://nusgs.nus.edu.sg/thesis-advisors/bizk"
+    ],
+    "searches": [
+      {
+        "query": "Bin Ke NUS professor official",
+        "result": "NUSGS original page opened; matching NUS Discovery ORCID 0000-0001-8274-2793 also in search."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://nusgs.nus.edu.sg/thesis-advisors/bizk",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "access_challenge_instead_of_page",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5006323592": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。同校Economics与Public Health为并任。",
+    "attempted_urls": [
+      "https://carey.jhu.edu/faculty/faculty-directory/andrew-ching-phd"
+    ],
+    "searches": [
+      {
+        "query": "\"Andrew Ching\" Johns Hopkins Carey faculty",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://carey.jhu.edu/faculty/faculty-directory/andrew-ching-phd",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5006565823": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Official Oxford-affiliated CDT lists him among 2020 cohort alumni. DRW private LinkedIn lead is not official employer evidence.",
+    "attempted_urls": [
+      "https://www.randomsystems-cdt.ac.uk/alumni"
+    ],
+    "searches": [
+      {
+        "query": "\"Marcello Monga\" Oxford current",
+        "result": "CDT alumni and private LinkedIn industry profile found."
+      },
+      {
+        "query": "\"Marcello Monga\" site:maths.ox.ac.uk OR site:drw.com",
+        "result": "Only Oxford research/coauthor mentions; no current official employer appointment page."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.randomsystems-cdt.ac.uk/alumni",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5006931766": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：CMU官方degrees-conferred页明确Graduated August2017；旧cs.cmu个人页2012-current PhD过期。TruEra贡献者/软件作者不是当前高校任职。",
+    "attempted_urls": [
+      "https://www.csd.cs.cmu.edu/academics/doctoral/degrees-conferred/david-kurokawa"
+    ],
+    "searches": [
+      {
+        "query": "\"David Kurokawa\" current Truera",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"David Kurokawa\" site:cmu.edu alumni",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.csd.cs.cmu.edu/academics/doctoral/degrees-conferred/david-kurokawa",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5010638511": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：Input research concerns robot diffusion/environment economics; same-name LLaVA author must not be substituted.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "Qingyang Wu Tsinghua UCLA official",
+        "result": "No official matching employment page; CESASC outside-employer scholarship result identifies UCLA PhD candidate."
+      },
+      {
+        "query": "\"Qingyang Wu\" site:ucla.edu",
+        "result": "No matching current employment page."
+      },
+      {
+        "query": "\"Qingyang Wu\" site:tsinghua.edu.cn",
+        "result": "Only unrelated CS citations/name matches; not evidence for economics/environment researcher."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5011785041": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：UPenn官方导师页列Graduates，微软论文只能证明发表作者关联，不能当当前任职与职称；第三方雇佣介绍不入库。",
+    "attempted_urls": [
+      "https://www.cis.upenn.edu/~fbrett/people.html"
+    ],
+    "searches": [
+      {
+        "query": "\"Alon Benhaim\" Microsoft official",
+        "result": "微软官方论文列表有作者，无当前岗位/职级"
+      },
+      {
+        "query": "\"Alon Benhaim\" site:microsoft.com \"Scientist\"",
+        "result": "仅论文作者与第三方Senior Applied Scientist信息"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.cis.upenn.edu/~fbrett/people.html",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5012065643": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。现页Professor；2019旧CV的Associate Professor为历史档案，不制造当前冲突。",
+    "attempted_urls": [
+      "https://carey.jhu.edu/faculty/faculty-directory/ruxian-wang-phd",
+      "https://carey.jhu.edu/faculty/faculty-directory?page=8"
+    ],
+    "searches": [
+      {
+        "query": "\"Ruxian Wang\" Carey professor official",
+        "result": "web.run现人员页完整打开，HTTP旧抓取403"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://carey.jhu.edu/faculty/faculty-directory/ruxian-wang-phd",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://carey.jhu.edu/faculty/faculty-directory?page=8",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5012816129": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Michigan 2026 Senior Day与校刊说明学生/毕业关联；LinkedIn雇主线索Davis Polk不作为官方岗位。没有当前大学任职或新雇主目录职称。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Jacob Gerszten\" site:umich.edu",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Jacob Gerszten\" lawyer profile 2026",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5016301762": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：Do not substitute Nagoya Buddhist philology scholar. Tsinghua author references establish publications but not employment title.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Naiqi Li\" Tsinghua assistant researcher",
+        "result": "Personal GitHub page says assistant researcher; no employer title page."
+      },
+      {
+        "query": "\"Naiqi Li\" site:tsinghua.edu.cn",
+        "result": "Official coauthor/publication references only."
+      },
+      {
+        "query": "\"李乃琦\" 清华 助理研究员",
+        "result": "Personal homepage only for target; unrelated Nagoya humanities scholar has same Chinese name."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5017927930": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Do not treat retained Oxford page as current Research Associate. No current employer appointment located.",
+    "attempted_urls": [
+      "https://www.cs.ox.ac.uk/people/paul.harrenstein/"
+    ],
+    "searches": [
+      {
+        "query": "\"Paul Harrenstein\" current official",
+        "result": "Official Oxford page located."
+      },
+      {
+        "query": "\"Paul Harrenstein\" site:ox.ac.uk \"Leaving\"",
+        "result": "Official page explicitly says leaving date 31 July 2023."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.cs.ox.ac.uk/people/paul.harrenstein/",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5020100285": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：NUS可定位Maritime magazine reviewer委员会与2020文章，均非当前院系任职目录；ORCID历史记录指NUS任期结束2025，CSU仅论文输出，不把其转为新雇主任职。",
+    "attempted_urls": [
+      "https://maritimestudies.nus.edu.sg/maritimeredi/magazine/people/committee/"
+    ],
+    "searches": [
+      {
+        "query": "\"Carol Anne Hargreaves\" professor university",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Carol Anne Hargreaves\" site:csu.edu.au",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://maritimestudies.nus.edu.sg/maritimeredi/magazine/people/committee/",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "access_challenge_instead_of_page",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5020854111": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：未用同名医院住院医师替换USTC公共事务学院研究作者。当前任职不明，无官方任职页。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Amna Younis\" University current official faculty",
+        "result": "同名医师等结果与USTC经济创新论文身份不符"
+      },
+      {
+        "query": "\"Amna Younis\" site:ustc.edu.cn",
+        "result": "未找到官方人员任职页"
+      },
+      {
+        "query": "\"Amna Younis\" \"Public Affairs\"",
+        "result": "ResearchGate旧自报Master学生，非现任官方证明"
+      },
+      {
+        "query": "\"Amna Younis\" site:spa.ustc.edu.cn OR site:faculty.ustc.edu.cn",
+        "result": "未找到可核实官网"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5021002637": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：不能把搜索snippet写成已核实职称。MDP目录搜索另称Professor，与大多页面Associate可能冲突，也需独立打开后判断。根代理可尝试相关来源补读。 补读旧学校域CV成功（pages2/7d21c9921373b86c.pdf和.txt），title Associate Professor，经历2006-present，但论文止于2017左右，不能当作2026现职确认；保留fetch_blocked。",
+    "attempted_urls": [
+      "https://web.eecs.umich.edu/~anastas/anastas/docs/cv.pdf"
+    ],
+    "searches": [
+      {
+        "query": "\"Achilleas Anastasopoulos\" professor Michigan official",
+        "result": "现EECS/个人页/2025师资PDF均有Associate线索，但打开失败"
+      },
+      {
+        "query": "\"Achilleas Anastasopoulos\" \"Associate Professor\" site:umich.edu -peoplenews",
+        "result": "找到学校域个人主页/CV、ECE目录、2025 faculty magazine；web.run打开均403或Internal Error"
+      },
+      {
+        "query": "\"Achilleas Anastasopoulos\" \"CV\" 2026 official",
+        "result": "找到CV页面 /cv-2/；未能独立读取职位正文"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://web.eecs.umich.edu/~anastas/anastas/docs/cv.pdf",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5021432602": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。",
+    "attempted_urls": [
+      "https://sph.umich.edu/faculty-profiles/kang-jian.html"
+    ],
+    "searches": [
+      {
+        "query": "site.umich.edu \"Jian Kang\" professor",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://sph.umich.edu/faculty-profiles/kang-jian.html",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://sph.umich.edu/faculty-profiles/kang-jian.html",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5021438838": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：2025年8月Wharton博客作者简介及2025作者材料可证明当时为visiting scholar；当前材料不足以确认2026年10月仍有该访问身份。保留历史证据，不据此推断访问已结束。",
+    "attempted_urls": [
+      "https://pensionresearchcouncil.wharton.upenn.edu/blog/high-time-to-prioritize-healthspan/"
+    ],
+    "searches": [
+      {
+        "query": "Stephen Utkus Wharton visiting scholar Georgetown official",
+        "result": "已执行真实web检索并打开所引官方页面"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://pensionresearchcouncil.wharton.upenn.edu/blog/high-time-to-prioritize-healthspan/",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5022902400": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "outside_scope",
+    "note": "2026-10-19 逐条复查：已获Columbia CS博士并转Category Labs，公司官方HTTP200人员页确认Blockchain Research Scientist / Senior Researcher。公司页面不属于本项目高校任职证据范围，故正式proposed状态unresolved/outside_scope；不再当作Columbia现任。",
+    "attempted_urls": [
+      "https://www.category.xyz/team/jason-milionis"
+    ],
+    "searches": [
+      {
+        "query": "Jason Milionis current Category Labs research official",
+        "result": "公司官方页真实HTTP200，已缓存"
+      },
+      {
+        "query": "\"Jason Milionis\" site:category.xyz",
+        "result": "搜索未给出更合适官方结果"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.category.xyz/team/jason-milionis",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5022909747": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已知comp.nus.edu.sg/~liuxu/ HTTP403，web.run读取也失败。以输入时空预测CS论文追踪，不用同名经济学教授替代；Salesforce PhD Intern介绍不当当前高校职务。",
+    "attempted_urls": [
+      "https://www.comp.nus.edu.sg/~liuxu/"
+    ],
+    "searches": [
+      {
+        "query": "\"Xu Liu\" \"Towards Unifying Diffusion\" NUS",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Xu Liu\" site:comp.nus.edu.sg liuxu",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Xu Liu\" site:comp.nus.edu.sg \"PhD\"",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.comp.nus.edu.sg/~liuxu/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5023271603": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：检索到Wachtell律师第三方名录，但未找到公司本身当前profile；Stanford JD/FRB RA为历史。未取得当前大学任职。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Martin Sicilian\" employer lawyer",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Martin Sicilian\" site:wlrk.com",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Martin J. Sicilian\" Stanford",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5024477355": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "identity_unresolved",
+    "note": "2026-10-19 逐条复查：Input author name Hao Feng and ORCID attributed to Hanrui Feng in previous_attempts. Do not claim one person's employment for a merged author record.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Hao Feng\" \"Hanrui Feng\" Chicago official",
+        "result": "No matching official person page."
+      },
+      {
+        "query": "\"Hanrui Feng\" site:uchicago.edu OR \"Hao Feng\" site:uchicago.edu",
+        "result": "No matching official appointment page."
+      },
+      {
+        "query": "\"Hao Feng\" \"Hanrui\" economics official",
+        "result": "No evidence resolving merged-name author identity."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5026553283": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Important: current official CMI research-staff PDF updated 26 March 2026 does not list HO Kin On Winky; old 28 March 2025 indexed PDF did. Absence does not prove departure, and old list cannot establish 2026 current appointment. New PDF actual read, saved web28.json.",
+    "attempted_urls": [
+      "https://www.polyu.edu.hk/bre/docdrive/Research%20Staff_as%20of%2026%20Mar%202026%20(for%20website).pdf"
+    ],
+    "searches": [
+      {
+        "query": "\"Winky K O Ho\" PolyU official",
+        "result": "Research paper records, no person title page."
+      },
+      {
+        "query": "\"Winky\" \"Ho\" site:polyu.edu.hk",
+        "result": "Old 2010/11 annual report and 2025 staff PDF mention Research Associate."
+      },
+      {
+        "query": "\"Winky\" \"Ho\" site:polyu.edu.hk \"Research Associate\"",
+        "result": "2025-03 staff PDF indexed, but old direct route no longer serves original PDF."
+      },
+      {
+        "query": "\"research personnel\" site:polyu.edu.hk/cmi",
+        "result": "Current CMI directory opened, followed actual staff link to 2026-03-26 PDF; target absent."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.polyu.edu.hk/bre/docdrive/Research%20Staff_as%20of%2026%20Mar%202026%20(for%20website).pdf",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5026619574": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。",
+    "attempted_urls": [
+      "https://business.columbia.edu/faculty/people/paul-glasserman"
+    ],
+    "searches": [
+      {
+        "query": "site.business.columbia.edu \"Paul Glasserman\" professor",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://business.columbia.edu/faculty/people/paul-glasserman",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5026905803": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：Personal GitHub page and paper bios corroborate research but are not official employer appointment pages.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Yebo Feng\" NTU research fellow official",
+        "result": "Personal page says NTU Research Fellow, but no university employment page."
+      },
+      {
+        "query": "\"Yebo Feng\" site:ntu.edu.sg \"Research Fellow\"",
+        "result": "No matching university appointment page; NTU news only award authorship."
+      },
+      {
+        "query": "\"Yebo Feng\" \"Yang Liu\" site:ntu.edu.sg",
+        "result": "NTU repository publications found, no current role listing."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5027371448": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：GNNWR作者身份可由论文核对，但Github项目的Graduate student不是学校域任职证明；未找到当前官方岗位/学籍页。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Yige Wang\" Zhejiang GIS GNNWR official",
+        "result": "仅论文与Github项目Graduate student"
+      },
+      {
+        "query": "\"Yige Wang\" site:zju.edu.cn GIS",
+        "result": "未找到人员岗位页"
+      },
+      {
+        "query": "\"Yige Wang\" site:earth.zju.edu.cn OR site:person.zju.edu.cn",
+        "result": "未找到官方个人页"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5027804837": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。HTTP旧轮403不代表无官网；本轮web.run现人员页确认。",
+    "attempted_urls": [
+      "https://engineering.jhu.edu/faculty/haoyang-cao/",
+      "https://engineering.jhu.edu/ams/research/probability-and-stochastic-processes/people-probability-and-stochastic-processes/"
+    ],
+    "searches": [
+      {
+        "query": "\"Haoyang Cao\" Johns Hopkins assistant professor official",
+        "result": "现雇主人员页可由web.run打开全文"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://engineering.jhu.edu/faculty/haoyang-cao/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://engineering.jhu.edu/ams/research/probability-and-stochastic-processes/people-probability-and-stochastic-processes/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5028537285": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：ABS self-operated academy page is readable, but repository policy excludes self-institution/company pages as university appointment evidence. No current official USTC employment page located; paper affiliation not sufficient.",
+    "attempted_urls": [
+      "https://www.absresearchacademy.com/about-us/our-team"
+    ],
+    "searches": [
+      {
+        "query": "Abu Bakkar Siddik USTC official faculty",
+        "result": "No matching USTC employment page; same-name Bangladesh university hits insufficient identity."
+      },
+      {
+        "query": "\"Abu Bakkar Siddik\" \"USTC\" finance research academy",
+        "result": "Input paper found with USTC affiliation; self-operated ABS academy page opened but not university appointment evidence."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.absresearchacademy.com/about-us/our-team",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5028585019": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Stanford PhD '20 transcript and old papers support historical student status. Meta/Instacart leads not enough for current official appointment.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Ali Shameli\" Stanford current official",
+        "result": "Stanford alumni student story says Graduating PhD candidate, not current employment."
+      },
+      {
+        "query": "\"Ali Shameli\" site:instacart.com OR site:about.fb.com OR site:mit.edu",
+        "result": "No current official employer profile found."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5032327635": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Current company role is independently readable, but repository excludes company pages as university appointment evidence. MIT explicitly alumni, no current academic appointment found.",
+    "attempted_urls": [
+      "https://electionlab.mit.edu/about",
+      "https://goodparty.org/team"
+    ],
+    "searches": [
+      {
+        "query": "\"Samuel Baltz\" MIT GoodParty official",
+        "result": "GoodParty full-time Director of Research verified from actual team page."
+      },
+      {
+        "query": "\"Samuel Baltz\" site:mit.edu alumni",
+        "result": "MIT Election Lab places Research Scientist role under MEDSL Alumni."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://electionlab.mit.edu/about",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      },
+      {
+        "url": "https://goodparty.org/team",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5032791497": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Stanford FSI残留页curl200写Assistant Professor，但主体GSB已撤下、输入上轮转Netflix线索未取得当前本校雇主profile；不靠陈旧跨中心页恢复现职。无Netflix官方当前职务。",
+    "attempted_urls": [
+      "https://fsi.stanford.edu/people/yonatan-gur"
+    ],
+    "searches": [
+      {
+        "query": "\"Yonatan Gur\" Netflix current official",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Yonatan Gur\" site:stanford.edu professor",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Yonatan Gur\" site:netflixtechblog.com",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://fsi.stanford.edu/people/yonatan-gur",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5036092620": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。New own-employer source recovered: 15 September 2026 Krieger School new-faculty announcement explicitly lists current Assistant Professor, Department of Economics, matching Princeton PhD and econometrics/macroeconomics identity. Original parsed page text read and saved; local HTTP still403. Root must independently read before admission.",
+    "attempted_urls": [
+      "https://krieger.jhu.edu/blog/2026/09/15/welcoming-new-krieger-school-faculty/",
+      "https://econ.jhu.edu/directory/eric-qian/"
+    ],
+    "searches": [
+      {
+        "query": "\"Eric Qian\" Johns Hopkins official",
+        "result": "Official directory URL located; indexed title Assistant Professor, Princeton PhD."
+      },
+      {
+        "query": "\"Eric Qian\" site:jhu.edu \"2026\"",
+        "result": "Official current directory and January 2026 student seminar."
+      },
+      {
+        "query": "\"Eric Qian\" site:jhu.edu \"faculty\"",
+        "result": "Official People and faculty pages located; original fetch also blocked."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://krieger.jhu.edu/blog/2026/09/15/welcoming-new-krieger-school-faculty/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://econ.jhu.edu/directory/eric-qian/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5036130379": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Berkeley的旧PhD Student简介不能当当前身份；2024毕业，由个人主页previously措辞看Succinct也已是过往，未发现可核实当前官方雇主岗位。",
+    "attempted_urls": [
+      "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2024/EECS-2024-221.html"
+    ],
+    "searches": [
+      {
+        "query": "Kshitij Kulkarni current research Succinct official",
+        "result": "个人页称previously Head of Protocol Research at Succinct"
+      },
+      {
+        "query": "\"Kshitij Kulkarni\" site:succinct.xyz OR site:berkeley.edu",
+        "result": "找到Berkeley旧学生与2024博士论文；未找到现雇主人员页"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2024/EECS-2024-221.html",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5040419676": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：CMU主页与2020博士学位是旧经历；导师个人网站提Uber不能替代新雇主官方任职页。",
+    "attempted_urls": [
+      "https://www.cs.cmu.edu/~rnoothig/"
+    ],
+    "searches": [
+      {
+        "query": "Ritesh Noothigattu current official faculty",
+        "result": "仅CMU旧个人页/CV与博士论文"
+      },
+      {
+        "query": "\"Ritesh Noothigattu\" site:uber.com OR site:hudsonrivertrading.com",
+        "result": "未找到当前雇主官方人员页"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.cs.cmu.edu/~rnoothig/",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5042976775": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。HTTP403但web.run打开搜索得到的同址正文成功；同校其他教授头衔为兼任职责。",
+    "attempted_urls": [
+      "https://michiganross.umich.edu/faculty-research/faculty/scott-page",
+      "https://sites.lsa.umich.edu/sustainablefoodsystems/faculty-staff/literature-science-and-the-arts-affiliated-faculty-staff/scott-page/"
+    ],
+    "searches": [
+      {
+        "query": "site:michiganross.umich.edu Scott Page Professor",
+        "result": "已执行真实web检索并打开所引官方页面"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://michiganross.umich.edu/faculty-research/faculty/scott-page",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://sites.lsa.umich.edu/sustainablefoodsystems/faculty-staff/literature-science-and-the-arts-affiliated-faculty-staff/scott-page/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5043334531": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。真实职级冲突：当前faculty目录/en路线实际打开正文，L282-L283列Professor of Finance；2026-2027官方catalog page337列Associate Professor of Finance。两份原文均已读取，不按多数猜测。Oxford历史访问不算当前任职。",
+    "attempted_urls": [
+      "https://cdn.adu.ac.ae/flipbooks/pgcat/files/basic-html/page337.html",
+      "https://www.adu.ac.ae/en/study/colleges/college-of-business/faculty"
+    ],
+    "searches": [
+      {
+        "query": "site.adu.ac.ae \"Haitham Nobanee\" \"Professor of Finance\"",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://cdn.adu.ac.ae/flipbooks/pgcat/files/basic-html/page337.html",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      },
+      {
+        "url": "https://www.adu.ac.ae/en/study/colleges/college-of-business/faculty",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5043531927": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Stanford placement source is explicitly 2020-2021 history. Old Bill Lane PhD Candidate page not current student status.",
+    "attempted_urls": [
+      "https://politicalscience.stanford.edu/graduate-program/phd-admissions/job-placement"
+    ],
+    "searches": [
+      {
+        "query": "\"Jesse Yoder\" Stanford current official",
+        "result": "Bill Lane profile retained PhD Candidate; current placement history shows already graduated."
+      },
+      {
+        "query": "\"Jesse Yoder\" site:politicalscience.stanford.edu \"Facebook\"",
+        "result": "2020-2021 placement record read, not evidence of current employer role."
+      },
+      {
+        "query": "\"Jesse Yoder\" site:about.fb.com OR site:research.facebook.com OR site:research.fb.com",
+        "result": "No official current Meta employer profile found."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://politicalscience.stanford.edu/graduate-program/phd-admissions/job-placement",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5044117692": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。旧轮URL /ryan-ball不是当前实际profile；当前URL含/ryan-t-ball。论文Panel Data Nowcasting在该profile搜索返回全文中匹配。独立curl仍403。",
+    "attempted_urls": [
+      "https://michiganross.umich.edu/faculty-research/faculty/ryan-t-ball"
+    ],
+    "searches": [
+      {
+        "query": "\"Ryan Ball\" site:michiganross.umich.edu faculty",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://michiganross.umich.edu/faculty-research/faculty/ryan-t-ball",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5044375203": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "identity_unresolved",
+    "note": "2026-10-19 逐条复查：输入记录混两名作者：金融AutoML论文DOI4495010/4495055/3738023的SSRN搜索全文列Yuhan Cheng、Tsinghua PBCSF Students及Shandong University School of Management；SDU官网程雨涵为助理教授，清华五道口金融博士，并列英文Yuhan Cheng合著。输入ORCID0000-0001-7731-2780在DBLP明确对应2024 MobiCom Multi-Agent Target Pursuit，与Jirong Zha、Xinlei Chen合著；Duke当前官网同名PhD Student为Tsinghua数据科学硕士/中山CS学士、agent/mobile systems，与SDU的北师大数学学士/北大经济双学位/清华金融博士不同。SDU任职页和Duke页已独立HTTP200；SSRN实际打开和curl均403，只能发现其山东关联，尚未完成输入金融论文与SDU人逐字来源连接，故身份合并未消解，不能直接替记录填SDU。",
+    "attempted_urls": [
+      "https://www.glxy.sdu.edu.cn/info/1091/6845.htm"
+    ],
+    "searches": [
+      {
+        "query": "\"Yuhan Cheng\" \"山东大学\"",
+        "result": "打开山东大学官方教师页"
+      },
+      {
+        "query": "\"Yuhan Cheng\" \"Automated Machine Learning\" finance",
+        "result": "SSRN输入DOI3738023同一作者同时列山东大学管理学院，支持金融作者身份"
+      },
+      {
+        "query": "\"0000-0001-7731-2780\" \"Cheng\"",
+        "result": "DBLP绑定MobiCom目标追踪作者，Duke官网不同学历/研究方向；搜索缓存关联SSRN金融论文与山东大学，但SSRN独立打开403。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.glxy.sdu.edu.cn/info/1091/6845.htm",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5045266227": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "identity_unresolved",
+    "note": "2026-10-19 逐条复查：输入ORCID无可确认现职。官方检索发现多个同名学生，论文作者跨CAU植保、PKU国发院；不把PKU光华2023博士答辩者或CAU企业导师直接视为同一人。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Manzhou Li\" Peking University official",
+        "result": "找到PKU文献库论文，但没有当前岗位页"
+      },
+      {
+        "query": "\"李曼州\" site:pku.edu.cn OR site:cau.edu.cn",
+        "result": "同名PKU2023博士答辩者、CAU2019级本科生与2025企业导师等多人线索；不能合并"
+      },
+      {
+        "query": "\"Manzhou Li\" \"Risk-Aware\" current",
+        "result": "2026论文仍见不同学位/机构组合，无官方现职证明"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5046199536": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "outside_scope",
+    "note": "2026-10-19 逐条复查：CQT现人员页Senior Research Fellow, NQCH；NQCH页Research Fellow且写Centre for Quantum Technologies, National University of Singapore。CQT官方Our National Role说明2025改全国中心/多个大学节点，现人员页本身不明确NUS归属；保留职称冲突线索，按项目大学任职边界不填NUS。",
+    "attempted_urls": [
+      "https://www.cqt.sg/people/alessandro-luongo/",
+      "https://www.nqch.sg/researcher/alessandro-luongo/"
+    ],
+    "searches": [
+      {
+        "query": "Alessandro Luongo CQT Singapore staff official",
+        "result": "已打开CQT和NQCH官方profile；两页职级不同"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.cqt.sg/people/alessandro-luongo/",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "access_challenge_instead_of_page",
+          "employer_domain_not_confirmed",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://www.nqch.sg/researcher/alessandro-luongo/",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5046711257": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：MIT thesis precisely matches input discrete choice research. Do not substitute same-name Shenyang materials scientist or separate industry person without identity evidence.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Yafei Han\" MIT current official",
+        "result": "MIT 2020 commencement: September 2019 Transportation PhD, Neural-Embedded Discrete Choice Models."
+      },
+      {
+        "query": "\"Yafei Han\" site:mit.edu OR site:cmtelematics.com",
+        "result": "Historical MIT papers/students and private CMT lead, no official current employment page."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5047291984": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。",
+    "attempted_urls": [
+      "https://www.economics.harvard.edu/people/neil-shephard"
+    ],
+    "searches": [
+      {
+        "query": "site.harvard.edu \"Neil Shephard\" professor",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.economics.harvard.edu/people/neil-shephard",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5048881826": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。旧 jeffery-y-zhang URL已不适用；新版人员页包含输入论文。",
+    "attempted_urls": [
+      "https://michigan.law.umich.edu/faculty-and-scholarship/our-faculty/jeffery-zhang"
+    ],
+    "searches": [
+      {
+        "query": "\"Jeffery Y. Zhang\" site:michigan.law.umich.edu",
+        "result": "旧URL打不开"
+      },
+      {
+        "query": "Jeffery Zhang Michigan law professor official",
+        "result": "找到新版官方URL jeffery-zhang，web.run完整可读"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://michigan.law.umich.edu/faculty-and-scholarship/our-faculty/jeffery-zhang",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5051095951": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：论文/第三方作者信息不足以确认当前雇主职称。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Kaiyang Zhong\" Zhejiang university profile",
+        "result": "未找到官方个人任职页。"
+      },
+      {
+        "query": "\"Kaiyang Zhong\" site:zju.edu.cn",
+        "result": "未找到官方个人任职页。"
+      },
+      {
+        "query": "\"Kaiyang Zhong\" \"浙江大学\" 钟凯扬",
+        "result": "未找到可独立核对职称的官方个人页。"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5055330200": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：旧PolyU/CityU学术记录不能确认当前职位；没有从目录缺席推断退休或离世。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"John J. Liu\" professor official current",
+        "result": "未找到当前任职主页"
+      },
+      {
+        "query": "\"John J. Liu\" site:polyu.edu.hk OR site:cityu.edu.hk OR site:uwm.edu",
+        "result": "仅旧论文/活动记录"
+      },
+      {
+        "query": "\"John J Liu\" emeritus professor supply chain official",
+        "result": "未找到当前荣休任职"
+      },
+      {
+        "query": "\"John J. Liu\" site:polyu.edu.hk \"Professor\"",
+        "result": "LMS现职目录已打开，无此人；仅2009会议资料"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5057053493": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：2026第三方论文作者bio称NJUST postdoctoral researcher；UNESCO专家bio只写Dr.与专业背景，均不是雇主任职页。JHU为教育经历，不能写faculty。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Sidique Gawusu\" university researcher",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Sidique Gawusu\" site:njust.edu.cn",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Sidique Gawusu\" site:epe.njust.edu.cn",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5062440568": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：SALT Alumni explicitly lists '(Postdoc) → OpenAI'. CRFM people list retains Postdoc without dated appointment; do not promote stale directory entry over explicit alumni status. No current university role established.",
+    "attempted_urls": [
+      "https://cs.stanford.edu/~diyiy/group.html"
+    ],
+    "searches": [
+      {
+        "query": "\"Matthias Gerstgrasser\" OpenAI Stanford official",
+        "result": "Stanford SALT/NLP alumni list shows move to OpenAI."
+      },
+      {
+        "query": "\"Matthias Gerstgrasser\" site:openai.com",
+        "result": "No official current employment profile found."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://cs.stanford.edu/~diyiy/group.html",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5063750068": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。HTTP 403但web.run完整正文可读；页面含输入同题论文，身份确定。",
+    "attempted_urls": [
+      "https://business.columbia.edu/faculty/people/omar-besbes",
+      "https://www.columbia.edu/~ob2105/bio.html"
+    ],
+    "searches": [
+      {
+        "query": "site:business.columbia.edu Omar Besbes Professor",
+        "result": "已执行真实web检索并打开所引官方页面"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://business.columbia.edu/faculty/people/omar-besbes",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://www.columbia.edu/~ob2105/bio.html",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5065661789": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Cornell 2019 masters thesis and 2020 PhD references support historical student affiliation. No official current Two Sigma profile.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Liao Zhu\" Cornell Two Sigma official",
+        "result": "Cornell thesis and publications; no current employer staff page."
+      },
+      {
+        "query": "\"Liao Zhu\" site:cornell.edu OR site:twosigma.com",
+        "result": "Thesis/master and faculty coauthor citations only; no employment."
+      },
+      {
+        "query": "\"Liao Zhu\" \"Cornell\" \"PhD\"",
+        "result": "2020 Cornell PhD bibliography found; no current official appointment."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5067992353": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：当前导师个人组页明确列Alumnus: Ph.D.2025，first job Zhongguanchun AI Institute没有现职职称。学院旧组页仍Phd Students不可冒充当前岗位。",
+    "attempted_urls": [
+      "https://people.iiis.tsinghua.edu.cn/~jianli/ADLgroup-mem.htm"
+    ],
+    "searches": [
+      {
+        "query": "\"Yitong Duan\" site:tsinghua.edu.cn",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Yitong Duan\" site:zgci.ac.cn",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Yitong Duan\" site:people.iiis.tsinghua.edu.cn",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://people.iiis.tsinghua.edu.cn/~jianli/ADLgroup-mem.htm",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5070405591": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。学校2023晋升公告明确升副教授，个人现主页与2026教学均Associate，足以将旧Assistant简介识别为已结束职级，非真冲突。",
+    "attempted_urls": [
+      "https://math.jhu.edu/~feilu/index.html",
+      "https://hub.jhu.edu/at-work/2023/08/14/faculty-appointments-and-promotions-june-2023/"
+    ],
+    "searches": [
+      {
+        "query": "\"Fei Lu\" Johns Hopkins mathematics professor official",
+        "result": "个人页Associate，部门页抬头Associate但生物简介旧Assistant；另找到官方2023晋升公告"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://math.jhu.edu/~feilu/index.html",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://hub.jhu.edu/at-work/2023/08/14/faculty-appointments-and-promotions-june-2023/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5074182231": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：PolyU论文repository返回作者学校，但缺职位。第三方Loop称Post Doctoral Researcher，未找到本校当前人员页。不能用同名Huizhen Wang等填补。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Huizhen Long\" site:polyu.edu.hk",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Huizhen Long\" university faculty",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5074528175": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：CIFE currently lists him in Alumni. No current university appointment or official current employer person profile located.",
+    "attempted_urls": [
+      "https://cife.stanford.edu/aboutus/people/students"
+    ],
+    "searches": [
+      {
+        "query": "\"Hesam Hamledari\" Stanford current official",
+        "result": "Stanford ExploreCourses name-only profile, no current title; company leads third-party."
+      },
+      {
+        "query": "\"Hesam Hamledari\" site:stanford.edu alumni",
+        "result": "Stanford CIFE Alumni and 2022 commencement establish former student."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://cife.stanford.edu/aboutus/people/students",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5075785426": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Columbia官方清楚列Doctoral Alumni及PhD2019，岗位Quantitative Researcher on Non-Compete未指定雇主，不是Columbia在职。",
+    "attempted_urls": [
+      "https://stat.columbia.edu/people/name/florian-stebegg/"
+    ],
+    "searches": [
+      {
+        "query": "\"Florian Stebegg\" employer official",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Florian Stebegg\" site:columbia.edu alumni",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://stat.columbia.edu/people/name/florian-stebegg/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5076771597": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：中国科大物理学院2026-03-24新闻明确称庄希宁为我院博士生，证据只能确认报道时点的身份；本轮未取得2026年10月当前在读/任职名录，不据此推断已毕业或仍在读。",
+    "attempted_urls": [
+      "https://physics.ustc.edu.cn/2026/0324/c33987a724032/page.htm"
+    ],
+    "searches": [
+      {
+        "query": "\"庄希宁\" site:ustc.edu.cn 个人",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://physics.ustc.edu.cn/2026/0324/c33987a724032/page.htm",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5077247630": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Gyroscope官方博客可HTTP200读取，逐字写co-founder of FTL Labs, developer of Gyroscope；为自办公司，不作为当前高校任职证明。Cornell PhD为已毕业。",
+    "attempted_urls": [
+      "https://www.gyro.finance/blog/gyroscope-launches-spin-rehype/"
+    ],
+    "searches": [
+      {
+        "query": "\"Ariah Klages-Mundt\" Gyroscope founder official",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Ariah Klages-Mundt\" site:gyro.finance",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.gyro.finance/blog/gyroscope-launches-spin-rehype/",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5077371715": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Oxford旧学生记录明确2016–2020，不能当现任；Jump Trading仅旧校友去向，未经现雇主证实。",
+    "attempted_urls": [
+      "https://www.maths.ox.ac.uk/groups/oxpde/oxpde-people/past-members"
+    ],
+    "searches": [
+      {
+        "query": "\"Imanol Pérez Arribas\" current official",
+        "result": "未找到当前雇主官方任职页"
+      },
+      {
+        "query": "\"Imanol Perez Arribas\" site:ox.ac.uk",
+        "result": "Oxford名录明确Past Members and Former Students"
+      },
+      {
+        "query": "\"Imanol Perez Arribas\" site:jumptrading.com OR site:jumpcrypto.com",
+        "result": "未找到官方现雇主人员页"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.maths.ox.ac.uk/groups/oxpde/oxpde-people/past-members",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5079907060": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。Input paper title present in official publications, resolves name order. Practice Professor/Professor in Practice are wording variants, not rank conflict. Local HTTP200 content blocked, actual tool original-page text saved.",
+    "attempted_urls": [
+      "https://lkyspp.nus.edu.sg/our-people/faculty/vu-minh-khuong"
+    ],
+    "searches": [
+      {
+        "query": "\"Khuong Minh Vu\" NUS professor",
+        "result": "Known official page found with name order Vu Minh Khuong."
+      },
+      {
+        "query": "\"Vu Minh Khuong\" site:nus.edu.sg professor",
+        "result": "Official faculty page read: Professor in Practice header, Practice Professor bio."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://lkyspp.nus.edu.sg/our-people/faculty/vu-minh-khuong",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "access_challenge_instead_of_page",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5079925857": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：Paper affiliations cannot establish current title; no official SWUST employment page located.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Ruizeng Zhao\" Southwest University Science Technology",
+        "result": "Recent papers/ResearchGate give SWUST School of Economics and Management, no staff page."
+      },
+      {
+        "query": "\"Ruizeng Zhao\" site:swust.edu.cn",
+        "result": "No matching official current appointment profile."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5081329004": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：Münster Jentzen group page independently read and HTTP200 cached pages3/jentzen.txt, but it describes a different university's appointment and is not CUHK employer evidence.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Philippe von Wurstemberger\" CUHK official",
+        "result": "Personal site says CUHK-Shenzhen postdoc; old ETH CV."
+      },
+      {
+        "query": "\"Philippe von Wurstemberger\" site:cuhk.edu.cn OR site:uni-muenster.de",
+        "result": "Münster supervisor page lists CUHK-Shenzhen postdoc; no own employer CUHK page."
+      },
+      {
+        "query": "\"Philippe von Wurstemberger\" site:sds.cuhk.edu.cn",
+        "result": "No matching own-employer profile."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5082793758": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。本校profile写Assistant；自有dan.bjorkegren.com搜索结果写Associate(without tenure)，非本校官方域，不据其覆盖职级，但提醒后续可能晋升。",
+    "attempted_urls": [
+      "https://www.sipa.columbia.edu/communities-connections/faculty/daniel-bjorkegren?page=0"
+    ],
+    "searches": [
+      {
+        "query": "\"Daniel Björkegren\" Columbia assistant professor",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.sipa.columbia.edu/communities-connections/faculty/daniel-bjorkegren?page=0",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5085644976": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：2024学位及2025–26的PG Member学生代表不足以断定2026-10-19当前雇佣/学生身份；未找到当前人员岗位页。",
+    "attempted_urls": [
+      "https://www.polyu.edu.hk/sao/student-development-section/student-participation-in-university-governance/the-list-of-council-student-member-and-student-representative-2025-26/student-affairs/"
+    ],
+    "searches": [
+      {
+        "query": "\"Temitope Olubanjo Kehinde\" PolyU",
+        "result": "找到2024博士论文与2025–26学生代表名录"
+      },
+      {
+        "query": "\"Temitope\" \"Kehinde\" \"2026\" site:polyu.edu.hk",
+        "result": "只找到论文、过期学年名录，无当前职级任职页"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.polyu.edu.hk/sao/student-development-section/student-participation-in-university-governance/the-list-of-council-student-member-and-student-representative-2025-26/student-affairs/",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5085681321": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：NUS是教育经历；不能从ORCID/LinkedIn或第三方资料入库明汯现任Portfolio Manager。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Zong Ke\" \"Minghong\" OR NUS OR 明汯",
+        "result": "只有LinkedIn/论文/第三方线索"
+      },
+      {
+        "query": "\"Zong Ke\" statistics finance official",
+        "result": "未找到官方任职人员页"
+      },
+      {
+        "query": "\"Zong Ke\" site:nus.edu.sg OR site:mhfunds.com",
+        "result": "未找到官方当前人员页"
+      },
+      {
+        "query": "\"Zong Ke\" \"明汯\"",
+        "result": "第三方介绍明汯投资，不是官方雇主任职页"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5090116188": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：MIT September 2024 PhD and Julia Lab Alumni confirm former student status. Gridmatic company page has no readable individual role; cannot assert current academic appointment.",
+    "attempted_urls": [
+      "https://julia.mit.edu/people/"
+    ],
+    "searches": [
+      {
+        "query": "\"Theo Diamandis\" Gridmatic official",
+        "result": "Personal site gives Gridmatic; official company about page opened but contains no Theo."
+      },
+      {
+        "query": "\"Theo Diamandis\" site:gridmatic.com OR site:mit.edu",
+        "result": "MIT thesis/commencement and Julia Lab alumni; no current employer person page."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://julia.mit.edu/people/",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5090271895": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Stanford lab listing is explicitly alumni. Personal stealth-startup claim not official university appointment.",
+    "attempted_urls": [
+      "https://www.gsb.stanford.edu/faculty-research/labs-initiatives/sil/who-we-are/researchers-students"
+    ],
+    "searches": [
+      {
+        "query": "\"Ayush Kanodia\" Stanford current official",
+        "result": "Personal site gives Stanford PhD 2016-2024 and current stealth startup; not employer evidence."
+      },
+      {
+        "query": "\"Ayush Kanodia\" site:stanford.edu alumni",
+        "result": "GSB SIL roster name has asterisk; legend '* Lab alumni'. Stanford 2024 commencement also found."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.gsb.stanford.edu/faculty-research/labs-initiatives/sil/who-we-are/researchers-students",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5090332144": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：2023博士拟录取和2024奖学金证明过往学生状态，2026现职无可核实官方页；不是同名传播大学英语副教授。",
+    "attempted_urls": [
+      "https://www.acem.sjtu.edu.cn/phd/77763.html"
+    ],
+    "searches": [
+      {
+        "query": "\"Xianfeng Hao\" Shanghai Jiao Tong university official",
+        "result": "英文未找到当前人员职位页"
+      },
+      {
+        "query": "\"郝显峰\" site:sjtu.edu.cn",
+        "result": "2023拟录取/2024博士奖学金公示"
+      },
+      {
+        "query": "\"郝显峰\" 安泰 博士 2026",
+        "result": "未找到当前师生名录"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.acem.sjtu.edu.cn/phd/77763.html",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5090957698": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。同一官方人员页标题为Emeritus，正文仍称Professor and Chair。保留页面内部任职状态矛盾，不凭页面段落优先级擅自消解。",
+    "attempted_urls": [
+      "https://business.columbia.edu/faculty/people/awi-federgruen"
+    ],
+    "searches": [
+      {
+        "query": "site:business.columbia.edu Awi Federgruen faculty",
+        "result": "已执行真实web检索并打开所引官方页面"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://business.columbia.edu/faculty/people/awi-federgruen",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://business.columbia.edu/faculty/people/awi-federgruen",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5091659223": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：Princeton官方实验室People-DRAFT（可curl200）明确was ... from 2022 to 2024，now CEO of ZERO；不能作为Princeton现职。",
+    "attempted_urls": [
+      "https://saferobotics.princeton.edu/people-1"
+    ],
+    "searches": [
+      {
+        "query": "\"Gabriele Dragotto\" current university",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Gabriele Dragotto\" site:princeton.edu",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://saferobotics.princeton.edu/people-1",
+        "http_status": 200,
+        "independently_read": true,
+        "problems": []
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5093519769": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：SICSS 2026 bio is conference third party; AIMS record is historical education. Current USTC appointment/student status not independently verified from employer page.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"John Kamwele Mutinda\" USTC official",
+        "result": "Paper affiliations and SICSS conference bio identify USTC doctoral candidate; no employer directory."
+      },
+      {
+        "query": "\"John Kamwele Mutinda\" site:ustc.edu.cn OR site:aims.ac.rw",
+        "result": "AIMS 2021-2022 student record/report only; no current USTC page."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5100342787": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。官方profile链接CV匹配输入两篇论文。CV最后更新2025-01-08写NTU博士在读属历史，当前profile Research Fellow不冲突。",
+    "attempted_urls": [
+      "https://iora.nus.edu.sg/people-p/zihao-li/",
+      "https://iora.nus.edu.sg/wp-content/uploads/2025/02/resume_ZihaoLi.pdf"
+    ],
+    "searches": [
+      {
+        "query": "\"Zihao Li\" site:iora.nus.edu.sg",
+        "result": "已定位并打开官方页面；姓名及职称按页面逐字记录。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://iora.nus.edu.sg/people-p/zihao-li/",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "access_challenge_instead_of_page",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://iora.nus.edu.sg/wp-content/uploads/2025/02/resume_ZihaoLi.pdf",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "name_quote_not_found",
+          "identity_quote_not_found",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5100405233": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。官方Quantum FinAI Lab人员页称PhD Student，并列FinRL研究，不能写教授或博士后。EE旧URL失败，现存实验室页面可读；可能需数据库区分学生与任职。",
+    "attempted_urls": [
+      "https://openfin.engineering.columbia.edu/people/xiao-yang-liu-yanglet"
+    ],
+    "searches": [
+      {
+        "query": "Xiao Yang Liu current professor FinRL Columbia 2026",
+        "result": "已执行真实web检索并打开所引官方页面"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://openfin.engineering.columbia.edu/people/xiao-yang-liu-yanglet",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5100459881": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：dvampire.github.io自述2026年2月重返NTU Research Associate，独立NTU组页与论文可读但未见该人的当前职称。避免以PKU/Mila同名Wentao Zhang替代。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Wentao Zhang\" \"NTU\" research associate",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Wentao Zhang\" site:ntu.edu.sg \"Research Associate\"",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5100591277": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：Input papers carry Chicago/NC State affiliations; no verifiable employment title or matching official person page was found.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Qishuo Cheng\" Chicago NC State official",
+        "result": "No matching official current employment page found."
+      },
+      {
+        "query": "\"Qishuo Cheng\" site:uchicago.edu OR site:ncsu.edu",
+        "result": "No matching faculty, staff, or student directory result located."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5100627027": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "identity_unresolved",
+    "note": "2026-10-19 逐条复查：输入ORCID0000-0001-5616-5988疑似经济金融同名学者，DMDP论文作者是zhaoyizhaoyi@sjtu.edu.cn的CS作者；不能用同名Henan经济老师替代。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Yi Zhao\" \"DMDP\" Shen",
+        "result": "论文作者对应上海交大CS，非经济金融同名学者"
+      },
+      {
+        "query": "\"Yi Zhao\" site:sjtu.edu.cn \"Yanyan\"",
+        "result": "未找到当前官方岗位页"
+      },
+      {
+        "query": "\"Yi Zhao\" \"zhaoyizhaoyi\" current",
+        "result": "仅2019论文与代码引用"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5100758154": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "identity_unresolved",
+    "note": "2026-10-19 逐条复查：未用不同研究方向同名学者填入；论文署名不足以确定当前职位。",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Zhaoyi Xu\" Tsinghua official faculty",
+        "result": "同名Michigan生物工程博士、Nanjing环境教授、Guizhou物理讲师均与输入经济论文不符"
+      },
+      {
+        "query": "\"Zhaoyi Xu\" \"xuzy\" Tsinghua",
+        "result": "未找到SEM官方任职页"
+      },
+      {
+        "query": "\"Zhaoyi Xu\" site:sem.tsinghua.edu.cn",
+        "result": "没有可核实官方岗位页"
+      },
+      {
+        "query": "\"Zhaoyi Xu\" \"Nexus between financial inclusion\"",
+        "result": "出版社2023论文确认SEM署名xuzy@sem.tsinghua.edu.cn，但无岗位级别"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5100781211": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：输入Shapley论文对应浙大作者，但未找到其当前官方身份/职位页面；不把其他学校同名PhD/MS学生入库。",
+    "attempted_urls": [
+      "https://icsr.zju.edu.cn/2022/1115/c70143a2678896/page.htm"
+    ],
+    "searches": [
+      {
+        "query": "Jiayao Zhang Zhejiang Jinfei Liu official student",
+        "result": "找到导师个人主页，未找到当前校方人员页"
+      },
+      {
+        "query": "\"Jiayao Zhang\" site:zju.edu.cn",
+        "result": "校方2022论文新闻含作者，无职位"
+      },
+      {
+        "query": "\"Jiayao Zhang\" \"Dynamic Shapley\" site:zju.edu.cn",
+        "result": "校方论文新闻同题确认作者，不能证明现任"
+      },
+      {
+        "query": "\"Jiayao Zhang\" Zhejiang student OR PhD official",
+        "result": "存在UPenn/KAUST等同名人员，不替代ZJU作者"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://icsr.zju.edu.cn/2022/1115/c70143a2678896/page.htm",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5101953417": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：Input DoubleAdapt/time-series author is student supervised by Yanyan Shen per personal page. Do not substitute same-name Shanghai Qizhi/Imperial graduate shown in OpenReview.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Lifan Zhao\" Shanghai Jiao Tong Tencent official",
+        "result": "Personal page identifies DoubleAdapt author and current student/Tencent researcher; no employer page."
+      },
+      {
+        "query": "\"Lifan Zhao\" site:sjtu.edu.cn OR site:tencent.com",
+        "result": "SJTU publication/coauthor records but no role."
+      },
+      {
+        "query": "\"Lifan Zhao\" \"Yanyan Shen\" site:sjtu.edu.cn",
+        "result": "Official faculty coauthor mentions; not appointment."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5103108962": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：官方NTU 2025-04-10活动只证明当时以DBS Data Science Team Lead受邀，不是NTU现职。未找到当前DBS或高校人员页。",
+    "attempted_urls": [
+      "https://www.ntu.edu.sg/computing/news-events/events/detail/2025/04/10/default-calendar/talk--agentic-ai-by-dr-kelvin-du--team-lead-of-dbs-data-science"
+    ],
+    "searches": [
+      {
+        "query": "\"Kelvin Du\" \"DBS\" NTU",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Kelvin Du\" site:dbs.com",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.ntu.edu.sg/computing/news-events/events/detail/2025/04/10/default-calendar/talk--agentic-ai-by-dr-kelvin-du--team-lead-of-dbs-data-science",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5103459842": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：没有从搜索摘要写入职称。",
+    "attempted_urls": [
+      "https://econ.jhu.edu/directory/jonathan-wright/"
+    ],
+    "searches": [
+      {
+        "query": "site.jhu.edu \"Jonathan Wright\" professor",
+        "result": "搜索定位官方个人页，但打开及独立HTTP被拦截。People目录也定位，后续读取超时。"
+      },
+      {
+        "query": "\"Jonathan Wright\" site:e-catalogue.jhu.edu professor",
+        "result": "2026-27经济学catalog HTTP200独立抓取，但无Jonathan Wright/职级正文；不可替代被403的个人页。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://econ.jhu.edu/directory/jonathan-wright/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_or_title_quote_absent"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5104024317": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "identity_unresolved",
+    "note": "2026-10-19 逐条复查：Input Wu Sun is associated with Wenxi Sun ORCID in previous_attempts. No matching current official employment and insufficient identity evidence; graduation listing alone not appointment.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Wu Sun\" \"Wenxi Sun\" Johns Hopkins option hedging",
+        "result": "No official current employer profile located."
+      },
+      {
+        "query": "\"Wenxi Sun\" site:jhu.edu OR site:krieger.jhu.edu",
+        "result": "JHU 2024 masters commencement PDF names Wenxi Sun, no employment title."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5107747807": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：2026晋升官方搜索线索支持Associate，现可读MIDAS仍Assistant；学校账号Google Sites称Associate但非umich.edu域。晋升原页读取受阻，无法完成要求的独立官方职级确认，不把搜索snippet直接入库。",
+    "attempted_urls": [
+      "https://midas.umich.edu/directory/mithun-chakraborty/",
+      "https://sites.google.com/umich.edu/mithunchakra/"
+    ],
+    "searches": [
+      {
+        "query": "Mithun Chakraborty Michigan research fellow official",
+        "result": "MIDAS Assistant Research Scientist，可打开；EECS Associate Research Scientist页面403"
+      },
+      {
+        "query": "\"Mithun Chakraborty\" promotion 2026 site:umich.edu",
+        "result": "找到2026晋升公告 /news/2025-promotions/ 与 /stories/cse-announces-2026-faculty-promotions 但页面读取403"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://midas.umich.edu/directory/mithun-chakraborty/",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      },
+      {
+        "url": "https://sites.google.com/umich.edu/mithunchakra/",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5112715557": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。Concurrent emeritus professorship and current Special Research Scholar are compatible. Avoid using old Columbia personal page to infer non-emeritus. web06.json.",
+    "attempted_urls": [
+      "https://business.columbia.edu/faculty/people/eli-noam"
+    ],
+    "searches": [
+      {
+        "query": "Eli Noam Columbia professor emeritus official",
+        "result": "Official current CBS directory opened: research scholar header and emeritus professorship in bio."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://business.columbia.edu/faculty/people/eli-noam",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5113721956": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：faculty.ustc.edu.cn/wangbinghong/ HTTP200 says 你访问的教师禁止开通主页. 2024 award news names him but does not establish current/retired employment.",
+    "attempted_urls": [],
+    "searches": [
+      {
+        "query": "\"Bing-Hong Wang\" USTC professor official",
+        "result": "Old official workshop bios and publication mentions; no current faculty profile."
+      },
+      {
+        "query": "\"汪秉宏\" site:ustc.edu.cn 教授",
+        "result": "USTC historical records and 2024 lifetime teaching award found."
+      },
+      {
+        "query": "\"汪秉宏\" site:ustc.edu.cn \"退休\"",
+        "result": "2004/2008 archives, no person-specific retirement statement."
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5013558969": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "historical_only",
+    "note": "2026-10-19 逐条复查：大学本校可验证来源均旧新闻/旧活动；当前TuSee自办公司称founder and CEO并称Tsinghua professor，按项目规则不从自办机构声明核实高校任职。",
+    "attempted_urls": [
+      "https://www.turingsenseai.com/en"
+    ],
+    "searches": [
+      {
+        "query": "\"Pingzhong Tang\" Tsinghua professor current",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Tang Pingzhong\" site:tsinghua.edu.cn",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Pingzhong Tang\" site:turingsenseai.com",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://www.turingsenseai.com/en",
+        "http_status": 200,
+        "independently_read": false,
+        "problems": [
+          "employer_domain_not_confirmed",
+          "redirected_off_official_host"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5077791496": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "not_found",
+    "note": "2026-10-19 逐条复查：BRG公司profile写lecturer at Johns Hopkins University，只是公司对校外岗位声明。JHU搜索未定位可读取当前人员profile，不用其他学校旧活动或公司介绍确认JHU聘任。",
+    "attempted_urls": [
+      "https://www.thinkbrg.com/people/ai-deng/"
+    ],
+    "searches": [
+      {
+        "query": "\"Ai Deng\" site:jhu.edu lecturer",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Ai Deng\" Johns Hopkins faculty lecturer",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      },
+      {
+        "query": "\"Ai Deng\" site:advanced.jhu.edu",
+        "result": "未得到可核对的当前高校任职姓名及职称；细节见note。"
+      }
+    ],
+    "official_pages_seen": [],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5026494364": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-19",
+    "reason_code": "fetch_blocked",
+    "note": "2026-10-19 逐条复查：已定位官方人员/任职页面，但独立抓取未能取得完整任职正文；部分工具可读文本仅留作检索线索，未提升为已核实。Current CITI director role from employer page replaces unsupported adjunct-professor claim. Page says taught CBS seminar for fifteen years and currently Visiting Professor at San Andres, but latter must get own employer evidence.",
+    "attempted_urls": [
+      "https://business.columbia.edu/citi/people/principals"
+    ],
+    "searches": [
+      {
+        "query": "\"Raul Katz\" Columbia official faculty",
+        "result": "Current CITI Principals official page opened, Director of Business Strategy Research."
+      },
+      {
+        "query": "\"Raúl Katz\" site:udesa.edu.ar profesor",
+        "result": "No own-employer UdeSA faculty page located."
+      }
+    ],
+    "official_pages_seen": [
+      {
+        "url": "https://business.columbia.edu/citi/people/principals",
+        "http_status": 403,
+        "independently_read": false,
+        "problems": [
+          "official_page_body_unreadable",
+          "name_quote_not_found",
+          "title_quote_not_found",
+          "identity_quote_not_found"
+        ]
+      }
+    ],
+    "review_campaign": "role_recovery_131_2026-10-19"
+  },
+  "A5064779744": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-21",
+    "note": "2026-10-21 复查：已不在卡内基梅隆大学计算机系现任博士后名录，原页面过期或失效，现职无法从官方页面核实。"
+  },
+  "A5005644819": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-21",
+    "note": "2026-10-21 复查：本人主页显示现任亚特兰大联邦储备银行研究部金融经济学家兼政策顾问，无高校任职。"
+  },
+  "A5087025582": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-21",
+    "note": "2026-10-21 复查：康奈尔大学新闻报道其已于2026年2月13日去世。"
+  },
+  "A5066748845": {
+    "status": "no_verifiable_official_page",
+    "checked_at": "2026-10-21",
+    "note": "2026-10-21 复查：本人主页显示已离开莱斯大学，现任 Tempo Labs 公司研究员；莱斯大学经济系现任教师名录已无此人。"
+  }
+}

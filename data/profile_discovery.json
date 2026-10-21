@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-16",
+  "method": {
+    "query_template": "{name} HKU {school_or_department}",
+    "domain_filter": "site:hku.hk",
+    "priority": [
+      "official_personal",
+      "official_department",
+      "historical_emeritus",
+      "needs_manual_followup"
+    ],
+    "rule": "Open the official HKU staff page first, then follow its Homepage/Webpage link; retain the source page and checked date."
+  },
+  "records": {
+    "A5021139306": {
+      "profile_urls": ["https://www.hkubs.hku.hk/people/roni-michaely/"],
+      "profile_source_url": "https://www.hkubs.hku.hk/people/roni-michaely/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_department",
+      "query": "Roni Michaely HKU Business School site:hku.hk"
+    },
+    "A5112201045": {
+      "profile_urls": ["https://www.law.hku.hk/academic_staff/professor-douglas-w-arner/"],
+      "profile_source_url": "https://www.law.hku.hk/academic_staff/professor-douglas-w-arner/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_department",
+      "query": "Douglas W. Arner HKU Law site:hku.hk"
+    },
+    "A5018708584": {
+      "profile_urls": ["https://i.cs.hku.hk/~hubert/"],
+      "profile_source_url": "https://i.cs.hku.hk/~hubert/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_personal",
+      "query": "Hubert T.H. Chan HKU Computer Science site:hku.hk"
+    },
+    "A5025130883": {
+      "profile_urls": [
+        "https://ai.hku.hk/people/academic-staff/smyiu",
+        "https://www.cs.hku.hk/~smyiu"
+      ],
+      "profile_source_url": "https://ai.hku.hk/people/academic-staff/smyiu",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_personal",
+      "query": "Siu Ming Yiu HKU Computer Science site:hku.hk"
+    },
+    "A5044562275": {
+      "profile_urls": ["https://i.cs.hku.hk/~zhiyi/"],
+      "profile_source_url": "https://i.cs.hku.hk/~zhiyi/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_personal",
+      "query": "Zhiyi Huang HKU Computer Science site:hku.hk"
+    },
+    "A5014301946": {
+      "profile_urls": ["https://www.arch.hku.hk/staff/upad/he-shenjing/"],
+      "profile_source_url": "https://www.arch.hku.hk/staff/upad/he-shenjing/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_department",
+      "query": "Shenjing He HKU Urban Planning site:hku.hk"
+    },
+    "A5036559535": {
+      "profile_urls": ["https://saasweb.hku.hk/staff/hrntlwk"],
+      "profile_source_url": "https://saasweb.hku.hk/staff/hrntlwk",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "historical_emeritus",
+      "query": "Wai Keung Li HKU Statistics site:hku.hk",
+      "note": "Official HKU honorary/adjunct historical profile; do not infer current appointment."
+    },
+    "A5000737468": {
+      "profile_urls": ["https://saasweb.hku.hk/staff/mazhuke"],
+      "profile_source_url": "https://saasweb.hku.hk/staff/mazhuke",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_department",
+      "query": "Ke Zhu HKU Statistics site:hku.hk"
+    },
+    "A5045548810": {
+      "profile_urls": ["https://www.hkubs.hku.hk/sc/people/shusong-ba/"],
+      "profile_source_url": "https://www.hkubs.hku.hk/sc/people/shusong-ba/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_department",
+      "query": "Shusong Ba HKU Business School site:hku.hk"
+    },
+    "A5102869500": {
+      "profile_urls": [
+        "https://www.hkubs.hku.hk/sc/people/yang-you/",
+        "http://yangyou1.weebly.com/"
+      ],
+      "profile_source_url": "https://www.hkubs.hku.hk/sc/people/yang-you/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_personal",
+      "query": "Yang You HKU Business School site:hku.hk"
+    },
+    "A5001299557": {
+      "profile_urls": [
+        "https://saasweb1.hku.hk/staff/adelalau/",
+        "https://saasweb1.hku.hk/staff/adelalau/web/Bio.html"
+      ],
+      "profile_source_url": "https://saasweb1.hku.hk/staff/adelalau/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_personal",
+      "query": "Adela S.M. Lau HKU Statistics site:hku.hk"
+    },
+    "A5013093910": {
+      "profile_urls": ["https://saasweb.hku.hk/staff/tjboonen"],
+      "profile_source_url": "https://saasweb.hku.hk/staff/tjboonen",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_department",
+      "query": "Tim J. Boonen HKU Statistics site:hku.hk"
+    },
+    "A5078468275": {
+      "profile_urls": ["https://www.hkubs.hku.hk/people/haishi-li/"],
+      "profile_source_url": "https://www.hkubs.hku.hk/people/haishi-li/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_department",
+      "query": "Haishi Li HKU Business School site:hku.hk"
+    },
+    "A5111976261": {
+      "profile_urls": [],
+      "profile_source_url": "https://hkumath.hku.hk/web/research/nmaa/nmaa.html",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "needs_manual_followup",
+      "query": "Siu Pang Yung HKU Mathematics site:hku.hk",
+      "note": "Only an old official research-group page was found; no current personal homepage was verified."
+    },
+    "A5021779067": {
+      "profile_urls": ["https://saasresearch.hku.hk/~mhofert/"],
+      "profile_source_url": "https://saasresearch.hku.hk/~mhofert/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_personal",
+      "query": "Marius Hofert HKU Statistics site:hku.hk"
+    },
+    "A5101892477": {
+      "profile_urls": [
+        "https://www.hkubs.hku.hk/people/hailiang-chen/",
+        "http://www.hlchen.com/"
+      ],
+      "profile_source_url": "https://www.hkubs.hku.hk/people/hailiang-chen/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_personal",
+      "query": "Hailiang Chen HKU Business School site:hku.hk"
+    },
+    "A5007407616": {
+      "profile_urls": ["https://www.arch.hku.hk/staff/upad/doan-quang-cuong/"],
+      "profile_source_url": "https://www.arch.hku.hk/staff/upad/doan-quang-cuong/",
+      "profile_checked_at": "2026-10-16",
+      "profile_status": "official_department",
+      "query": "Quang Cuong Doan HKU Architecture site:hku.hk"
+    }
+  }
+}

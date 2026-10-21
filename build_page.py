@@ -9,11 +9,25 @@ from datetime import date
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from display_affiliation import apply_display_affiliations
+
 ROOT = Path(__file__).resolve().parent
 TEMPLATE_PATH = ROOT / "src" / "template.html"
+CATALOG_JS_PATH = ROOT / "src" / "catalog.js"
 DATA_PATH = ROOT / "data" / "talent.json"
 ROLES_PATH = ROOT / "data" / "current_roles_verified.json"
+SEARCH_LOG_PATH = ROOT / "data" / "role_search_log.json"
+SEARCH_STATUSES = {"no_verifiable_official_page"}
+PROFILE_DISCOVERY_PATH = ROOT / "data" / "profile_discovery.json"
+QS_RANKINGS_PATH = ROOT / "data" / "qs_world_rankings.json"
 OUTPUT_PATH = ROOT / "index.html"
+
+PROFILE_STATUSES = {
+    "official_personal",
+    "official_department",
+    "historical_emeritus",
+    "needs_manual_followup",
+}
 
 
 def validate_dataset(data):
@@ -28,6 +42,90 @@ def validate_dataset(data):
         for field in ("id", "name", "school"):
             if not isinstance(person.get(field), str) or not person[field].strip():
                 raise ValueError(f"people[{index}].{field} must be a non-empty string")
+    return data
+
+
+def _validate_profile_url(value, label):
+    if not isinstance(value, str) or not value.strip() or any(char.isspace() for char in value):
+        raise ValueError(f"{label} must be a non-empty URL without whitespace")
+    url = urlsplit(value)
+    if url.scheme not in ("http", "https") or not url.netloc or url.username or url.password:
+        raise ValueError(f"{label} must be a public HTTP(S) URL")
+    return value.strip()
+
+
+def load_profile_discovery(people):
+    """Load the checked homepage mapping kept outside the bibliographic snapshot."""
+    if not PROFILE_DISCOVERY_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(PROFILE_DISCOVERY_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise ValueError("Profile discovery mapping is not valid JSON") from error
+    if not isinstance(payload, dict) or payload.get("schema_version") != 1:
+        raise ValueError("Profile discovery mapping must use schema_version 1")
+    records = payload.get("records")
+    if not isinstance(records, dict):
+        raise ValueError("Profile discovery mapping must contain a records object")
+    ids = {person["id"] for person in people}
+    unknown = sorted(set(records) - ids)
+    if unknown:
+        raise ValueError(f"Profile discovery mapping contains unknown IDs: {', '.join(unknown)}")
+    checked = {}
+    for author_id, record in records.items():
+        if not isinstance(record, dict):
+            raise ValueError(f"Profile discovery record {author_id} must be an object")
+        status = record.get("profile_status")
+        if status not in PROFILE_STATUSES:
+            raise ValueError(f"Profile discovery record {author_id} has an unsupported profile_status")
+        checked_at = record.get("profile_checked_at")
+        if not isinstance(checked_at, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", checked_at):
+            raise ValueError(f"Profile discovery record {author_id}.profile_checked_at must use YYYY-MM-DD")
+        try:
+            date.fromisoformat(checked_at)
+        except ValueError as error:
+            raise ValueError(f"Profile discovery record {author_id}.profile_checked_at is not a valid date") from error
+        query = record.get("query")
+        if not isinstance(query, str) or not query.strip():
+            raise ValueError(f"Profile discovery record {author_id}.query must be non-empty")
+        urls = record.get("profile_urls", [])
+        if not isinstance(urls, list):
+            raise ValueError(f"Profile discovery record {author_id}.profile_urls must be a list")
+        clean_urls = []
+        for index, value in enumerate(urls):
+            clean = _validate_profile_url(value, f"Profile discovery record {author_id}.profile_urls[{index}]")
+            if clean not in clean_urls:
+                clean_urls.append(clean)
+        source_url = record.get("profile_source_url")
+        if source_url is not None:
+            source_url = _validate_profile_url(source_url, f"Profile discovery record {author_id}.profile_source_url")
+        elif clean_urls:
+            source_url = clean_urls[0]
+        elif status != "needs_manual_followup":
+            raise ValueError(f"Profile discovery record {author_id} needs profile_source_url")
+        checked[author_id] = {
+            "profile_urls": clean_urls,
+            "profile_source_url": source_url,
+            "profile_checked_at": checked_at,
+            "profile_status": status,
+            "query": query.strip(),
+        }
+        note = record.get("note")
+        if note is not None:
+            if not isinstance(note, str):
+                raise ValueError(f"Profile discovery record {author_id}.note must be text")
+            checked[author_id]["note"] = note
+    return checked
+
+
+def merge_profile_discovery(data):
+    discovery = load_profile_discovery(data["people"])
+    for person in data["people"]:
+        record = discovery.get(person["id"])
+        if record is None:
+            continue
+        person["profile_urls"] = copy.deepcopy(record["profile_urls"])
+        person["profile_search"] = copy.deepcopy({key: value for key, value in record.items() if key != "profile_urls"})
     return data
 
 
@@ -48,7 +146,8 @@ def import_dataset(data):
     clean.pop("role_checked_at", None)
     for person in clean["people"]:
         person.pop("current_role", None)
-    return clean
+        person.pop("role_search", None)
+    return merge_profile_discovery(clean)
 
 
 def validate_roles(roles, people):
@@ -77,6 +176,24 @@ def validate_roles(roles, people):
         url = urlsplit(source)
         if url.scheme not in ("http", "https") or not url.netloc or url.username or url.password:
             raise ValueError(f"Role {author_id}.source_url must be a public HTTP(S) URL")
+        if "appointments" in role:
+            appointments = role["appointments"]
+            if not isinstance(appointments, list) or not appointments:
+                raise ValueError(f"Role {author_id}.appointments must be a non-empty list")
+            for appointment in appointments:
+                if not isinstance(appointment, dict):
+                    raise ValueError(f"Role {author_id} appointment must be an object")
+                for field in ("institution", "position", "source_url"):
+                    value = appointment.get(field)
+                    if not isinstance(value, str) or not value.strip():
+                        raise ValueError(f"Role {author_id} appointment needs {field}")
+                if appointment.get("status") not in ("current", "emeritus", "retired", "historical", "future"):
+                    raise ValueError(f"Role {author_id} appointment has an unsupported status")
+                appointment_url = urlsplit(appointment["source_url"])
+                if (appointment_url.scheme not in ("http", "https") or not appointment_url.netloc
+                        or appointment_url.username or appointment_url.password
+                        or any(c.isspace() for c in appointment["source_url"])):
+                    raise ValueError(f"Role {author_id} appointment.source_url must be a public HTTP(S) URL")
         checked = role.get("checked_at")
         if not isinstance(checked, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", checked):
             raise ValueError(f"Role {author_id}.checked_at must use YYYY-MM-DD")
@@ -98,14 +215,64 @@ def merge_roles(data, roles):
     return merged
 
 
-def prepare_page(data=None):
+def validate_search_log(log, people):
+    """A search outcome records that official pages were searched and none could be verified."""
+    if not isinstance(log, dict):
+        raise ValueError("Role search log must be an ID-to-record object")
+    ids = {person["id"] for person in people}
+    for key, entry in log.items():
+        if key not in ids:
+            raise ValueError(f"Role search log ID {key!r} is absent from the dataset")
+        if not isinstance(entry, dict) or entry.get("status") not in SEARCH_STATUSES:
+            raise ValueError(f"Role search log {key} has an unsupported status")
+        checked = entry.get("checked_at")
+        if not isinstance(checked, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", checked):
+            raise ValueError(f"Role search log {key}.checked_at must use YYYY-MM-DD")
+        try:
+            date.fromisoformat(checked)
+        except ValueError as error:
+            raise ValueError(f"Role search log {key}.checked_at is not a valid date") from error
+        if entry.get("note") is not None and not isinstance(entry["note"], str):
+            raise ValueError(f"Role search log {key}.note must be text")
+    return log
+
+
+def merge_search_log(merged, log):
+    validate_search_log(log, merged["people"])
+    both = sorted(person["id"] for person in merged["people"] if person["id"] in log and "current_role" in person)
+    if both:
+        raise ValueError(f"Role evidence and a not-found search outcome both exist for: {', '.join(both[:3])}")
+    for person in merged["people"]:
+        if person["id"] in log:
+            person["role_search"] = copy.deepcopy(log[person["id"]])
+    return merged
+
+
+def _combine(public, extra, label):
+    if not extra:
+        return public
+    overlap = sorted(set(public) & set(extra))
+    if overlap:
+        raise ValueError(f"Private {label} overlaps the public file for: {', '.join(overlap[:3])}")
+    return {**public, **extra}
+
+
+def prepare_page(data=None, extra_roles=None, extra_search_log=None):
+    """Render the page; the extra_* arguments carry private evidence that only the local server may add."""
     if data is None:
         data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     roles = json.loads(ROLES_PATH.read_text(encoding="utf-8")) if ROLES_PATH.exists() else {}
-    merged = merge_roles(data, roles)
+    roles = _combine(roles, extra_roles, "role evidence")
+    log = json.loads(SEARCH_LOG_PATH.read_text(encoding="utf-8")) if SEARCH_LOG_PATH.exists() else {}
+    log = _combine(log, extra_search_log, "role search log")
+    merged = apply_display_affiliations(merge_search_log(merge_roles(data, roles), log), QS_RANKINGS_PATH)
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
     if template.count("__DATA__") != 1:
         raise ValueError("Template must contain exactly one __DATA__ placeholder")
+    if "__CATALOG_JS__" in template:
+        if template.count("__CATALOG_JS__") != 1:
+            raise ValueError("Template must contain exactly one __CATALOG_JS__ placeholder")
+        template = template.replace("__CATALOG_JS__", CATALOG_JS_PATH.read_text(encoding="utf-8"))
     for anchor in ("roster", "shortlist", "method"):
         if not re.search(rf'\bid=[\"\']{anchor}[\"\']', template):
             raise ValueError(f"Template is missing the {anchor} section")
@@ -113,8 +280,16 @@ def prepare_page(data=None):
     return template.replace("__DATA__", blob), merged
 
 
+def validate_public_dataset(data):
+    validate_dataset(data)
+    if any(person.get("source_kind") == "hong_kong" or person.get("reference") for person in data["people"]):
+        raise ValueError("Private reference records must be viewed through the local database server, not exported to static HTML")
+    return data
+
+
 def build(data=None, output=OUTPUT_PATH):
     html, merged = prepare_page(data)
+    validate_public_dataset(merged)
     payload = html.encode("utf-8")
     Path(output).write_bytes(payload)
     return {

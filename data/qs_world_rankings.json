@@ -1,0 +1,469 @@
+{
+  "edition": 2027,
+  "checked_at": "2026-10-19",
+  "edition_published_at": "2026-06-18",
+  "ranking_scope": "QS World University Rankings 2027 overall; not subject, regional, or sustainability ranking",
+  "read_method": "QS official pages independently opened through web.open; urllib direct fetches returned HTTP403 and were not counted as successful raw-page reads",
+  "institutions": [
+    {
+      "institution": "麻省理工学院",
+      "canonical_name": "麻省理工学院",
+      "institution_en": "Massachusetts Institute of Technology",
+      "aliases": [
+        "MIT",
+        "Massachusetts Institute of Technology (MIT)"
+      ],
+      "rank": 1,
+      "rank_display": "1",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "1\nQS World University Rank\nMassachusetts Institute of Technology (MIT)",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "牛津大学",
+      "canonical_name": "牛津大学",
+      "institution_en": "University of Oxford",
+      "aliases": [
+        "Oxford"
+      ],
+      "rank": 4,
+      "rank_display": "4",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "4\nQS World University Rank\nUniversity of Oxford",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "哈佛大学",
+      "canonical_name": "哈佛大学",
+      "institution_en": "Harvard University",
+      "aliases": [
+        "Harvard"
+      ],
+      "rank": 5,
+      "rank_display": "5",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "5\nQS World University Rank\nHarvard University",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "宾夕法尼亚大学",
+      "canonical_name": "宾夕法尼亚大学",
+      "institution_en": "University of Pennsylvania",
+      "aliases": [
+        "UPenn",
+        "Penn"
+      ],
+      "rank": 15,
+      "rank_display": "15",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "15\nQS World University Rank\nUniversity of Pennsylvania",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "康奈尔大学",
+      "canonical_name": "康奈尔大学",
+      "institution_en": "Cornell University",
+      "aliases": [
+        "Cornell"
+      ],
+      "rank": 16,
+      "rank_display": "=16",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "=16\nQS World University Rank\nCornell University",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "耶鲁大学",
+      "canonical_name": "耶鲁大学",
+      "institution_en": "Yale University",
+      "aliases": [
+        "Yale"
+      ],
+      "rank": 16,
+      "rank_display": "=16",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "=16\nQS World University Rank\nYale University",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "香港中文大学",
+      "canonical_name": "香港中文大学",
+      "institution_en": "The Chinese University of Hong Kong",
+      "aliases": [
+        "CUHK",
+        "The Chinese University of Hong Kong (CUHK)"
+      ],
+      "rank": 18,
+      "rank_display": "18",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "18\nQS World University Rank\nThe Chinese University of Hong Kong (CUHK)",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "普林斯顿大学",
+      "canonical_name": "普林斯顿大学",
+      "institution_en": "Princeton University",
+      "aliases": [
+        "Princeton"
+      ],
+      "rank": 27,
+      "rank_display": "27",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "27\nQS World University Rank\nPrinceton University",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "香港科技大学",
+      "canonical_name": "香港科技大学",
+      "institution_en": "The Hong Kong University of Science and Technology",
+      "aliases": [
+        "HKUST",
+        "Hong Kong University of Science and Technology"
+      ],
+      "rank": 33,
+      "rank_display": "33",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "33\nQS World University Rank\nThe Hong Kong University of Science and Technology",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "哥伦比亚大学",
+      "canonical_name": "哥伦比亚大学",
+      "institution_en": "Columbia University",
+      "aliases": [
+        "Columbia"
+      ],
+      "rank": 43,
+      "rank_display": "=43",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "=43\nQS World University Rank\nColumbia University",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "西北大学",
+      "canonical_name": "西北大学",
+      "institution_en": "Northwestern University",
+      "aliases": [
+        "Northwestern"
+      ],
+      "rank": 45,
+      "rank_display": "=45",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "=45\nQS World University Rank\nNorthwestern University",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "纽约大学",
+      "canonical_name": "纽约大学",
+      "institution_en": "New York University",
+      "aliases": [
+        "NYU",
+        "New York University (NYU)"
+      ],
+      "rank": 58,
+      "rank_display": "58",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "58\nQS World University Rank\nNew York University (NYU)",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "伦敦政治经济学院",
+      "canonical_name": "伦敦政治经济学院",
+      "institution_en": "London School of Economics and Political Science",
+      "aliases": [
+        "LSE",
+        "The London School of Economics and Political Science",
+        "The London School of Economics and Political Science (LSE)"
+      ],
+      "rank": 62,
+      "rank_display": "62",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "62\nQS World University Rank\nThe London School of Economics and Political Science (LSE)",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "奥克兰大学",
+      "canonical_name": "奥克兰大学",
+      "institution_en": "University of Auckland",
+      "aliases": [
+        "The University of Auckland",
+        "Auckland"
+      ],
+      "rank": 67,
+      "rank_display": "67",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "67\nQS World University Rank\nThe University of Auckland",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "波士顿大学",
+      "canonical_name": "波士顿大学",
+      "institution_en": "Boston University",
+      "aliases": [
+        "BU"
+      ],
+      "rank": 94,
+      "rank_display": "94",
+      "source_url": "https://www.topuniversities.com/student-info/choosing-university/worlds-top-100-universities",
+      "verbatim_evidence": "94\nQS World University Rank\nBoston University",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "埃默里大学",
+      "canonical_name": "埃默里大学",
+      "institution_en": "Emory University",
+      "aliases": [
+        "Emory"
+      ],
+      "rank": 183,
+      "rank_display": "183",
+      "source_url": "https://www.topuniversities.com/universities/emory-university",
+      "verbatim_evidence": "It is ranked #183 in QS World University Rankings 2027.",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "马德里康普顿斯大学",
+      "canonical_name": "马德里康普顿斯大学",
+      "institution_en": "Universidad Complutense de Madrid",
+      "aliases": [
+        "Complutense University of Madrid",
+        "UCM"
+      ],
+      "rank": 199,
+      "rank_display": "199",
+      "source_url": "https://www.topuniversities.com/world-university-rankings?search=Complutense+University+of+Madrid",
+      "verbatim_evidence": "Rank 199\nOverall Score: 56.2\nComplutense University of Madrid",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "耶路撒冷希伯来大学",
+      "canonical_name": "耶路撒冷希伯来大学",
+      "institution_en": "The Hebrew University of Jerusalem",
+      "aliases": [
+        "Hebrew University of Jerusalem",
+        "HUJI"
+      ],
+      "rank": 218,
+      "rank_display": "=218",
+      "source_url": "https://www.topuniversities.com/universities/hebrew-university-jerusalem",
+      "verbatim_evidence": "It is ranked #=218 in QS World University Rankings 2027.",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "中国科学院大学",
+      "canonical_name": "中国科学院大学",
+      "institution_en": "University of Chinese Academy of Sciences",
+      "aliases": [
+        "University of Chinese Academy of Sciences (UCAS)",
+        "UCAS",
+        "University of the Chinese Academy of Sciences"
+      ],
+      "rank": 360,
+      "rank_display": "=360",
+      "source_url": "https://www.topuniversities.com/universities/university-chinese-academy-sciences-ucas",
+      "verbatim_evidence": "It is ranked #=360 in QS World University Rankings 2027.",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "美国东北大学",
+      "canonical_name": "美国东北大学",
+      "institution_en": "Northeastern University",
+      "aliases": [
+        "美国东北大学",
+        "东北大学（美国）"
+      ],
+      "rank": 385,
+      "rank_display": "=385",
+      "source_url": "https://www.topuniversities.com/universities/northeastern-university",
+      "verbatim_evidence": "It is ranked #=385 in QS World University Rankings 2027.",
+      "read_method": "web.open independent primary-page text extraction, read 2026-10-19",
+      "independent_http_fetch_status": 403,
+      "scope": "QS World University Rankings 2027 overall"
+    },
+    {
+      "institution": "亚特兰大联邦储备银行",
+      "canonical_name": "亚特兰大联邦储备银行",
+      "institution_en": "Federal Reserve Bank of Atlanta",
+      "aliases": [],
+      "rank": null,
+      "rank_display": null,
+      "source_url": null,
+      "verbatim_evidence": null,
+      "read_method": "not_applicable_non_university",
+      "institution_type": "central_bank",
+      "ranking_status": "not_applicable_non_university",
+      "note": "不是独立QS大学候选；不借所在城市、合作大学或相似名称赋予排名。尤其IAS不等于Princeton University。"
+    },
+    {
+      "institution": "Banco de España",
+      "canonical_name": "Banco de España",
+      "institution_en": "Banco de España",
+      "aliases": [
+        "Bank of Spain",
+        "西班牙央行"
+      ],
+      "rank": null,
+      "rank_display": null,
+      "source_url": null,
+      "verbatim_evidence": null,
+      "read_method": "not_applicable_non_university",
+      "institution_type": "central_bank",
+      "ranking_status": "not_applicable_non_university",
+      "note": "不是独立QS大学候选；不借所在城市、合作大学或相似名称赋予排名。尤其IAS不等于Princeton University。"
+    },
+    {
+      "institution": "Institute for Advanced Study",
+      "canonical_name": "Institute for Advanced Study",
+      "institution_en": "Institute for Advanced Study",
+      "aliases": [
+        "IAS",
+        "普林斯顿高等研究院"
+      ],
+      "rank": null,
+      "rank_display": null,
+      "source_url": null,
+      "verbatim_evidence": null,
+      "read_method": "not_applicable_non_university",
+      "institution_type": "independent_research_institute",
+      "ranking_status": "not_applicable_non_university",
+      "note": "不是独立QS大学候选；不借所在城市、合作大学或相似名称赋予排名。尤其IAS不等于Princeton University。"
+    },
+    {
+      "institution": "香港中文大学（深圳）",
+      "institution_en": "The Chinese University of Hong Kong, Shenzhen",
+      "aliases": [
+        "香港中文大学(深圳)",
+        "香港中文大学深圳",
+        "港中深",
+        "Chinese University of Hong Kong, Shenzhen",
+        "CUHK-Shenzhen",
+        "CUHKSZ"
+      ],
+      "rank": null,
+      "rank_display": null,
+      "rank_status": "overall_rank_not_shown_on_official_profile",
+      "scope": "distinct institution; never borrow CUHK rank for Shenzhen-only appointment",
+      "source_url": "https://www.topuniversities.com/universities/chinese-university-hong-kong-shenzhen",
+      "verbatim_evidence": "It is ranked #201+ in World University Rankings - Masters In Business Analytics 2027.",
+      "note": "官方独立条目仅列专项硕士排名，未列QS WUR2027总榜位次；专项201+不用于总榜比较，也不借用香港中文大学18名。",
+      "read_method": "QS official profile independently opened through web.open on 2026-10-19"
+    },
+    {
+      "institution": "斯坦福大学",
+      "canonical_name": "斯坦福大学",
+      "institution_en": "Stanford University",
+      "aliases": [
+        "Stanford"
+      ],
+      "rank": 2,
+      "rank_display": "=2",
+      "source_url": "https://www.topuniversities.com/universities/stanford-university",
+      "verbatim_evidence": "It is ranked #=2 in QS World University Rankings 2027.",
+      "read_method": "QS official profile independently opened through web.open on 2026-10-19",
+      "scope": "QS World University Rankings 2027 overall; not subject, regional, or sustainability ranking"
+    },
+    {
+      "institution": "亚利桑那州立大学",
+      "canonical_name": "亚利桑那州立大学",
+      "institution_en": "Arizona State University",
+      "aliases": [
+        "ASU"
+      ],
+      "rank": 172,
+      "rank_display": "172",
+      "source_url": "https://www.topuniversities.com/universities/arizona-state-university",
+      "verbatim_evidence": "It is ranked #172 in QS World University Rankings 2027.",
+      "read_method": "QS official profile independently opened through web.open on 2026-10-19",
+      "scope": "QS World University Rankings 2027 overall; not subject, regional, or sustainability ranking"
+    },
+    {
+      "institution": "波恩大学",
+      "canonical_name": "波恩大学",
+      "institution_en": "University of Bonn",
+      "aliases": [
+        "Rheinische Friedrich-Wilhelms-Universität Bonn"
+      ],
+      "rank": 209,
+      "rank_display": "=209",
+      "source_url": "https://www.topuniversities.com/universities/rheinische-friedrich-wilhelms-universitat-bonn",
+      "verbatim_evidence": "It is ranked #=209 in QS World University Rankings 2027.",
+      "read_method": "QS official profile independently opened through web.open on 2026-10-19",
+      "scope": "QS World University Rankings 2027 overall; not subject, regional, or sustainability ranking"
+    },
+    {
+      "institution": "明斯特大学",
+      "canonical_name": "明斯特大学",
+      "institution_en": "University of Münster",
+      "aliases": [
+        "University of Muenster",
+        "University of Munster",
+        "明斯特大学"
+      ],
+      "rank": 370,
+      "rank_display": "=370",
+      "source_url": "https://www.topuniversities.com/universities/university-munster",
+      "verbatim_evidence": "It is ranked #=370 in QS World University Rankings 2027.",
+      "read_method": "QS official profile independently opened through web.open on 2026-10-19",
+      "scope": "QS World University Rankings 2027 overall; not subject, regional, or sustainability ranking"
+    },
+    {
+      "institution": "延世大学",
+      "canonical_name": "延世大学",
+      "institution_en": "Yonsei University",
+      "aliases": [
+        "Yonsei"
+      ],
+      "rank": 42,
+      "rank_display": "42",
+      "source_url": "https://www.topuniversities.com/universities/yonsei-university",
+      "verbatim_evidence": "It is ranked #42 in QS World University Rankings 2027.",
+      "read_method": "QS official profile independently opened through web.open on 2026-10-19",
+      "scope": "QS World University Rankings 2027 overall; not subject, regional, or sustainability ranking"
+    }
+  ],
+  "user_alias_policy": {
+    "both_cuhk_and_cuhk_shenzhen_appointments": "香港中文大学",
+    "cuhk_shenzhen_only": "香港中文大学（深圳）"
+  },
+  "alias_policy_note": "仅当同一人有香港中文大学及香港中文大学（深圳）两边的有效任职记录，才归并展示为香港中文大学；只有深圳任职保持香港中文大学（深圳），不借用香港中文大学QS排名。",
+  "source_url": "https://www.topuniversities.com/world-university-rankings",
+  "edition_source_url": "https://www.topuniversities.com/world-university-rankings"
+}

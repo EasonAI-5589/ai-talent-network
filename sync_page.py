@@ -13,6 +13,7 @@ def main():
     args = parser.parse_args()
     try:
         data = build_page.import_dataset(build_page.extract_dataset(args.source.read_text(encoding="utf-8")))
+        build_page.validate_public_dataset(data)
         # Validate the complete local build before replacing the source dataset.
         build_page.prepare_page(data)
         build_page.DATA_PATH.parent.mkdir(parents=True, exist_ok=True)

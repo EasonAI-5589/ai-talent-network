@@ -1,10 +1,10 @@
-# AI Talent Network
+# PBCSF AI Talent Dashboard
 
-An interactive pilot directory of researchers working across AI, finance, and economics.
+An interactive pilot directory of researchers working across AI, finance, and economics, built for PBCSF (Tsinghua University PBC School of Finance).
 
 **Website:** https://easonai-5589.github.io/ai-talent-network/
 
-The bibliographic snapshot was generated on 15 October 2026 and contains 754 candidates from 38 universities: 13 in Asia (mainland China, Hong Kong, and Singapore), 23 in the United States (U.S. News 2026 Best National Universities top 20, including the four schools tied at 20th), and 2 in Europe (expansion to the rest of Europe is on hold). The default shortlist has 10 candidates per continent. Current appointment evidence is maintained separately, with its own check dates and coverage shown on the page. Chinese names are shown only where a source confirms them. This is a research demo, not a fully verified faculty directory or a final recruiting recommendation.
+The bibliographic snapshot was generated on 15 October 2026 and contains 754 candidates from 38 universities: 13 in Asia (mainland China, Hong Kong, and Singapore), 23 in the United States (U.S. News 2026 Best National Universities top 20, including the four schools tied at 20th), and 2 in Europe (expansion to the rest of Europe is on hold). The default shortlist has 10 candidates per continent. Current appointment evidence is maintained separately, with its own check dates and coverage shown on the page; the latest review of current institutions, titles and departments was completed on 21 October 2026. Chinese names are shown only where a source confirms them. This is a research demo, not a fully verified faculty directory or a final recruiting recommendation.
 
 ## School, position, and project tier
 
@@ -26,7 +26,7 @@ Shortlist edits are saved in the current browser only. They are not shared with 
 
 GitHub Pages serves `index.html` directly from the root of `main`. The page includes its styles, scripts, and dataset; it does not require a backend, an API key, or a Claude account. Google Fonts is optional and has local font fallbacks.
 
-The publication sources are `src/template.html` and `data/talent.json`. Appointment corrections are stored independently in `data/current_roles_verified.json`; each record includes the institution, position, source URL, check date, and evidence status. To rebuild after editing them:
+The publication sources are `src/template.html`, `src/catalog.js` and `data/talent.json`. Appointment corrections are stored independently in `data/current_roles_verified.json`; each record includes the institution, position, source URL, check date, and evidence status. Dated outcomes for people whose current post could not be confirmed are in `data/role_search_log.json`; `data/profile_discovery.json` holds official homepage links, and `display_affiliation.py` with `data/qs_world_rankings.json` chooses the one school shown for people with several appointments. To rebuild after editing them:
 
 ```sh
 python3 build_page.py
