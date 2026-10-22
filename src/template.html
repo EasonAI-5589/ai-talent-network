@@ -289,6 +289,9 @@ button:disabled { cursor: wait; opacity: .6; }
 /* Method */
 .steps li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 22px; padding: 22px 0; border-top: 1px solid var(--line); align-items: start; }
 .steps li:last-child { border-bottom: 1px solid var(--line); }
+.crit-title { font-size: 20px; margin: 34px 0 14px; }
+.crit-lead { color: var(--soft); font-size: 14px; margin-bottom: 18px; }
+.crit-formula { font-size: 17px; font-weight: 600; margin: 4px 0 10px; }
 .steps { list-style: none; margin: 0; padding: 0; }
 .step-index { font-size: 26px; color: var(--muted); line-height: 1.3; font-weight: 400; }
 .steps h3 { font-size: 18px; line-height: 1.4; }
@@ -333,7 +336,7 @@ button:disabled { cursor: wait; opacity: .6; }
     <div class="nav-links">
       <a href="#roster" data-nav="roster">人才库</a>
       <a href="#shortlist" data-nav="shortlist">Shortlist</a>
-      <a href="#method" data-nav="method">方法与进度</a>
+      <a href="#method" data-nav="method">评选标准</a>
     </div>
     <button class="theme-toggle" id="theme" type="button" aria-label="切换明暗主题"><span class="theme-icon" aria-hidden="true"></span><span id="theme-label">Light</span></button>
   </nav>
@@ -433,41 +436,72 @@ button:disabled { cursor: wait; opacity: .6; }
   <section class="section container ruled" id="method">
     <div class="section-heading">
       <div>
-        <p class="kicker">03 · 方法与进度</p>
-        <h2>从论文出发找人，再补齐人才档案</h2>
+        <p class="kicker">03 · 评选标准</p>
+        <h2>六步流程，六项门槛，两个维度评价</h2>
       </div>
       <p class="lead" id="method-lead"></p>
     </div>
+
+    <h3 class="crit-title">一、评选流程</h3>
     <ol class="steps" id="steps"></ol>
 
+    <h3 class="crit-title">二、入库门槛</h3>
+    <p class="crit-lead">以下 6 项条件须同时满足，按学校逐一筛选。</p>
+    <div class="box"><div class="box-body table-scroll">
+      <table class="mini"><thead><tr><th>条件</th><th>规则</th><th>目的</th></tr></thead><tbody>
+        <tr><td>交叉论文</td><td>以该校署名发表至少 2 篇交叉论文（2018 年以来）</td><td>有持续的交叉研究</td></tr>
+        <tr><td>当前关联</td><td>OpenAlex 最近关联机构包含该校</td><td>排除已调离或仅合作署名的作者</td></tr>
+        <tr><td>研究资历</td><td>h 指数 ≥ 6</td><td>排除以学生为主的作者</td></tr>
+        <tr><td>领域对口</td><td>医学、环境、物理等非目标领域的主题占比 &lt; 40%</td><td>排除只是顺带用到经济或 AI 的其他领域学者</td></tr>
+        <tr><td>经济金融背景</td><td>经济金融相关主题占比 ≥ 15%；计算机背景的学者还须有 ≥ 3 篇交叉论文</td><td>排除不了解经济金融的纯计算机学者</td></tr>
+        <tr><td>AI 背景</td><td>AI 论文 ≥ 2 篇，或 AI 主题占比 ≥ 15%，或计算机主题占比 ≥ 20% 且交叉论文 ≥ 3 篇</td><td>确认确实在做 AI</td></tr>
+      </tbody></table>
+      <p class="box-note">“AI 论文”指标题含机器学习、深度学习、大语言模型、文本分析、预测等方法词，或主题属于人工智能等子领域的论文。同一人在 OpenAlex 被拆成多个档案时合并为一条；在多所学校出现时只保留一条。</p>
+    </div></div>
+
+    <h3 class="crit-title">三、评价维度</h3>
+    <p class="crit-lead">共 <b>2 个计分维度</b>（7 项子指标），加 <b>1 项资格核验</b>（不计分）。两个维度合成综合分，用于排序和生成 Shortlist。</p>
     <div class="method-grid">
       <div class="box">
-        <div class="box-head">我们的分层定义（非学校职称）</div>
+        <div class="box-head">维度一 · 学术影响力（分层 L1–L4）</div>
         <div class="box-body">
-          <table class="mini"><thead><tr><th>分层</th><th>口径</th><th class="r">记录</th></tr></thead><tbody id="tier-def"></tbody></table>
-          <p class="box-note">以下是项目内部的初筛规则，结合奖项、OpenAlex 指标和人工指定；不是官方职称、学界统一排名或招聘结论。L4 只表示未达到前三层条件，不能据此推断年龄、资历或“新锐”。每人的分层依据在详情中展示。</p><p class="box-note">AI×金融相关性 = 55% 交叉论文证据（金融论文计 1、一般经济论文计 0.7、博弈论/投票等计 0.35；非 AI 的交叉论文再乘 0.4）+ 25% 研究主题中金融的占比 + 20% AI 强度。综合分 = 0.6 × 相关性 + 0.4 × 分层分（L1 100、L2 85、L3 60、L4 35）。</p>
+          <p class="box-note">子指标 4 项：顶级奖项、h 指数、总被引、人工标注。先看奖项，再按 h 指数和被引分层；经济金融与计算机引用习惯不同，分两套门槛。</p>
+          <table class="mini"><thead><tr><th>分层</th><th>规则</th><th class="r">分层分</th><th class="r">记录</th></tr></thead><tbody id="tier-def"></tbody></table>
+          <table class="mini" style="margin-top:14px"><thead><tr><th>学科口径</th><th>L2</th><th>L3</th><th>L4</th></tr></thead><tbody>
+            <tr><td>经济金融</td><td>h≥45 或被引≥1.5 万</td><td>20≤h&lt;45</td><td>h&lt;20</td></tr>
+            <tr><td>计算机/AI、交叉学科</td><td>h≥60 或被引≥2.5 万</td><td>25≤h&lt;60</td><td>h&lt;25</td></tr>
+          </tbody></table>
+          <p class="box-note">学科口径：研究主题中经济金融与商科占比 ≥ 45% 的学者用经济金融门槛，其余（计算机/AI、交叉学科）用计算机门槛。L1、L2 的奖项名单经人工核对；人工标注的领域带头人目前 3 位。分层是项目内部标签，不代表官方职称、年龄或资历。</p>
         </div>
       </div>
       <div class="box">
-        <div class="box-head">工作量估算</div>
+        <div class="box-head">维度二 · AI × 金融相关性（0–100 分）</div>
         <div class="box-body">
-          <dl class="facts est" id="estimate"></dl>
-          <p class="box-note">机器抓取只占小头，主要工作量在身份核验和人工复核。60 所约需 900 次接口调用，超过匿名额度（1000 次/天）时需要申请免费 API key。</p>
+          <p class="box-note">子指标 3 项，衡量研究与“AI + 经济金融”交叉方向的贴合程度。</p>
+          <p class="crit-formula">相关性 = 100 × (0.55 × 交叉论文得分 + 0.25 × 金融主题得分 + 0.20 × AI 强度得分)</p>
+          <table class="mini"><thead><tr><th>子指标</th><th class="r">权重</th><th>计算方式</th></tr></thead><tbody>
+            <tr><td>交叉论文证据</td><td class="r">55%</td><td>每篇交叉论文计分：金融类 1、一般经济类 0.7、其他（博弈论、投票等）0.35；未使用 AI 的再乘 0.4。累计为 E，得分 = 1 − e<sup>−E/5</sup>（E=5 时 63%，E=10 时 86%）</td></tr>
+            <tr><td>金融主题占比</td><td class="r">25%</td><td>研究主题中金融类主题（资产、银行、信贷、交易、加密货币、会计等）的占比；达到 35% 即满分</td></tr>
+            <tr><td>AI 强度</td><td class="r">20%</td><td>取“AI 主题占比”与“0.3 × AI 论文数 / 6”（6 篇封顶）中的较大值；达到 30% 即满分</td></tr>
+          </tbody></table>
         </div>
       </div>
-      <div class="box" style="grid-column: 1 / -1">
-        <div class="box-head">各校抓取实测</div>
-        <div class="box-body table-scroll">
-          <table class="mini" style="min-width:560px"><thead><tr><th>学校</th><th>区域</th><th class="r">交叉论文</th><th class="r">候选作者</th><th class="r">入库</th><th class="r">耗时</th><th class="r">接口调用</th></tr></thead><tbody id="timing"></tbody></table>
+      <div class="box">
+        <div class="box-head">综合分（排序依据）</div>
+        <div class="box-body">
+          <p class="crit-formula">综合分 = 0.6 × 相关性 + 0.4 × 分层分</p>
+          <p class="box-note">分层分：L1 100、L2 85、L3 60、L4 35。相关性占六成，保证排在前面的是方向对口的学者，而不只是引用最高的学者。<span id="score-range"></span></p>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-head">资格核验 · 现职（不计分）</div>
+        <div class="box-body">
+          <dl class="facts" id="role-gate"></dl>
+          <p class="box-note">每条记录逐一检索学校官方页面，核对姓名、学校、职称和院系。核验结果不改变分数，但未能核实的记录不作为已确认人选。</p>
         </div>
       </div>
     </div>
-
-    <div class="box" style="margin-top:28px">
-      <div class="box-head" id="check-head">历史归属与身份备注</div>
-      <div class="box-body"><ul class="check-list" id="check-list"></ul>
-      <p class="box-note">这里保留初版“已调离／非本校”等备注用于追溯，它们相对于检索关联学校，不能代替当前任职信息。旧记录中的“未单独检索”不计为已核实；学校或职位缺乏证据时仍显示待核实。本轮新来源优先于旧备注。</p></div>
-    </div>
+    <p class="box-note" style="margin-top:18px">研究主题、研究方法 / AI 类型标签只用于筛选浏览，不参与计分。</p>
 
     <details class="notes">
       <summary>已知局限</summary>
@@ -553,12 +587,7 @@ button:disabled { cursor: wait; opacity: .6; }
 
   // Hero, stats
   const schools = D.stats;
-  const T = D.timing;
-  const avgS = T.reduce((a, s) => a + s.seconds, 0) / T.length;
-  const avgC = T.reduce((a, s) => a + s.api_calls, 0) / T.length;
-  const publicPeople = P.filter(p => !isRef(p));
   const referencePeople = P.filter(isRef);
-  const avgKept = publicPeople.length / Math.max(1, T.length);
   $("#hero-desc").textContent = "我们搭建了 PBCSF AI Talent Dashboard（AI × 金融经济人才库），希望检索到在经济金融与 AI 交叉方向做研究的学者，为这一方向建立人才储备。";
   const SCOPE = { "亚洲": "中国大陆、香港、新加坡", "北美": "U.S. News 前 20", "欧洲": "暂缓" };
   $("#launch-note").innerHTML = `<span class="status-mark"></span>${schools.length} 所资料关联学校<span class="sep">·</span>统一人才表 ${P.length} 条记录`;
@@ -807,34 +836,27 @@ button:disabled { cursor: wait; opacity: .6; }
     el.textContent = msg; el.hidden = false; clearTimeout(tt); tt = setTimeout(() => { el.hidden = true; }, error ? 10000 : 2200);
   }
 
-  // Method section
+  // Method section: selection criteria
+  const tierCount = t => P.filter(p => p.tier === t).length;
   const STEPS = [
-    ["选校", `亚洲只看中国大陆、香港和新加坡：取 QS 2026 亚洲排名前 20 里这三地的学校，另加中科大。北美取 U.S. News 2026 全美大学排名前 20，并列第 20 的 4 所都收。欧洲暂缓，目前只有牛津和 LSE。目前已跑：${REGIONS.map(r => `${r} ${T.filter(s => s.region === r).length} 所`).join("，")}（仅公开采集部分；参考表学校另计）。`, true],
-    ["抓论文", `从 OpenAlex 拉取该校 ${D.since.slice(0, 4)} 年以来两类论文：经济金融领域中用 AI/ML 的论文，以及计算机与经济金融交叉的论文。`, true],
-    ["归并作者", "只统计署名单位属于该校的作者，至少 2 篇交叉论文进入候选。", true],
-    ["候选过滤", "按 OpenAlex 最近关联机构、h 指数和研究主题发现候选；这些条件不能证明当前学校或正式教职，仍须核实任职来源。", true],
-    ["分层与打分", "奖项名单优先，其余按 h 指数和被引分层，经济金融与计算机分两套门槛；计算 AI×金融相关性与综合分，生成 Shortlist。", true],
-    ["人工补录与标注", "OpenAlex 把单位记错的学者按论文署名补录（如黄益平、张晓燕）；部分学者按旧人工规则指定为 L2（如丛林），该标签属于项目判断。名单可以随时补充。", true],
-    ["统一数据库", `各类记录已合并到同一人才表，共 ${P.length} 条；地区、学校、院系、职称和研究特性可以组合筛选。`, true],
-    ["核身份", `全库逐条检索官方页面，并由独立程序抓取原页面逐字核对姓名、职称、引文、域名和同一人依据：${roleCounts.ok} 条已官方核实，${roleCounts.bad} 条官方页面给出的职务不唯一（逐页列出原文），${roleCounts.notFound} 条现职未能核实（详情列出检索日期、原因和已找到的来源）${roleCounts.todo ? `，${roleCounts.todo} 条尚未检索` : ""}。原有 ${P.filter(p => p.verify).length} 条旧核对备注仅作追溯。`, roleCounts.todo ? "doing" : true],
-    ["读主页", "用 LLM 阅读个人主页或 CV，确认研究方向，补充奖项、学会会士等头衔。", false],
-    ["扩校与复核", "欧洲按 QS 2026 欧洲排名前 20 扩校（暂缓）；继续为候选补当前学校、职位和中文名，人工复核 L1、L2 和 Shortlist。", false],
+    ["确定学校范围", `共 ${schools.length} 所：${REGIONS.map(r => `${r} ${schools.filter(s => s.region === r).length} 所`).join("、")}。亚洲取 QS 2026 亚洲前 20 中的中国大陆、香港、新加坡高校，另加中国科学技术大学；北美取 U.S. News 2026 全美大学前 20（并列第 20 的 4 所全部纳入）；欧洲目前为牛津和 LSE，扩展暂缓。`],
+    ["从论文发现学者", `在 OpenAlex 检索各校 ${D.since.slice(0, 4)} 年以来的两类论文：经济金融领域中使用 AI / 机器学习的论文；计算机与经济金融的交叉论文。`],
+    ["入库门槛", "逐校筛选作者，6 项条件须同时满足（见下方“入库门槛”）。少数因数据库单位记错被漏掉的学者按论文署名人工补录。"],
+    ["两个维度评价", "按“学术影响力”分 L1–L4 层，按“AI × 金融相关性”打 0–100 分，两者合成综合分（见下方“评价维度”）。"],
+    ["现职核验", "逐条检索学校官方页面，确认当前学校、职称和院系；找不到或页面互相矛盾的如实标注，不以论文署名代替。"],
+    ["生成 Shortlist", "每个大洲按综合分从高到低取前 10 人；人工核对发现已调离、非本校、非教职或方向不符的人不入选。Shortlist 是重点查看名单，不是录用建议。"],
   ];
-  $("#method-lead").textContent = `公开记录从交叉论文发现作者，参考资料按原表整行入库。两类来源统一检索，分别保留来源与核验状态；自动研究标签可回看原文。扩展学校、现任核实和研究资格复核继续按后续计划推进。`;
-  $("#steps").innerHTML = STEPS.map(([h, p, done], i) => `<li><span class="step-index num">${String(i + 1).padStart(2, "0")}</span><div><h3>${h}</h3><p>${esc(p)}</p></div><span class="availability${done === true ? " done" : ""}">${done === true ? "已完成" : done === "doing" ? "进行中" : "待做"}</span></li>`).join("");
-  const bad = P.filter(p => p.verify && !["在职", "在职·职称待核"].includes(vst(p))).sort((a, b) => b.fit - a.fit);
-  $("#check-head").textContent = `历史备注：${bad.length} 条需注意归属、身份或方向（非当前现职结论）`;
-  $("#check-list").innerHTML = bad.map(p => `<li><span class="who">${esc(p.name)}${p.name_zh ? " " + esc(p.name_zh) : ""} · ${esc(p.school)}</span><span class="tag bad">旧标注：${esc(p.verify.status)}</span><span class="what">${p.current_role ? `本轮：${esc(institution(p))} · ${esc(position(p))}。${esc(p.current_role.note)}<br>` : ""}旧说明：${esc(p.verify.title)}${p.verify.url ? ` · ${link(p.verify.url,"来源")}` : ""}</span></li>`).join("");
-  $("#tier-def").innerHTML = [1, 2, 3, 4].map(t => `<tr><td>${tierTag(t)}</td><td>${TIER_DEF[t]}</td><td class="r">${P.filter(p => p.tier === t).length}</td></tr>`).join("");
-  $("#estimate").innerHTML = `
-    <div><dt>60 所预计入库</dt><dd>约 ${fmt(Math.round(avgKept * 60 / 100) * 100)} 人</dd></div>
-    <div><dt>机器抓取（60 所，单线程）</dt><dd>约 ${Math.round(avgS)} 分钟</dd></div>
-    <div><dt>单校接口调用</dt><dd>约 ${avgC.toFixed(0)} 次</dd></div>
-    <div><dt>官网身份核验（LLM 辅助）</dt><dd>约 2–3 天</dd></div>
-    <div><dt>人工复核 L1–L2 与 Shortlist</dt><dd>约 1 天</dd></div>
-    <div><dt>LLM 读主页（每人约 5k tokens）</dt><dd>约 ${fmt(Math.round(avgKept * 60 * 0.5 / 100) * 100)} 万 tokens</dd></div>
-    <div class="hl"><dt>扩展计划</dt><dd>待确认范围与时间</dd></div>`;
-  $("#timing").innerHTML = T.map(s => `<tr><td>${esc(s.school_zh)}（${esc(s.school)}）</td><td>${esc(s.region)}</td><td class="r">${fmt(s.works)}</td><td class="r">${s.candidates}</td><td class="r">${fmt(s.kept ?? s.candidates)}</td><td class="r">${s.seconds.toFixed(0)} 秒</td><td class="r">${s.api_calls}</td></tr>`).join("");
+  $("#method-lead").textContent = `人才库中每位学者都经过同一套流程筛选和评价。以下规则可作为后续评审的统一口径。`;
+  $("#steps").innerHTML = STEPS.map(([h, p], i) => `<li><span class="step-index num">${String(i + 1).padStart(2, "0")}</span><div><h3>${h}</h3><p>${esc(p)}</p></div></li>`).join("");
+  const TIER_POINTS = { 1: 100, 2: 85, 3: 60, 4: 35 };
+  $("#tier-def").innerHTML = [1, 2, 3, 4].map(t => `<tr><td>${tierTag(t)}</td><td>${TIER_DEF[t]}</td><td class="r">${TIER_POINTS[t]}</td><td class="r">${tierCount(t)}</td></tr>`).join("");
+  const scores = P.map(p => p.score).filter(x => x != null);
+  if (scores.length) $("#score-range").textContent = `当前综合分范围 ${Math.min(...scores)}–${Math.max(...scores)}。`;
+  $("#role-gate").innerHTML = `
+    <div><dt>已官方核实</dt><dd>${roleCounts.ok} 条</dd></div>
+    <div><dt>官方页面不唯一</dt><dd>${roleCounts.bad} 条</dd></div>
+    <div><dt>现职未能核实</dt><dd>${roleCounts.notFound} 条</dd></div>${roleCounts.todo ? `
+    <div><dt>尚未检索</dt><dd>${roleCounts.todo} 条</dd></div>` : ""}`;
 
   // Nav highlight follows the section in view
   const navs = [...document.querySelectorAll("[data-nav]")];
