@@ -2,7 +2,7 @@
 
 PBCSF AI Talent Dashboard 中每位学者都经过同一套流程筛选和评价。本文是评审时的统一口径，与网站“评选标准”一节一致。
 
-规则来自生成数据的打分脚本 `pipeline/build.py`（原脚本在生成数据的那台 Mac 上，`~/Documents/AI-Talent-Network/pipeline/`，未放入本仓库）。当前公开数据生成于 2026-10-15 01:06，共 754 条记录。
+规则来自生成数据的打分脚本 `pipeline/build.py`，已存入私有仓库 `EasonAI-5589/pbcsf-ai-talent-dashboard` 的 `pipeline/` 目录。当前公开数据生成于 2026-10-15 01:06，共 754 条记录。
 
 ## 一、评选流程（六步）
 
