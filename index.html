@@ -838,7 +838,7 @@ button:disabled { cursor: wait; opacity: .6; }
   optionChecks("#title-options", C.TITLE_LABELS, "titles");
   optionChecks("#theme-options", C.THEME_LABELS, "themes");
   optionChecks("#method-options", C.METHOD_LABELS, "methods");
-  const departments = [...new Set(P.map(C.departmentLabel))].sort((a,b)=>a.localeCompare(b,"zh"));
+  const departments = [...new Set(P.map(C.departmentLabel))].filter(d => d !== "未知").sort((a,b)=>a.localeCompare(b,"zh"));
   $("#department").innerHTML = '<option value="all">全部院系</option>' + departments.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
   for (const [id,field] of [["source","source"],["department","department"],["year-status","yearStatus"],["phd-from","phdFrom"],["phd-to","phdTo"]]) {
     $("#" + id).addEventListener("change", e => { state[field] = e.target.value; render(); });
