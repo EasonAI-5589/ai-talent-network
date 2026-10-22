@@ -6,7 +6,7 @@ An interactive pilot directory of researchers working across AI, finance, and ec
 
 The bibliographic snapshot was generated on 15 October 2026 and contains 754 candidates from 38 universities: 13 in Asia (mainland China, Hong Kong, and Singapore), 23 in the United States (U.S. News 2026 Best National Universities top 20, including the four schools tied at 20th), and 2 in Europe (expansion to the rest of Europe is on hold). The default shortlist has 10 candidates per continent. Current appointment evidence is maintained separately, with its own check dates and coverage shown on the page; the latest review of current institutions, titles and departments was completed on 21 October 2026. Chinese names are shown only where a source confirms them. This is a research demo, not a fully verified faculty directory or a final recruiting recommendation.
 
-The full selection process, screening thresholds and scoring formulas are documented in [docs/selection-criteria.md](docs/selection-criteria.md) (Chinese) and in the site's 评选标准 section.
+The site shows a curated subset: of 754 candidates, 190 researchers whose current appointment is officially verified, who reach tiers L1–L3, and whose AI × finance relevance is at least 50 (`apply_showcase` in `build_page.py`). The full selection process, screening thresholds and scoring formulas are documented in [docs/selection-criteria.md](docs/selection-criteria.md) (Chinese) and in the site's 评选标准 section.
 
 ## School, position, and project tier
 

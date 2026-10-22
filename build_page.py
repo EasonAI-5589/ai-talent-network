@@ -257,7 +257,35 @@ def _combine(public, extra, label):
     return {**public, **extra}
 
 
-def prepare_page(data=None, extra_roles=None, extra_search_log=None):
+# Public showcase: only people whose current appointment is officially verified, in tiers L1-L3,
+# with AI x finance relevance of at least SHOWCASE_MIN_FIT. Data files keep every record.
+SHOWCASE_TIERS = (1, 2, 3)
+SHOWCASE_MIN_FIT = 50
+SHORTLIST_PER_REGION = 10
+
+
+def apply_showcase(merged):
+    people = merged["people"]
+    keep = [p for p in people
+            if (p.get("current_role") or {}).get("evidence_status") == "official_verified"
+            and p.get("tier") in SHOWCASE_TIERS and (p.get("fit") or 0) >= SHOWCASE_MIN_FIT]
+    # same shortlist rule as the scoring pipeline: top N per continent by score, skipping manual-check problems
+    ok = lambda p: (p.get("verify") or {}).get("status", "在职") in ("在职", "在职·职称待核")
+    ranked = sorted((p for p in keep if ok(p)), key=lambda p: (-p["score"], -p["fit"], p["id"]))
+    short = set()
+    for region in ("亚洲", "北美", "欧洲"):
+        short |= {p["id"] for p in [q for q in ranked if q["region"] == region][:SHORTLIST_PER_REGION]}
+    for p in keep:
+        p["shortlist"] = p["id"] in short
+    present = {p["school"] for p in keep}
+    merged["stats"] = [s for s in merged.get("stats", []) if s["school"] in present]
+    merged["showcase"] = {"pool": len(people), "kept": len(keep), "tiers": list(SHOWCASE_TIERS),
+                          "min_fit": SHOWCASE_MIN_FIT, "per_region": SHORTLIST_PER_REGION}
+    merged["people"] = keep
+    return merged
+
+
+def prepare_page(data=None, extra_roles=None, extra_search_log=None, showcase=False):
     """Render the page; the extra_* arguments carry private evidence that only the local server may add."""
     if data is None:
         data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
@@ -266,6 +294,8 @@ def prepare_page(data=None, extra_roles=None, extra_search_log=None):
     log = json.loads(SEARCH_LOG_PATH.read_text(encoding="utf-8")) if SEARCH_LOG_PATH.exists() else {}
     log = _combine(log, extra_search_log, "role search log")
     merged = apply_display_affiliations(merge_search_log(merge_roles(data, roles), log), QS_RANKINGS_PATH)
+    if showcase:
+        merged = apply_showcase(merged)
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
     if template.count("__DATA__") != 1:
         raise ValueError("Template must contain exactly one __DATA__ placeholder")
@@ -288,7 +318,7 @@ def validate_public_dataset(data):
 
 
 def build(data=None, output=OUTPUT_PATH):
-    html, merged = prepare_page(data)
+    html, merged = prepare_page(data, showcase=True)
     validate_public_dataset(merged)
     payload = html.encode("utf-8")
     Path(output).write_bytes(payload)
