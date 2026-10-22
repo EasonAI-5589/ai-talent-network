@@ -437,7 +437,7 @@ button:disabled { cursor: wait; opacity: .6; }
     <div class="section-heading">
       <div>
         <p class="kicker">03 · 评选标准</p>
-        <h2>六项门槛，两个维度评价，官方核实后严选</h2>
+        <h2>六项门槛，两个维度评价，只收录已核实学者</h2>
       </div>
       <p class="lead" id="method-lead"></p>
     </div>
@@ -497,7 +497,7 @@ button:disabled { cursor: wait; opacity: .6; }
         <div class="box-head">资格核验 · 现职（不计分，必须通过）</div>
         <div class="box-body">
           <dl class="facts" id="role-gate"></dl>
-          <p class="box-note">每条记录逐一检索学校官方页面，核对姓名、学校、职称和院系。核验结果不改变分数；官方页面找不到或互相矛盾的学者不入选展示。</p>
+          <p class="box-note">每条记录逐一检索学校官方页面，核对姓名、学校、职称和院系。核验结果不改变分数；官方页面找不到或互相矛盾的学者不在网站展示。</p>
         </div>
       </div>
     </div>
@@ -592,7 +592,7 @@ button:disabled { cursor: wait; opacity: .6; }
   const SCOPE = { "亚洲": "中国大陆、香港、新加坡", "北美": "U.S. News 前 20", "欧洲": "暂缓" };
   const SC = D.showcase;
   $("#launch-note").innerHTML = SC
-    ? `<span class="status-mark"></span>${schools.length} 所学校<span class="sep">·</span>从 ${SC.pool} 位候选中严选 ${P.length} 位<span class="sep">·</span>现职全部经官方核实`
+    ? `<span class="status-mark"></span>${schools.length} 所学校<span class="sep">·</span>${P.length} 位学者<span class="sep">·</span>现职全部经官方核实`
     : `<span class="status-mark"></span>${schools.length} 所资料关联学校<span class="sep">·</span>统一人才表 ${P.length} 条记录`;
   const slCount = () => P.filter(inSL).length;
   const roleCounts = (() => {
@@ -602,16 +602,16 @@ button:disabled { cursor: wait; opacity: .6; }
   })();
   const regionSchools = `亚洲 ${schools.filter(x => x.region === "亚洲").length} · 北美 ${schools.filter(x => x.region === "北美").length} · 欧洲 ${schools.filter(x => x.region === "欧洲").length}`;
   $("#stats").innerHTML = SC ? `
-    <div><strong class="num">${P.length}<small>位</small></strong><span>入选学者，现职全部经学校官方页面核实</span></div>
+    <div><strong class="num">${P.length}<small>位</small></strong><span>学者，现职全部经学校官方页面核实</span></div>
     <div><strong class="num">${schools.length}<small>所</small></strong><span>学校（${regionSchools}）</span></div>
     <div><strong class="num">${P.filter(p => p.tier === 1 || p.tier === 2).length}<small>位</small></strong><span>L1–L2：诺贝尔奖、图灵奖、克拉克奖得主与高影响力学者</span></div>
-    <div><strong class="num">${Math.round(P.length / SC.pool * 100)}<small>%</small></strong><span>入选率：${SC.pool} 位候选经 6 项门槛、2 个维度评价后入选 ${P.length} 位</span></div>` : `
+    <div><strong class="num">${P.filter(p => p.shortlist).length}<small>位</small></strong><span>Shortlist：每个大洲综合分前 ${SC.per_region} 位</span></div>` : `
     <div><strong class="num">${P.length}</strong><span>人才记录（未按人员去重）</span></div>
     <div><strong class="num">${schools.length}<small>所</small></strong><span>学校（${regionSchools}）</span></div>
     <div><strong class="num">${roleCounts.ok}<small>条</small></strong><span>任职状态已官方核实（含明确标注的荣休、退休）</span></div>
     <div><strong class="num">${P.length - roleCounts.ok}<small>条</small></strong><span>未能官方核实：官方页面不唯一 ${roleCounts.bad} · 现职未能核实 ${roleCounts.notFound}${roleCounts.todo ? ` · 尚未检索 ${roleCounts.todo}` : ""}</span></div>`;
   $("#stats-source").textContent = SC
-    ? `入选标准：现职经官方核实，学术影响力 L1–L3，AI × 金融相关性 ≥ ${SC.min_fit}。可按地区、学校、院系、职称和研究特性筛选。`
+    ? `只收录现职经学校官方页面核实的学者。可按地区、学校、院系、职称和研究特性筛选。`
     : `统一人才表 ${P.length} 条记录，按地区、学校、院系、职称和研究特性筛选；疑似重复保留原行。`;
   $("#foot").innerHTML = `${DB ? "本机人才数据库" : "公开 Demo"} · <a class="text-link" href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> · 统一人才表`;
 
@@ -855,18 +855,18 @@ button:disabled { cursor: wait; opacity: .6; }
     ["入库门槛", "逐校筛选作者，6 项条件须同时满足（见下方“入库门槛”）。少数因数据库单位记错被漏掉的学者按论文署名人工补录。"],
     ["两个维度评价", "按“学术影响力”分 L1–L4 层，按“AI × 金融相关性”打 0–100 分，两者合成综合分（见下方“评价维度”）。"],
     ["现职核验", "逐条检索学校官方页面，确认当前学校、职称和院系；找不到或页面互相矛盾的如实标注，不以论文署名代替。"],
-    ...(SC ? [["严选展示", `只展示同时满足 3 项条件的学者：现职经学校官方页面核实；学术影响力达到 L1–L3；AI × 金融相关性 ≥ ${SC.min_fit}。${SC.pool} 位候选中入选 ${P.length} 位。`]] : []),
-    ["生成 Shortlist", `每个大洲按综合分从高到低取前 10 人${SC ? "（在入选学者中选）" : ""}；人工核对发现已调离、非本校、非教职或方向不符的人不入选。Shortlist 是重点查看名单，不是录用建议。`],
+    ...(SC ? [["只收录已核实学者", `现职经学校官方页面核实的学者才在网站展示；官方页面找不到或互相矛盾的不收录。${SC.pool} 位候选中收录 ${P.length} 位。`]] : []),
+    ["生成 Shortlist", `每个大洲按综合分从高到低取前 10 人${SC ? "（在已核实学者中选）" : ""}；人工核对发现已调离、非本校、非教职或方向不符的人不入选。Shortlist 是重点查看名单，不是录用建议。`],
   ];
   $("#method-lead").textContent = `人才库中每位学者都经过同一套流程筛选和评价。以下规则可作为后续评审的统一口径。`;
   $("#steps").innerHTML = STEPS.map(([h, p], i) => `<li><span class="step-index num">${String(i + 1).padStart(2, "0")}</span><div><h3>${h}</h3><p>${esc(p)}</p></div></li>`).join("");
   const TIER_POINTS = { 1: 100, 2: 85, 3: 60, 4: 35 };
-  $("#tier-def").innerHTML = [1, 2, 3, 4].map(t => `<tr><td>${tierTag(t)}</td><td>${TIER_DEF[t]}</td><td class="r">${TIER_POINTS[t]}</td><td class="r">${SC && !SC.tiers.includes(t) ? "不入选" : tierCount(t)}</td></tr>`).join("");
+  $("#tier-def").innerHTML = [1, 2, 3, 4].map(t => `<tr><td>${tierTag(t)}</td><td>${TIER_DEF[t]}</td><td class="r">${TIER_POINTS[t]}</td><td class="r">${tierCount(t)}</td></tr>`).join("");
   const scores = P.map(p => p.score).filter(x => x != null);
   if (scores.length) $("#score-range").textContent = `当前综合分范围 ${Math.min(...scores)}–${Math.max(...scores)}。`;
   $("#role-gate").innerHTML = SC ? `
     <div><dt>候选</dt><dd>${SC.pool} 位</dd></div>
-    <div><dt>入选（现职已官方核实）</dt><dd>${P.length} 位</dd></div>` : `
+    <div><dt>收录（现职已官方核实）</dt><dd>${P.length} 位</dd></div>` : `
     <div><dt>已官方核实</dt><dd>${roleCounts.ok} 条</dd></div>
     <div><dt>官方页面不唯一</dt><dd>${roleCounts.bad} 条</dd></div>
     <div><dt>现职未能核实</dt><dd>${roleCounts.notFound} 条</dd></div>${roleCounts.todo ? `

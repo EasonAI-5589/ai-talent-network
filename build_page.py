@@ -257,18 +257,13 @@ def _combine(public, extra, label):
     return {**public, **extra}
 
 
-# Public showcase: only people whose current appointment is officially verified, in tiers L1-L3,
-# with AI x finance relevance of at least SHOWCASE_MIN_FIT. Data files keep every record.
-SHOWCASE_TIERS = (1, 2, 3)
-SHOWCASE_MIN_FIT = 50
+# Public showcase: only people whose current appointment is officially verified. Data files keep every record.
 SHORTLIST_PER_REGION = 10
 
 
 def apply_showcase(merged):
     people = merged["people"]
-    keep = [p for p in people
-            if (p.get("current_role") or {}).get("evidence_status") == "official_verified"
-            and p.get("tier") in SHOWCASE_TIERS and (p.get("fit") or 0) >= SHOWCASE_MIN_FIT]
+    keep = [p for p in people if (p.get("current_role") or {}).get("evidence_status") == "official_verified"]
     # same shortlist rule as the scoring pipeline: top N per continent by score, skipping manual-check problems
     ok = lambda p: (p.get("verify") or {}).get("status", "在职") in ("在职", "在职·职称待核")
     ranked = sorted((p for p in keep if ok(p)), key=lambda p: (-p["score"], -p["fit"], p["id"]))
@@ -279,8 +274,7 @@ def apply_showcase(merged):
         p["shortlist"] = p["id"] in short
     present = {p["school"] for p in keep}
     merged["stats"] = [s for s in merged.get("stats", []) if s["school"] in present]
-    merged["showcase"] = {"pool": len(people), "kept": len(keep), "tiers": list(SHOWCASE_TIERS),
-                          "min_fit": SHOWCASE_MIN_FIT, "per_region": SHORTLIST_PER_REGION}
+    merged["showcase"] = {"pool": len(people), "kept": len(keep), "per_region": SHORTLIST_PER_REGION}
     merged["people"] = keep
     return merged
 
