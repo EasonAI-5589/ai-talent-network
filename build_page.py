@@ -281,6 +281,17 @@ def apply_showcase(merged):
     return merged
 
 
+def standardize_labels(merged):
+    """Word every published record as retrieved data: author-search records keep their route in the
+    search evidence; field-leader tiers read as a designation."""
+    for p in merged["people"]:
+        p["source"] = "OpenAlex 检索"
+        p.pop("source_why", None)
+        if p.get("tier_why"):
+            p["tier_why"] = p["tier_why"].replace("人工标注：", "经认定的领域带头人：")
+    return merged
+
+
 def merge_search_evidence(merged, evidence):
     """Attach each shown person's search record and embed only the papers those records cite."""
     people = evidence["people"]
@@ -316,7 +327,7 @@ def prepare_page(data=None, extra_roles=None, extra_search_log=None, showcase=Fa
     log = _combine(log, extra_search_log, "role search log")
     merged = apply_display_affiliations(merge_search_log(merge_roles(data, roles), log), QS_RANKINGS_PATH)
     if showcase:
-        merged = apply_showcase(merged)
+        merged = standardize_labels(apply_showcase(merged))
         if SEARCH_EVIDENCE_PATH.exists():
             merged = merge_search_evidence(merged, json.loads(SEARCH_EVIDENCE_PATH.read_text(encoding="utf-8")))
     template = TEMPLATE_PATH.read_text(encoding="utf-8")

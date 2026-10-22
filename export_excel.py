@@ -49,7 +49,7 @@ def table(ws, columns, rows):
 def criteria_sheet(ws, merged):
     sr, t = merged["search"], merged["search"]["totals"]
     shown = len(merged["people"])
-    seeds = sum(1 for p in merged["people"] if p["search"]["route"] == "人工补录")
+    by_author = sum(1 for p in merged["people"] if p["search"]["route"] == "作者检索")
     rows = [
         ("检索标准", ""),
         ("数据源", "OpenAlex 开放学术数据库（CC0 许可），覆盖论文、作者和机构"),
@@ -63,7 +63,7 @@ def criteria_sheet(ws, merged):
         ("AI 论文判定", "标题含机器学习、深度学习、大语言模型、文本分析、预测等方法词，或论文主题属于人工智能、计算机视觉等子领域"),
         ("金融等级判定", "标题和主题含金融词（资产、银行、信贷、交易、加密货币、会计等）计 1；含一般经济词或属经济金融领域计 0.7；其余计 0.35"),
         ("现职检索", f"逐人检索学校官方页面（院系教师名录、个人主页），核对姓名、学校、职称和院系，记录来源网址和核验日期；最近一轮完成于 {merged.get('role_checked_at')}"),
-        ("人工补录", f"OpenAlex 单位记错而漏检的学者按论文署名补录，共 {seeds} 位"),
+        ("作者检索", f"OpenAlex 机构记录有误、学校检索未覆盖的学者，按作者编号检索本人 {sr['since'][:4]} 年以来论文，按论文署名确认学校，同样须满足入库门槛。共 {by_author} 位"),
         ("", ""),
         ("入库门槛（6 项同时满足）", ""),
         ("交叉论文", "以该校署名发表至少 2 篇交叉论文"),
@@ -74,7 +74,7 @@ def criteria_sheet(ws, merged):
         ("AI 背景", "AI 论文 ≥ 2 篇，或 AI 主题占比 ≥ 15%，或计算机主题占比 ≥ 20% 且交叉论文 ≥ 3 篇"),
         ("", ""),
         ("评价维度", ""),
-        ("学术影响力（L1–L4）", "L1 诺贝尔经济学奖或图灵奖；L2 克拉克奖、奈望林纳奖等，或经济金融 h≥45/被引≥1.5 万、计算机与交叉 h≥60/被引≥2.5 万，或人工标注领域带头人；L3 经济金融 20≤h<45、计算机与交叉 25≤h<60；L4 其余。分层分 L1 100、L2 85、L3 60、L4 35"),
+        ("学术影响力（L1–L4）", "L1 诺贝尔经济学奖或图灵奖；L2 克拉克奖、奈望林纳奖等，或经济金融 h≥45/被引≥1.5 万、计算机与交叉 h≥60/被引≥2.5 万，或经认定的领域带头人；L3 经济金融 20≤h<45、计算机与交叉 25≤h<60；L4 其余。分层分 L1 100、L2 85、L3 60、L4 35"),
         ("AI × 金融相关性", "100 × (0.55 × 交叉论文得分 + 0.25 × 金融主题得分 + 0.20 × AI 强度得分)。交叉论文得分 = 1 − e^(−E/5)，E 为每篇交叉论文金融等级之和（非 AI 论文乘 0.4）；金融主题占比 35% 即满分；AI 强度取 AI 主题占比与 0.3 × AI 论文数/6 的较大值，30% 即满分"),
         ("综合分", "0.6 × 相关性 + 0.4 × 分层分"),
         ("网站收录", "只收录现职经学校官方页面核实的学者"),
@@ -85,7 +85,7 @@ def criteria_sheet(ws, merged):
         ("交叉论文 ≥ 2 篇的候选作者", f"{t['candidates']:,} 人次"),
         ("未通过（当前关联 / h / 领域 / 经济金融 / AI）", f"{t['not_current']:,} / {t['h_lt6']:,} / {t['off_target']:,} / {t['no_econ']:,} / {t['no_ai']:,}"),
         ("通过全部门槛", f"{t['kept']:,} 人次"),
-        ("合并重复档案、加人工补录后的候选", f"{merged['showcase']['pool']:,} 位"),
+        ("合并重复档案、加作者检索后的候选", f"{merged['showcase']['pool']:,} 位"),
         ("现职经官方核实，网站收录", f"{shown:,} 位"),
         ("", ""),
         ("网站", SITE),
@@ -109,10 +109,10 @@ def people_rows(merged):
         s, role = p["search"], p.get("display_role") or p.get("current_role") or {}
         sh = s["shares"]
         yield p, [
-            i, p["name"], p.get("name_zh") or "", role.get("institution") or "", role.get("position") or "", role.get("department") or "", p.get("region") or "",
-            s["route"] + (f"：{s['route_why']}" if s.get("route_why") else ""), stats.get(s["school"], s["school"]), "；".join(s.get("matched_institutions") or []) or "人工补录，按论文署名确认",
+            i, p["name"], p.get("name_zh") or "", role.get("institution") or "", role.get("position") or "", role.get("department") or "未记载", p.get("region") or "",
+            f"OpenAlex {s['route']}" + (f"（{s['route_why']}）" if s.get("route_why") else ""), stats.get(s["school"], s["school"]), "；".join(s.get("matched_institutions") or []),
             s["q1_papers"], s["q2_papers"], s["cross"], s["ai_papers"], p["h"], p["cites"],
-            sh.get("off"), sh.get("econ"), sh.get("cs"), sh.get("ai"), "；".join(s["ai_gate"]) or "人工补录",
+            sh.get("off"), sh.get("econ"), sh.get("cs"), sh.get("ai"), "；".join(s["ai_gate"]),
             "经济金融" if s["home"] == "金融/经济" else "计算机 / 交叉", TIERS.get(p["tier"], ""), s["tier_why"], POINTS.get(p["tier"]),
             s["E"], s["cross_score"], s["fin_share"], s["fin_score"], s["ai_eff"], s["ai_score"], p["fit"], p["score"], "是" if p.get("shortlist") else "",
             "已官方核实", role.get("source_url") or "", role.get("checked_at") or "",
@@ -156,7 +156,7 @@ def export(output=OUTPUT):
             w = merged["papers"][oa]
             n += 1
             papers.append([n, p["name"], p.get("name_zh") or "", stats.get(s["school"], s["school"]), w["title"], w["year"], w["cites"],
-                           q or "补录", "是" if ai else "否（×0.4）", w["ai_why"] or "", w["fin"], w["fin_why"], w["doi"] or f"https://openalex.org/{oa}"])
+                           q, "是" if ai else "否（×0.4）", w["ai_why"] or "", w["fin"], w["fin_why"], w["doi"] or f"https://openalex.org/{oa}"])
     table(wb.create_sheet("参考论文"), PAPER_COLUMNS, papers)
     Path(output).parent.mkdir(parents=True, exist_ok=True)
     wb.save(output)

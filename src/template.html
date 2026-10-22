@@ -494,13 +494,13 @@ button:disabled { cursor: wait; opacity: .6; }
       <div class="box">
         <div class="box-head">维度一 · 学术影响力（分层 L1–L4）</div>
         <div class="box-body">
-          <p class="box-note">子指标 4 项：顶级奖项、h 指数、总被引、人工标注。先看奖项，再按 h 指数和被引分层；经济金融与计算机引用习惯不同，分两套门槛。</p>
+          <p class="box-note">子指标 4 项：顶级奖项、h 指数、总被引、领域带头人认定。先看奖项，再按 h 指数和被引分层；经济金融与计算机引用习惯不同，分两套门槛。</p>
           <table class="mini"><thead><tr><th>分层</th><th>规则</th><th class="r">分层分</th><th class="r">记录</th></tr></thead><tbody id="tier-def"></tbody></table>
           <table class="mini" style="margin-top:14px"><thead><tr><th>学科口径</th><th>L2</th><th>L3</th><th>L4</th></tr></thead><tbody>
             <tr><td>经济金融</td><td>h≥45 或被引≥1.5 万</td><td>20≤h&lt;45</td><td>h&lt;20</td></tr>
             <tr><td>计算机/AI、交叉学科</td><td>h≥60 或被引≥2.5 万</td><td>25≤h&lt;60</td><td>h&lt;25</td></tr>
           </tbody></table>
-          <p class="box-note">学科口径：研究主题中经济金融与商科占比 ≥ 45% 的学者用经济金融门槛，其余（计算机/AI、交叉学科）用计算机门槛。L1、L2 的奖项名单经人工核对；人工标注的领域带头人目前 3 位。分层是项目内部标签，不代表官方职称、年龄或资历。</p>
+          <p class="box-note">学科口径：研究主题中经济金融与商科占比 ≥ 45% 的学者用经济金融门槛，其余（计算机/AI、交叉学科）用计算机门槛。L1、L2 的奖项名单经逐一核对；经认定的领域带头人目前 3 位。分层是项目内部标签，不代表官方职称、年龄或资历。</p>
         </div>
       </div>
       <div class="box">
@@ -562,7 +562,7 @@ button:disabled { cursor: wait; opacity: .6; }
   const pending = new Set();
   let resetting = false;
   const TIERS = { 1: "顶级奖项", 2: "高影响力候选", 3: "领域骨干候选", 4: "其他候选" };
-  const TIER_DEF = { 1: "诺贝尔经济学奖或图灵奖得主", 2: "克拉克奖、奈望林纳奖等顶级奖项；或经济金融 h≥45 / 被引≥1.5 万，计算机与交叉 h≥60 / 被引≥2.5 万；或人工标注的领域带头人", 3: "经济金融 20≤h<45；计算机与交叉 25≤h<60", 4: "未达到 L1–L3 规则；不据此判断年龄或真实职称（h<12 可单独筛选）" };
+  const TIER_DEF = { 1: "诺贝尔经济学奖或图灵奖得主", 2: "克拉克奖、奈望林纳奖等顶级奖项；或经济金融 h≥45 / 被引≥1.5 万，计算机与交叉 h≥60 / 被引≥2.5 万；或经认定的领域带头人", 3: "经济金融 20≤h<45；计算机与交叉 25≤h<60", 4: "未达到 L1–L3 规则；不据此判断年龄或真实职称（h<12 可单独筛选）" };
   const TIER_COLOR = { 1: "--chart-1", 2: "--chart-3", 3: "--chart-5", 4: "--chart-2" };
   const HOMES = ["金融/经济", "交叉（统计/运筹/管理等）", "计算机/AI"];
   const HOME_SHORT = { "金融/经济": "金融/经济", "交叉（统计/运筹/管理等）": "交叉学科", "计算机/AI": "计算机/AI" };
@@ -780,17 +780,17 @@ button:disabled { cursor: wait; opacity: .6; }
     const field = (label, value) => `<div><dt>${label}</dt><dd>${value}</dd></div>`;
     const ok = '<span class="gate-ok" aria-label="通过">✓</span>';
     const schoolZh = (D.search.stats.find(x => x.school === s.school) || {}).school_zh || s.school;
-    const seed = s.route === "人工补录";
+    const byAuthor = s.route === "作者检索";
     const record = [
-      ["检索途径", seed ? `人工补录（${esc(s.route_why || "")}）` : "检索发现"],
+      ["检索途径", `OpenAlex ${esc(s.route)}${byAuthor ? `<br><span class="unit">${esc(s.route_why || "")}</span>` : ""}`],
       ["检索学校", esc(schoolZh)],
       ["数据源", `OpenAlex · ${esc(D.search.searched.replace("/", " 至 "))}`],
       ["论文范围", `${esc(D.search.since.slice(0, 4))} 年以来`],
-      ["命中检索式", seed ? "按本人论文检索，取 AI × 经济金融论文" : `Q1 ${s.q1_papers} 篇 · Q2 ${s.q2_papers} 篇`],
+      ["命中检索式", byAuthor ? "作者检索：本人论文中的 AI × 经济金融论文" : `Q1 ${s.q1_papers} 篇 · Q2 ${s.q2_papers} 篇`],
       ["交叉论文 / AI 论文", `${s.cross} 篇 / ${s.ai_papers} 篇`],
       ["学科口径", esc(s.home === "金融/经济" ? "经济金融" : "计算机 / 交叉")],
     ];
-    const gates = seed ? [["说明", "人工补录，不经检索门槛"]] : [
+    const gates = [
       ["交叉论文 ≥ 2 篇", `${ok}${s.cross} 篇`],
       ["当前关联本校", `${ok}${esc((s.matched_institutions || []).join("；"))}`],
       ["h 指数 ≥ 6", `${ok}${s.h}`],
@@ -817,7 +817,7 @@ button:disabled { cursor: wait; opacity: .6; }
       const w = D.papers[oa] || {};
       const href = w.doi || "https://openalex.org/" + oa;
       const finLabel = w.fin === 1 ? "金融类 1" : w.fin === 0.7 ? "一般经济类 0.7" : "其他 0.35";
-      return `<li>${link(href, w.title || oa)}<div class="meta"><span class="ptag${ai ? " ai" : ""}">${ai ? "AI 论文" : "非 AI ×0.4"}</span><span class="ptag">${finLabel}</span><span class="ptag">${esc(q || "补录")}</span><span class="num">${w.year || "—"} · 被引 ${fmt(w.cites)}</span>${ai && w.ai_why ? ` · ${esc(w.ai_why)}` : ""}${w.fin_why ? ` · ${esc(w.fin_why)}` : ""}</div></li>`;
+      return `<li>${link(href, w.title || oa)}<div class="meta"><span class="ptag${ai ? " ai" : ""}">${ai ? "AI 论文" : "非 AI ×0.4"}</span><span class="ptag">${finLabel}</span><span class="ptag">${esc(q)}</span><span class="num">${w.year || "—"} · 被引 ${fmt(w.cites)}</span>${ai && w.ai_why ? ` · ${esc(w.ai_why)}` : ""}${w.fin_why ? ` · ${esc(w.fin_why)}` : ""}</div></li>`;
     }).join("");
     return `<section class="search-card"><p class="card-section-title">检索与入选依据</p><div class="search-grid">
       <section class="card-section"><p class="card-section-title">检索记录</p><dl class="facts">${record.map(([k, v]) => field(k, v)).join("")}</dl></section>
@@ -943,11 +943,11 @@ button:disabled { cursor: wait; opacity: .6; }
   const STEPS = [
     ["确定学校范围", `共 ${schools.length} 所：${REGIONS.map(r => `${r} ${schools.filter(s => s.region === r).length} 所`).join("、")}。亚洲取 QS 2026 亚洲前 20 中的中国大陆、香港、新加坡高校，另加中国科学技术大学；北美取 U.S. News 2026 全美大学前 20（并列第 20 的 4 所全部纳入）；欧洲目前为牛津和 LSE，扩展暂缓。`],
     ["从论文发现学者", `在 OpenAlex 检索各校 ${D.since.slice(0, 4)} 年以来的两类论文：经济金融领域中使用 AI / 机器学习的论文；计算机与经济金融的交叉论文。`],
-    ["入库门槛", "逐校筛选作者，6 项条件须同时满足（见下方“入库门槛”）。少数因数据库单位记错被漏掉的学者按论文署名人工补录。"],
+    ["入库门槛", "逐校筛选作者，6 项条件须同时满足（见下方“入库门槛”）。OpenAlex 机构记录有误、学校检索未覆盖的学者改用作者检索，按论文署名确认学校，同样须满足这些条件。"],
     ["两个维度评价", "按“学术影响力”分 L1–L4 层，按“AI × 金融相关性”打 0–100 分，两者合成综合分（见下方“评价维度”）。"],
     ["现职核验", "逐条检索学校官方页面，确认当前学校、职称和院系；找不到或页面互相矛盾的如实标注，不以论文署名代替。"],
     ...(SC ? [["只收录已核实学者", `现职经学校官方页面核实的学者才在网站展示；官方页面找不到或互相矛盾的不收录。${SC.pool} 位候选中收录 ${P.length} 位。`]] : []),
-    ["生成 Shortlist", `每个大洲按综合分从高到低取前 10 人${SC ? "（在已核实学者中选）" : ""}；人工核对发现已调离、非本校、非教职或方向不符的人不入选。Shortlist 是重点查看名单，不是录用建议。`],
+    ["生成 Shortlist", `每个大洲按综合分从高到低取前 10 人${SC ? "（在已核实学者中选）" : ""}；核对发现已调离、非本校、非教职或方向不符的人不入选。Shortlist 是重点查看名单，不是录用建议。`],
   ];
   $("#method-lead").textContent = `人才库中每位学者都经过同一套流程筛选和评价。以下规则可作为后续评审的统一口径。`;
   $("#steps").innerHTML = STEPS.map(([h, p], i) => `<li><span class="step-index num">${String(i + 1).padStart(2, "0")}</span><div><h3>${h}</h3><p>${esc(p)}</p></div></li>`).join("");
@@ -980,7 +980,7 @@ button:disabled { cursor: wait; opacity: .6; }
       ["AI 论文判定", "标题含机器学习、深度学习、大语言模型、文本分析、预测等方法词，或论文主题属于人工智能、计算机视觉等子领域"],
       ["金融等级判定", "标题和主题含金融词（资产、银行、信贷、交易、加密货币、会计等）计 1；含一般经济词或属经济金融领域计 0.7；其余计 0.35"],
       ["现职检索", `逐人检索学校官方页面（院系教师名录、个人主页），核对姓名、学校、职称和院系，记录来源网址和核验日期；最近一轮完成于 ${D.role_checked_at || "2026-10-21"}`],
-      ["人工补录", `OpenAlex 单位记错而漏检的学者按论文署名补录，共 ${P.filter(p => p.search?.route === "人工补录").length} 位`],
+      ["作者检索", `OpenAlex 机构记录有误、学校检索未覆盖的学者，按作者编号检索本人 ${SR.since.slice(0, 4)} 年以来论文，按论文署名确认学校，同样须满足入库门槛。共 ${P.filter(p => p.search?.route === "作者检索").length} 位`],
     ];
     $("#search-spec").innerHTML = spec.map(([k, v]) => `<tr><td style="white-space:nowrap">${k}</td><td>${esc(v)}</td></tr>`).join("");
     const shownTotal = SR.stats.reduce((a, s) => a + s.shown, 0);
@@ -994,7 +994,7 @@ button:disabled { cursor: wait; opacity: .6; }
       ["未通过：经济金融背景", `${n(T0.no_econ)}`],
       ["未通过：AI 背景", `${n(T0.no_ai)}`],
       ["通过全部门槛", `${n(T0.kept)} 人次`],
-      ["合并重复档案、加人工补录后的候选", `${n(D.showcase ? D.showcase.pool : P.length)} 位`],
+      ["合并重复档案、加作者检索后的候选", `${n(D.showcase ? D.showcase.pool : P.length)} 位`],
       ["现职经官方核实，网站收录", `${n(shownTotal)} 位`],
     ].map(([k, v], i, a) => `<div${i === a.length - 1 ? ' class="hl"' : ""}><dt>${k}</dt><dd>${v}</dd></div>`).join("");
     $("#search-schools").innerHTML = SR.stats.map(s => `<tr><td>${esc(s.school_zh)}</td><td>${esc(s.region)}</td><td class="r">${n(s.q1)}</td><td class="r">${n(s.q2)}</td><td class="r">${n(s.works)}</td><td class="r">${n(s.candidates)}</td><td class="r">${n(s.kept)}</td><td class="r">${n(s.shown)}</td></tr>`).join("");
