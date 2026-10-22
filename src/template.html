@@ -228,6 +228,10 @@ button:disabled { cursor: wait; opacity: .6; }
 .legacy-note p { margin-block: 8px; }
 /* Dossier card (opens under the row) */
 .roster tr.card-row > td { padding: 0 0 18px; background: var(--paper); }
+/* the roster scrolls sideways; keep the open card at the visible width so no column is cut off */
+.roster tr.card-row > td > .card { position: sticky; left: 0; box-sizing: border-box; width: min(1180px, calc(100vw - 96px)); }
+@media (max-width: 860px) { .roster tr.card-row > td > .card { width: calc(100vw - 48px); } }
+@media (max-width: 520px) { .roster tr.card-row > td > .card { width: calc(100vw - 32px); padding: 18px 16px; } .card-head { flex-wrap: wrap; } }
 .card { margin-top: 12px; padding: 22px 24px; border: 1px solid var(--strong-line); border-top: 3px solid var(--brand); border-radius: var(--radius); background: var(--surface); }
 .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 .card-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
@@ -266,6 +270,19 @@ button:disabled { cursor: wait; opacity: .6; }
 .card-links a, .text-link { text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 4px; }
 .card-links a:hover, .text-link:hover { text-decoration-color: var(--ink); }
 .card-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+.search-card { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--strong-line); }
+.search-card > .card-section-title { font-size: 13px; color: var(--ink); margin-bottom: 12px; }
+.search-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 28px; }
+.search-grid .card-section { margin-top: 0; padding-top: 0; border-top: 0; }
+.gate-ok { color: var(--brand); font-weight: 600; margin-right: 6px; }
+.ptag { display: inline-block; font-size: 11px; line-height: 1.5; padding: 0 5px; margin-right: 6px; border-radius: 3px; box-shadow: inset 0 0 0 1px var(--line); color: var(--soft); }
+.ptag.ai { box-shadow: inset 0 0 0 1px var(--brand); color: var(--brand); }
+.ref-list { margin-top: 14px; font-size: 13px; }
+.ref-list summary { cursor: pointer; color: var(--ink); font-weight: 500; }
+.ref-list .papers { margin-top: 12px; }
+.search-funnel div { grid-template-columns: minmax(0, 1fr) auto; }
+.search-funnel dd { text-align: right; font-family: var(--mono); }
+@media (max-width: 860px) { .search-grid { grid-template-columns: 1fr; } }
 
 /* Shortlist */
 .sl-group + .sl-group { margin-top: 34px; }
@@ -384,6 +401,7 @@ button:disabled { cursor: wait; opacity: .6; }
       <label class="check"><input type="checkbox" id="hide-early"> 隐藏 h&lt;12 记录</label>
       <span class="grow"></span>
       <button class="text-button" id="copy" type="button">复制当前结果（可粘贴到 Excel）</button>
+      <a class="text-button" id="xlsx" href="downloads/pbcsf-ai-talent-search-evidence.xlsx" download hidden>下载 Excel（含每位学者的检索依据）</a>
     </div>
     <details class="filter-panel" open>
       <summary>组合筛选 <span class="unit">地区、学校、职称和研究特性可以任意组合；同组多选满足任一项，不同组条件同时满足。</span></summary>
@@ -437,15 +455,26 @@ button:disabled { cursor: wait; opacity: .6; }
     <div class="section-heading">
       <div>
         <p class="kicker">03 · 评选标准</p>
-        <h2>六项门槛，两个维度评价，只收录已核实学者</h2>
+        <h2>检索标准、入库门槛与评价维度</h2>
       </div>
       <p class="lead" id="method-lead"></p>
     </div>
 
-    <h3 class="crit-title">一、评选流程</h3>
+    <div id="search-block">
+    <h3 class="crit-title">一、检索标准</h3>
+    <p class="crit-lead" id="search-lead"></p>
+    <div class="box"><div class="box-body table-scroll"><table class="mini"><thead><tr><th>项目</th><th>标准</th></tr></thead><tbody id="search-spec"></tbody></table></div></div>
+    <div class="method-grid" style="margin-top:18px">
+      <div class="box"><div class="box-head">检索漏斗（38 所学校合计）</div><div class="box-body"><dl class="facts search-funnel" id="search-funnel"></dl><p class="box-note">候选作者和未通过人数按学校计次：同一学者在多所学校出现时分别计算，合并后为最终候选。</p></div></div>
+      <div class="box"><div class="box-head">每位学者的检索依据</div><div class="box-body"><p class="box-note" style="margin-top:0">人才库中每位学者的档案卡都列出本人的检索记录：在哪所学校、由哪条检索式检出、交叉论文和 AI 论文各几篇、6 项门槛各自的实际数值、评分拆解，以及全部交叉论文与现职来源链接。</p><p class="box-note" id="xlsx-note"></p></div></div>
+    </div>
+    <details class="notes"><summary>各校检索结果</summary><div class="table-scroll"><table class="mini" style="min-width:640px"><thead><tr><th>学校</th><th>地区</th><th class="r">Q1 论文</th><th class="r">Q2 论文</th><th class="r">去重合计</th><th class="r">候选作者</th><th class="r">通过门槛</th><th class="r">网站收录</th></tr></thead><tbody id="search-schools"></tbody></table></div></details>
+    </div>
+
+    <h3 class="crit-title">二、评选流程</h3>
     <ol class="steps" id="steps"></ol>
 
-    <h3 class="crit-title">二、入库门槛</h3>
+    <h3 class="crit-title">三、入库门槛</h3>
     <p class="crit-lead">以下 6 项条件须同时满足，按学校逐一筛选。</p>
     <div class="box"><div class="box-body table-scroll">
       <table class="mini"><thead><tr><th>条件</th><th>规则</th><th>目的</th></tr></thead><tbody>
@@ -459,7 +488,7 @@ button:disabled { cursor: wait; opacity: .6; }
       <p class="box-note">“AI 论文”指标题含机器学习、深度学习、大语言模型、文本分析、预测等方法词，或主题属于人工智能等子领域的论文。同一人在 OpenAlex 被拆成多个档案时合并为一条；在多所学校出现时只保留一条。</p>
     </div></div>
 
-    <h3 class="crit-title">三、评价维度</h3>
+    <h3 class="crit-title">四、评价维度</h3>
     <p class="crit-lead">共 <b>2 个计分维度</b>（7 项子指标），加 <b>1 项资格核验</b>（不计分）。两个维度合成综合分，用于排序和生成 Shortlist。</p>
     <div class="method-grid">
       <div class="box">
@@ -732,7 +761,7 @@ button:disabled { cursor: wait; opacity: .6; }
     const field = (label, value, raw = false) => `<div><dt>${label}</dt><dd>${raw ? value : esc(value)}</dd></div>`;
     const papers = (p.papers || []).slice(0, 5);
     return `<div class="card" id="card-${esc(p.id)}">
-      <div class="card-head"><div><p class="card-kicker">人才档案</p><h3>${esc(p.name)}${p.name_zh ? `<span class="zh"> ${esc(p.name_zh)}</span>` : ""}</h3><p class="card-meta">${esc(d.institution)} · ${esc(d.title)}</p>${duplicateNote(p) ? `<p class="notice">${esc(duplicateNote(p))}</p>` : ""}${d.sheet && d.sheet.titleDiffers ? `<p class="notice">${esc(`表内职称“${d.sheet.title}”与官方页面不一致，已以官方页面为准`)}</p>` : ""}</div><div class="card-actions">${star(p)}<button class="small-btn" data-close="1">收起</button></div></div>
+      <div class="card-head"><div><p class="card-kicker">人才档案</p><h3>${esc(p.name)}${p.name_zh ? `<span class="zh"> ${esc(p.name_zh)}</span>` : ""}</h3><p class="card-meta">${esc(d.institution)} · ${esc(d.title)}</p>${duplicateNote(p) ? `<p class="notice">${esc(duplicateNote(p))}</p>` : ""}${d.sheet && d.sheet.titleDiffers ? `<p class="notice">${esc(`表内职称“${d.sheet.title}”与官方页面不一致，已以官方页面为准`)}</p>` : ""}</div><div class="card-actions">${star(p)}<button class="small-btn" data-copylink="${esc(p.id)}">复制卡片链接</button><button class="small-btn" data-close="1">收起</button></div></div>
       <div class="card-body"><div>
         <section class="card-section"><p class="card-section-title">研究领域</p><dl class="facts">${field("研究领域", d.research)}${field("学科", d.discipline)}</dl>${researchSummary(p)}</section>
         <section class="card-section"><p class="card-section-title">教育背景</p><dl class="facts">${field("博士毕业院校", d.phdInstitution)}${field("博士毕业年份", d.phdYear)}</dl></section>
@@ -742,7 +771,62 @@ button:disabled { cursor: wait; opacity: .6; }
         ${outcome ? `<section class="card-section"><p class="card-section-title">任职核验结果</p><dl class="facts">${field("核验日期", outcome.checkedAt || "未记载")}${field("结果", outcome.reason)}${field("具体情况", outcome.note)}${outcome.urls.length ? field("已检索来源", urls(outcome.urls, "来源"), true) : ""}</dl></section>` : ""}
         <section class="card-section"><p class="card-section-title">主页与联系方式</p><dl class="facts">${field("个人主页", urls(d.profileUrls, "主页"), true)}${field("学院主页", urls(d.departmentUrls, "学院"), true)}${field("电子邮箱", d.email)}</dl><div class="card-links">${C.openAlexUrl(p) ? link(C.openAlexUrl(p), "OpenAlex") : ""}${p.orcid ? link(p.orcid, "ORCID") : ""}<a href="${esc(scholar)}" target="_blank" rel="noopener">Google Scholar</a></div></section>
         <section class="card-section"><p class="card-section-title">研究产出</p><dl class="facts">${field("相关性 / 综合分", `${p.fit == null ? "未记载" : p.fit} / ${p.score == null ? "未记载" : p.score}`)}${field("AI / 交叉论文", `${p.ai_papers == null ? "未记载" : p.ai_papers} / ${p.cross == null ? "未记载" : p.cross}`)}${field("h 指数 / 总被引", `${p.h == null ? "未记载" : p.h} / ${fmt(p.cites)}`)}</dl>${papers.length ? `<ul class="papers">${papers.map(w => `<li>${link(w.doi || (/^W\d+$/.test(w.oa || "") ? "https://openalex.org/" + w.oa : ""), w.title)}<div class="meta num">${w.year || "未记载"} · 被引 ${fmt(w.cites)}</div></li>`).join("")}</ul>` : "<p class=unit>未记载</p>"}</section>
-      </div></div><p class="card-note">缺失字段显示“未记载”；研究关联、学校归属和现任职务分别保留，不把空缺当作否定结论。</p></div>`;
+      </div></div>${searchSection(p)}<p class="card-note">缺失字段显示“未记载”；研究关联、学校归属和现任职务分别保留，不把空缺当作否定结论。</p></div>`;
+  }
+  function searchSection(p) {
+    const s = p.search; if (!s || !D.search) return "";
+    const pct = x => x == null ? "—" : `${Math.round(x * 100)}%`;
+    const pts = x => (Math.round(x * 10) / 10).toFixed(1);
+    const field = (label, value) => `<div><dt>${label}</dt><dd>${value}</dd></div>`;
+    const ok = '<span class="gate-ok" aria-label="通过">✓</span>';
+    const schoolZh = (D.search.stats.find(x => x.school === s.school) || {}).school_zh || s.school;
+    const seed = s.route === "人工补录";
+    const record = [
+      ["检索途径", seed ? `人工补录（${esc(s.route_why || "")}）` : "检索发现"],
+      ["检索学校", esc(schoolZh)],
+      ["数据源", `OpenAlex · ${esc(D.search.searched.replace("/", " 至 "))}`],
+      ["论文范围", `${esc(D.search.since.slice(0, 4))} 年以来`],
+      ["命中检索式", seed ? "按本人论文检索，取 AI × 经济金融论文" : `Q1 ${s.q1_papers} 篇 · Q2 ${s.q2_papers} 篇`],
+      ["交叉论文 / AI 论文", `${s.cross} 篇 / ${s.ai_papers} 篇`],
+      ["学科口径", esc(s.home === "金融/经济" ? "经济金融" : "计算机 / 交叉")],
+    ];
+    const gates = seed ? [["说明", "人工补录，不经检索门槛"]] : [
+      ["交叉论文 ≥ 2 篇", `${ok}${s.cross} 篇`],
+      ["当前关联本校", `${ok}${esc((s.matched_institutions || []).join("；"))}`],
+      ["h 指数 ≥ 6", `${ok}${s.h}`],
+      ["非目标领域 < 40%", `${ok}${pct(s.shares.off)}`],
+      [s.home === "计算机/AI" ? "经济金融 ≥ 15% 且交叉 ≥ 3" : "经济金融主题 ≥ 15%", `${ok}${pct(s.shares.econ)}`],
+      ["AI 背景（任一）", `${ok}${esc(s.ai_gate.join("；"))}`],
+    ];
+    const POINTS = { 1: 100, 2: 85, 3: 60, 4: 35 };
+    const scoreRows = [
+      ["学术影响力", `${tierTag(p.tier)} 分层分 ${POINTS[p.tier] ?? "—"}<br><span class="unit">${esc(s.tier_why)}</span>`],
+      ["交叉论文证据 ×55%", `E = ${s.E}，得分 ${pct(s.cross_score)} → ${pts(55 * s.cross_score)}`],
+      ["金融主题 ×25%", `占比 ${pct(s.fin_share)}，得分 ${pct(s.fin_score)} → ${pts(25 * s.fin_score)}`],
+      ["AI 强度 ×20%", `强度 ${pct(s.ai_eff)}，得分 ${pct(s.ai_score)} → ${pts(20 * s.ai_score)}`],
+      ["AI × 金融相关性", `<b>${s.fit}</b>`],
+      ["综合分", `0.6 × ${s.fit} + 0.4 × ${POINTS[p.tier] ?? "—"} = <b>${p.score}</b>`],
+    ];
+    const role = p.display_role || p.current_role || {};
+    const host = u => C.safeUrl(u) ? new URL(u).hostname.replace(/^www\./, "") : "来源";
+    const refs = [
+      role.source_url ? field("现职来源", `${link(role.source_url, host(role.source_url))}<br><span class="unit">核验日期 ${esc(role.checked_at || "未记载")}</span>`) : "",
+      C.openAlexUrl(p) ? field("作者档案", link(C.openAlexUrl(p), "OpenAlex")) : "",
+    ].join("");
+    const paperItems = s.papers.map(([oa, ai, q]) => {
+      const w = D.papers[oa] || {};
+      const href = w.doi || "https://openalex.org/" + oa;
+      const finLabel = w.fin === 1 ? "金融类 1" : w.fin === 0.7 ? "一般经济类 0.7" : "其他 0.35";
+      return `<li>${link(href, w.title || oa)}<div class="meta"><span class="ptag${ai ? " ai" : ""}">${ai ? "AI 论文" : "非 AI ×0.4"}</span><span class="ptag">${finLabel}</span><span class="ptag">${esc(q || "补录")}</span><span class="num">${w.year || "—"} · 被引 ${fmt(w.cites)}</span>${ai && w.ai_why ? ` · ${esc(w.ai_why)}` : ""}${w.fin_why ? ` · ${esc(w.fin_why)}` : ""}</div></li>`;
+    }).join("");
+    return `<section class="search-card"><p class="card-section-title">检索与入选依据</p><div class="search-grid">
+      <section class="card-section"><p class="card-section-title">检索记录</p><dl class="facts">${record.map(([k, v]) => field(k, v)).join("")}</dl></section>
+      <section class="card-section"><p class="card-section-title">入库门槛（实际数值）</p><dl class="facts">${gates.map(([k, v]) => field(k, v)).join("")}</dl></section>
+      <section class="card-section"><p class="card-section-title">评分拆解</p><dl class="facts">${scoreRows.map(([k, v]) => field(k, v)).join("")}</dl></section>
+    </div>
+    <section class="card-section" style="margin-top:16px"><p class="card-section-title">参考来源</p><dl class="facts">${refs}</dl>
+      <details class="ref-list"><summary>交叉论文 ${s.papers.length} 篇（全部列出，含检索式、AI 判定和金融等级）</summary><ul class="papers">${paperItems}</ul></details>
+    </section></section>`;
   }
   function card(p) { return unifiedCard(p); }
 
@@ -804,6 +888,13 @@ button:disabled { cursor: wait; opacity: .6; }
         toast(next ? `已加入 Shortlist：${p.name}` : `已移出 Shortlist：${p.name}`);
       } catch (error) { toast(`保存失败，已保留原状态：${error.message}`, true); }
       finally { pending.delete(key(p)); render(); }
+      return;
+    }
+    const cl = e.target.closest("[data-copylink]");
+    if (cl) {
+      const url = location.href.split("#")[0] + "#p-" + cl.dataset.copylink;
+      try { await navigator.clipboard.writeText(url); toast("已复制卡片链接"); }
+      catch (error) { toast(`复制失败，请手动复制：${url}`, true); }
       return;
     }
     if (e.target.closest("[data-close]")) { state.open = null; render(); return; }
@@ -872,12 +963,61 @@ button:disabled { cursor: wait; opacity: .6; }
     <div><dt>现职未能核实</dt><dd>${roleCounts.notFound} 条</dd></div>${roleCounts.todo ? `
     <div><dt>尚未检索</dt><dd>${roleCounts.todo} 条</dd></div>` : ""}`;
 
+  // Search criteria (overall) and download link
+  const SR = D.search;
+  $("#search-block").hidden = !SR;
+  if (SR) {
+    const T0 = SR.totals, n = x => fmt(x);
+    $("#search-lead").textContent = `数据来自 OpenAlex，于 ${SR.searched.replace("/", " 至 ")} 按学校逐一检索。每所学校执行同样的两条检索式，再按下列规则确定作者、判定论文类型。`;
+    const spec = [
+      ["数据源", "OpenAlex 开放学术数据库（CC0 许可），覆盖论文、作者和机构"],
+      ["检索时间", SR.searched.replace("/", " 至 ")],
+      ["论文范围", `${SR.since.slice(0, 4)} 年 1 月 1 日以来发表的论文`],
+      ["学校识别", "按 OpenAlex 机构编号检索，包含该校下属学院、研究所和校区"],
+      ["检索式 Q1", `经济金融中使用 AI 的论文：署名机构属于该校，主题领域为“经济学、计量经济学与金融”，且标注“人工智能”或“机器学习”概念。共 ${n(T0.q1)} 篇`],
+      ["检索式 Q2", `计算机与经济金融交叉论文：署名机构属于该校，主题领域同时包含“计算机科学”与“经济学、计量经济学与金融”。共 ${n(T0.q2)} 篇`],
+      ["作者归属", "只计该论文中署名机构属于该校的作者；同一作者在该校的 Q1、Q2 论文合并去重，称为“交叉论文”"],
+      ["AI 论文判定", "标题含机器学习、深度学习、大语言模型、文本分析、预测等方法词，或论文主题属于人工智能、计算机视觉等子领域"],
+      ["金融等级判定", "标题和主题含金融词（资产、银行、信贷、交易、加密货币、会计等）计 1；含一般经济词或属经济金融领域计 0.7；其余计 0.35"],
+      ["现职检索", `逐人检索学校官方页面（院系教师名录、个人主页），核对姓名、学校、职称和院系，记录来源网址和核验日期；最近一轮完成于 ${D.role_checked_at || "2026-10-21"}`],
+      ["人工补录", `OpenAlex 单位记错而漏检的学者按论文署名补录，共 ${P.filter(p => p.search?.route === "人工补录").length} 位`],
+    ];
+    $("#search-spec").innerHTML = spec.map(([k, v]) => `<tr><td style="white-space:nowrap">${k}</td><td>${esc(v)}</td></tr>`).join("");
+    const shownTotal = SR.stats.reduce((a, s) => a + s.shown, 0);
+    $("#search-funnel").innerHTML = [
+      ["Q1 + Q2 去重后论文", `${n(T0.works)} 篇`],
+      ["本校署名作者", `${n(T0.authors)} 人次`],
+      ["交叉论文 ≥ 2 篇的候选作者", `${n(T0.candidates)} 人次`],
+      ["未通过：当前关联本校", `${n(T0.not_current)}`],
+      ["未通过：h 指数 ≥ 6", `${n(T0.h_lt6)}`],
+      ["未通过：领域对口", `${n(T0.off_target)}`],
+      ["未通过：经济金融背景", `${n(T0.no_econ)}`],
+      ["未通过：AI 背景", `${n(T0.no_ai)}`],
+      ["通过全部门槛", `${n(T0.kept)} 人次`],
+      ["合并重复档案、加人工补录后的候选", `${n(D.showcase ? D.showcase.pool : P.length)} 位`],
+      ["现职经官方核实，网站收录", `${n(shownTotal)} 位`],
+    ].map(([k, v], i, a) => `<div${i === a.length - 1 ? ' class="hl"' : ""}><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+    $("#search-schools").innerHTML = SR.stats.map(s => `<tr><td>${esc(s.school_zh)}</td><td>${esc(s.region)}</td><td class="r">${n(s.q1)}</td><td class="r">${n(s.q2)}</td><td class="r">${n(s.works)}</td><td class="r">${n(s.candidates)}</td><td class="r">${n(s.kept)}</td><td class="r">${n(s.shown)}</td></tr>`).join("");
+    $("#xlsx").hidden = false;
+    $("#xlsx-note").innerHTML = `完整数据可 <a class="text-link" href="downloads/pbcsf-ai-talent-search-evidence.xlsx" download>下载 Excel</a>：每位学者一行，另附全部参考论文。`;
+  }
+
   // Nav highlight follows the section in view
   const navs = [...document.querySelectorAll("[data-nav]")];
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) navs.forEach(a => a.setAttribute("aria-current", a.dataset.nav === en.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
   ["roster", "shortlist", "method"].forEach(id => io.observe(document.getElementById(id)));
 
   fillSchools(); render();
+  // #p-<OpenAlex id> opens that researcher's card, so each card has its own link
+  function openFromHash() {
+    const m = /^#p-(A\d+)$/.exec(location.hash);
+    const p = m && P.find(x => x.id === m[1]);
+    if (!p) return;
+    clearFilters(); state.open = key(p); render();
+    document.getElementById("card-" + p.id)?.scrollIntoView({ block: "start" });
+  }
+  openFromHash();
+  window.addEventListener("hashchange", openFromHash);
 })();
 </script>
 </body>

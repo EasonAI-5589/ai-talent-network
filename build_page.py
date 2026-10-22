@@ -20,6 +20,8 @@ SEARCH_LOG_PATH = ROOT / "data" / "role_search_log.json"
 SEARCH_STATUSES = {"no_verifiable_official_page"}
 PROFILE_DISCOVERY_PATH = ROOT / "data" / "profile_discovery.json"
 QS_RANKINGS_PATH = ROOT / "data" / "qs_world_rankings.json"
+# per-person search record replayed from the OpenAlex cache (pipeline/explain_search.py in the private repo)
+SEARCH_EVIDENCE_PATH = ROOT / "data" / "search_evidence.json"
 OUTPUT_PATH = ROOT / "index.html"
 
 PROFILE_STATUSES = {
@@ -279,6 +281,31 @@ def apply_showcase(merged):
     return merged
 
 
+def merge_search_evidence(merged, evidence):
+    """Attach each shown person's search record and embed only the papers those records cite."""
+    people = evidence["people"]
+    missing = [p["id"] for p in merged["people"] if p["id"] not in people]
+    if missing:
+        raise ValueError(f"Search evidence is missing {len(missing)} people, e.g. {missing[:3]}")
+    used = {}
+    for p in merged["people"]:
+        rec = people[p["id"]]
+        if (rec["fit"], rec["cross"], rec["h"]) != (p.get("fit"), p.get("cross"), p.get("h")):
+            raise ValueError(f"Search evidence for {p['id']} does not match the published scores")
+        for oa, _, _ in rec["papers"]:
+            if oa not in evidence["papers"]:
+                raise ValueError(f"Search evidence cites unknown paper {oa}")
+            used[oa] = {k: evidence["papers"][oa][k] for k in ("title", "year", "cites", "doi", "ai_why", "fin", "fin_why")}
+        p["search"] = rec
+    shown = {}
+    for p in merged["people"]:
+        shown[p["school"]] = shown.get(p["school"], 0) + 1
+    merged["search"] = {k: evidence[k] for k in ("source", "searched", "since", "queries", "totals")}
+    merged["search"]["stats"] = [{**s, "shown": shown.get(s["school"], 0)} for s in evidence["stats"]]
+    merged["papers"] = used
+    return merged
+
+
 def prepare_page(data=None, extra_roles=None, extra_search_log=None, showcase=False):
     """Render the page; the extra_* arguments carry private evidence that only the local server may add."""
     if data is None:
@@ -290,6 +317,8 @@ def prepare_page(data=None, extra_roles=None, extra_search_log=None, showcase=Fa
     merged = apply_display_affiliations(merge_search_log(merge_roles(data, roles), log), QS_RANKINGS_PATH)
     if showcase:
         merged = apply_showcase(merged)
+        if SEARCH_EVIDENCE_PATH.exists():
+            merged = merge_search_evidence(merged, json.loads(SEARCH_EVIDENCE_PATH.read_text(encoding="utf-8")))
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
     if template.count("__DATA__") != 1:
         raise ValueError("Template must contain exactly one __DATA__ placeholder")
