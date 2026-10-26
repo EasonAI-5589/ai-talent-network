@@ -261,11 +261,16 @@ def _combine(public, extra, label):
 
 # Public showcase: only people whose current appointment is officially verified. Data files keep every record.
 SHORTLIST_PER_REGION = 10
+# Verified records the project owner chose not to show on the public site (data files keep them).
+HIDDEN_FROM_SHOWCASE = {
+    "A5110659752",  # Craig Wright, hidden 2026-10-26 at the owner's request
+}
 
 
 def apply_showcase(merged):
     people = merged["people"]
-    keep = [p for p in people if (p.get("current_role") or {}).get("evidence_status") == "official_verified"]
+    keep = [p for p in people if (p.get("current_role") or {}).get("evidence_status") == "official_verified"
+            and p["id"] not in HIDDEN_FROM_SHOWCASE]
     # same shortlist rule as the scoring pipeline: top N per continent by score, skipping manual-check problems
     ok = lambda p: (p.get("verify") or {}).get("status", "在职") in ("在职", "在职·职称待核")
     ranked = sorted((p for p in keep if ok(p)), key=lambda p: (-p["score"], -p["fit"], p["id"]))
