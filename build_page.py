@@ -22,6 +22,7 @@ PROFILE_DISCOVERY_PATH = ROOT / "data" / "profile_discovery.json"
 QS_RANKINGS_PATH = ROOT / "data" / "qs_world_rankings.json"
 # per-person search record replayed from the OpenAlex cache (pipeline/explain_search.py in the private repo)
 SEARCH_EVIDENCE_PATH = ROOT / "data" / "search_evidence.json"
+FEATURED_150_PATH = ROOT / "data" / "featured_150.json"
 OUTPUT_PATH = ROOT / "index.html"
 
 PROFILE_STATUSES = {
@@ -322,6 +323,29 @@ def merge_search_evidence(merged, evidence):
     return merged
 
 
+def merge_featured_150(merged):
+    """Attach the 150 featured scholars evaluation (5 directions x 30 scholars) when present."""
+    if not FEATURED_150_PATH.exists():
+        return merged
+    featured = json.loads(FEATURED_150_PATH.read_text(encoding="utf-8"))
+    scholars = featured.get("scholars") or {}
+    matched = []
+    for person in merged["people"]:
+        rec = scholars.get(person["id"])
+        if rec is not None:
+            person["featured"] = copy.deepcopy(rec)
+            matched.append(person["id"])
+    if matched:
+        present = set(matched)
+        merged["featured_150"] = {
+            "total": len(present),
+            "generated_at": featured.get("generated_at"),
+            "directions": copy.deepcopy(featured.get("directions") or []),
+            "order": [aid for aid in (featured.get("order") or []) if aid in present],
+        }
+    return merged
+
+
 def prepare_page(data=None, extra_roles=None, extra_search_log=None, showcase=False):
     """Render the page; the extra_* arguments carry private evidence that only the local server may add."""
     if data is None:
@@ -335,6 +359,7 @@ def prepare_page(data=None, extra_roles=None, extra_search_log=None, showcase=Fa
         merged = standardize_labels(apply_showcase(merged))
         if SEARCH_EVIDENCE_PATH.exists():
             merged = merge_search_evidence(merged, json.loads(SEARCH_EVIDENCE_PATH.read_text(encoding="utf-8")))
+    merged = merge_featured_150(merged)
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
     if template.count("__DATA__") != 1:
         raise ValueError("Template must contain exactly one __DATA__ placeholder")

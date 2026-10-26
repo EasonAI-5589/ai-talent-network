@@ -314,7 +314,40 @@ button:disabled { cursor: wait; opacity: .6; }
 .resource .metrics { display: flex; gap: 18px; margin-top: auto; padding-top: 16px; font-size: 12px; color: var(--muted); }
 .resource .metrics b { font-family: var(--mono); font-weight: 500; color: var(--ink); margin-left: 4px; }
 .sl-bar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; border-block: 1px solid var(--line); padding-block: 14px; margin-bottom: 28px; font-size: 13px; color: var(--soft); }
-.sl-bar .acts { display: flex; gap: 18px; }
+.sl-bar .acts { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; }
+
+/* Featured 150 */
+.f150-tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid var(--strong-line); border-radius: var(--radius); overflow: hidden; margin-bottom: 18px; }
+.f150-tabs button { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; border: 0; background: var(--tint); padding: 13px 15px; text-align: left; position: relative; min-width: 0; }
+.f150-tabs button + button { border-left: 1px solid var(--line); }
+.f150-tabs button[aria-selected="true"] { background: var(--paper); }
+.f150-tabs button[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--brand); }
+.f150-tabs .rt-group { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+.f150-tabs .rt-name { font-size: 15px; font-weight: 600; line-height: 1.25; }
+.f150-tabs .rt-meta { font-size: 12px; color: var(--muted); }
+@media (max-width: 960px) {
+  .f150-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .f150-tabs button:nth-child(4) { border-left: 0; }
+  .f150-tabs button:nth-child(n+4) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 580px) {
+  .f150-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .f150-tabs button:nth-child(odd) { border-left: 0; }
+  .f150-tabs button:nth-child(even) { border-left: 1px solid var(--line); }
+  .f150-tabs button:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+.f150-toolbar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; margin-bottom: 16px; font-size: 13px; color: var(--soft); }
+.pill-group { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pill-btn { border: 1px solid var(--line); background: var(--paper); color: var(--soft); padding: 5px 11px; border-radius: 3px; font-size: 12px; line-height: 1.4; }
+.pill-btn:hover { border-color: var(--strong-line); color: var(--ink); }
+.pill-btn[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: var(--inverse); font-weight: 500; }
+.wtags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 5px; }
+.wtag { display: inline-block; white-space: nowrap; font-size: 11px; line-height: 1.45; padding: 1px 6px; border-radius: 3px; background: var(--brand-tint); color: var(--brand); font-weight: 500; }
+.wtag.neutral { background: var(--tint); color: var(--soft); font-weight: 400; }
+.wreason { font-size: 12px; color: var(--muted); line-height: 1.5; max-width: 380px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+.jlist { display: block; font-size: 11px; color: var(--muted); font-family: var(--mono); margin-top: 3px; }
+#f150-table tbody th { min-width: 175px; }
+#f150-table td, #f150-table tbody th { vertical-align: top; padding-block: 12px; }
 
 /* Method */
 .steps li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 22px; padding: 22px 0; border-top: 1px solid var(--line); align-items: start; }
@@ -364,6 +397,7 @@ button:disabled { cursor: wait; opacity: .6; }
   <nav class="nav container" aria-label="主导航">
     <a class="wordmark" href="#top">PBCSF AI Talent<span>Dashboard</span></a>
     <div class="nav-links">
+      <a href="#featured" data-nav="featured" id="nav-featured">150 人精选</a>
       <a href="#roster" data-nav="roster">人才库</a>
       <a href="#shortlist" data-nav="shortlist">Shortlist</a>
       <a href="#method" data-nav="method">评选标准</a>
@@ -377,7 +411,9 @@ button:disabled { cursor: wait; opacity: .6; }
     <h1>PBCSF AI Talent Dashboard</h1>
     <p class="hero-description" id="hero-desc"></p>
     <div class="hero-actions">
-      <a class="button primary" href="#roster">查看人才库 <span>→</span></a>
+      <a class="button primary" href="#featured" id="hero-f150-btn">150 人精选 <span class="num" id="hero-f150">150</span></a>
+      <a class="button" href="#roster">查看人才库 <span>→</span></a>
+      <a class="button" href="downloads/pbcsf-150-featured-scholars.xlsx" id="hero-f150-xlsx" download>下载 150 人精选 Excel <span>↓</span></a>
       <a class="button" href="#shortlist">Shortlist <span class="num" id="hero-sl"></span></a>
       <a class="button" id="backup" href="/api/backup" hidden>备份数据库 <span>↓</span></a>
     </div>
@@ -389,10 +425,60 @@ button:disabled { cursor: wait; opacity: .6; }
     <p class="stats-source" id="stats-source"></p>
   </div>
 
-  <section class="section container" id="roster">
+  <section class="section container" id="featured">
     <div class="section-heading">
       <div>
-        <p class="kicker">01 · 人才库</p>
+        <p class="kicker">01 · 150 人精选</p>
+        <h2>潜在合作学者名单，按五大方向分组</h2>
+      </div>
+      <p class="lead" id="f150-lead">围绕宏观金融、资产定价、公司金融、市场微观结构与金融科技（细分 FinTech 与 AI）五大方向，从已核实学者中各选拔 30 位（共 150 位）学科带头人，综合展示顶刊代表作与合作契合度加权依据。</p>
+    </div>
+    <div class="sl-bar">
+      <span id="f150-summary"></span>
+      <span class="acts">
+        <button class="text-button" id="copy-f150" type="button">复制当前方向名单（可粘贴到 Excel）</button>
+        <a class="text-button" id="dl-f150" href="downloads/pbcsf-150-featured-scholars.xlsx" download style="color:var(--brand);font-weight:600">下载 150 人精选 Excel（含五方向分表与权重依据）</a>
+      </span>
+    </div>
+    <div class="f150-tabs" id="f150-tabs" role="tablist" aria-label="五大方向"></div>
+    <div class="f150-toolbar">
+      <div class="pill-group" id="f150-subbar" hidden>
+        <span>金融科技子方向：</span>
+        <button type="button" class="pill-btn" data-fsub="all" aria-pressed="true">全部（30）</button>
+        <button type="button" class="pill-btn" data-fsub="FinTech" aria-pressed="false">FinTech（15）</button>
+        <button type="button" class="pill-btn" data-fsub="AI" aria-pressed="false">AI（15）</button>
+      </div>
+      <span id="f150-dir-desc" class="unit" style="font-size:13px"></span>
+      <div class="pill-group" id="f150-sortbar" style="margin-left:auto">
+        <span>排序方式：</span>
+        <button type="button" class="pill-btn" data-fsort="priority" aria-pressed="true">综合推荐</button>
+        <button type="button" class="pill-btn" data-fsort="collab" aria-pressed="false">合作契合度优先</button>
+        <button type="button" class="pill-btn" data-fsort="top" aria-pressed="false">顶刊篇数优先</button>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table class="roster" id="f150-table">
+        <thead>
+          <tr>
+            <th class="rank">#</th>
+            <th>学者</th>
+            <th>学校 / 机构</th>
+            <th>方向 / 子标签</th>
+            <th>学科带头人认定（顶刊与总发表）</th>
+            <th class="r">合作契合度</th>
+            <th class="r">综合推荐</th>
+            <th>核心加权依据</th>
+          </tr>
+        </thead>
+        <tbody id="f150-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section container ruled" id="roster">
+    <div class="section-heading">
+      <div>
+        <p class="kicker">02 · 人才库</p>
         <h2>按特性查找，按职称浏览</h2>
       </div>
       <p class="lead">地区、学校、院系、职称和研究方向可以任意组合筛选。点击姓名展开档案卡，查看现职来源、检索依据和评分拆解；分层与评分规则见“评选标准”。</p>
@@ -452,7 +538,7 @@ button:disabled { cursor: wait; opacity: .6; }
   <section class="section container ruled" id="shortlist">
     <div class="section-heading">
       <div>
-        <p class="kicker">02 · Shortlist</p>
+        <p class="kicker">03 · Shortlist</p>
         <h2>重点学者名单，按地区分组</h2>
       </div>
       <p class="lead" id="shortlist-lead"></p>
@@ -467,7 +553,7 @@ button:disabled { cursor: wait; opacity: .6; }
   <section class="section container ruled" id="method">
     <div class="section-heading">
       <div>
-        <p class="kicker">03 · 评选标准</p>
+        <p class="kicker">04 · 评选标准</p>
         <h2>检索标准、入库门槛与评价维度</h2>
       </div>
       <p class="lead" id="method-lead"></p>
@@ -540,6 +626,36 @@ button:disabled { cursor: wait; opacity: .6; }
         <div class="box-body">
           <dl class="facts" id="role-gate"></dl>
           <p class="box-note">逐位检索学校官方页面，核对姓名、学校、职称和院系，记录来源网址和核验日期。核验结果不改变分数；现职经官方页面核实的学者才在网站展示。</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="method-f150">
+      <h3 class="crit-title">五、150 人精选（学科带头人 × 合作契合度）</h3>
+      <p class="crit-lead">面向宏观金融、资本市场（资产定价、公司金融、市场微观结构）与金融科技（FinTech、AI）五大方向，从现职已官方核实的学者中各选拔 30 位（共 150 位不重复学者），同步评估学术带头人底线与合作契合度。完整工作簿可 <a class="text-link" href="downloads/pbcsf-150-featured-scholars.xlsx" download>下载 150 人精选 Excel</a>。</p>
+      <div class="method-grid" style="margin-top:18px">
+        <div class="box">
+          <div class="box-head">维度一 · 学科带头人认定（学术底线）</div>
+          <div class="box-body">
+            <p class="box-note">要求总发表量 &gt; 10 篇（double-digit publications），并按顶级期刊产出分级认定：</p>
+            <table class="mini"><thead><tr><th>认定等级</th><th>标准</th></tr></thead><tbody>
+              <tr><td>核心顶刊带头人</td><td>总发表 &gt; 10 篇，且金融 Top 3（JF、JFE、RFS）与经济 Top 5（AER、ECTA、QJE、JPE、REStud）核心顶刊 ≥ 6 篇</td></tr>
+              <tr><td>延伸顶刊带头人</td><td>总发表 &gt; 10 篇，且计入 Management Science（MS）、JFQA、Operations Research（OR）、REStat、JME、JoE、Review of Finance（RF）等延伸顶刊后合计 ≥ 5 篇</td></tr>
+              <tr><td>高影响力带头人</td><td>总发表 &gt; 10 篇，且达到 L1/L2 顶级奖项或高影响力标准（经济金融 h≥45 / 被引≥1.5 万，计算机与交叉 h≥60 / 被引≥2.5 万）</td></tr>
+            </tbody></table>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-head">维度二 · 合作契合度（0–100 分，非等权加权）</div>
+          <div class="box-body">
+            <p class="box-note">基于公开学术档案与合作网络，从 4 个维度合成合作契合度：</p>
+            <table class="mini"><thead><tr><th>加权项</th><th class="r">满分</th><th>评分依据</th></tr></thead><tbody>
+              <tr><td>华语学术背景</td><td class="r">30</td><td>华人学者、具中文姓名或华语高校本硕博背景计 30 分；全职任教于亚洲高校计 20 分；其余计 10 分</td></tr>
+              <tr><td>中国问题研究</td><td class="r">25</td><td>发表 2 篇及以上中国金融/经济主题论文计 25 分，1 篇计 20 分；研究领域含中国问题计 18 分；方法可迁移应用计 8 分</td></tr>
+              <tr><td>对华交流与高校纽带</td><td class="r">25</td><td>国内顶尖高校在职计 25 分，香港高校计 23 分，新加坡高校计 21 分；海外学者与国内高校有合作署名研究计 18–22 分</td></tr>
+              <tr><td>资历阶段与大牛豁免</td><td class="r">20</td><td>顶刊 ≥ 12 篇、核心顶刊 ≥ 8 篇、h ≥ 50 或获顶级奖项的大牛学者适用“年龄不设限”计 20 分；中青年活跃正/副教授计 18–19 分</td></tr>
+            </tbody></table>
+          </div>
         </div>
       </div>
     </div>
@@ -636,7 +752,7 @@ button:disabled { cursor: wait; opacity: .6; }
     <div><strong class="num">${P.length}<small>位</small></strong><span>学者，现职全部经学校官方页面核实</span></div>
     <div><strong class="num">${schools.length}<small>所</small></strong><span>学校（${regionSchools}）</span></div>
     <div><strong class="num">${P.filter(p => p.tier === 1 || p.tier === 2).length}<small>位</small></strong><span>L1–L2：诺贝尔奖、图灵奖、克拉克奖得主与高影响力学者</span></div>
-    <div><strong class="num">${P.filter(p => p.shortlist).length}<small>位</small></strong><span>Shortlist：每个大洲综合分前 ${SC.per_region} 位</span></div>` : `
+    <div><strong class="num">${D.featured_150?.total || P.filter(p => p.shortlist).length}<small>位</small></strong><span>${D.featured_150?.total ? "150 人精选：五大方向各 30 位潜在合作学科带头人" : `Shortlist：每个大洲综合分前 ${SC.per_region} 位`}</span></div>` : `
     <div><strong class="num">${P.length}</strong><span>人才记录（未按人员去重）</span></div>
     <div><strong class="num">${schools.length}<small>所</small></strong><span>学校（${regionSchools}）</span></div>
     <div><strong class="num">${roleCounts.ok}<small>条</small></strong><span>任职状态已官方核实（含明确标注的荣休、退休）</span></div>
@@ -783,7 +899,30 @@ button:disabled { cursor: wait; opacity: .6; }
         ${outcome ? section("任职核验结果", field("核验日期", outcome.checkedAt || MISSING) + field("结果", outcome.reason) + opt("具体情况", outcome.note) + (outcome.urls.length ? field("已检索来源", urls(outcome.urls, "来源"), true) : "")) : ""}
         ${section("主页与联系方式", (d.profileUrls.length ? field("个人主页", urls(d.profileUrls, "官方主页"), true) : "") + (d.departmentUrls.length ? field("学院主页", urls(d.departmentUrls, "学院主页"), true) : "") + opt("电子邮箱", d.email), `<div class="card-links">${C.openAlexUrl(p) ? link(C.openAlexUrl(p), "OpenAlex") : ""}${p.orcid ? link(p.orcid, "ORCID") : ""}<a href="${esc(scholar)}" target="_blank" rel="noopener">Google Scholar</a></div>`)}
         ${section("研究产出", field("相关性 / 综合分", `${p.fit == null ? "—" : p.fit} / ${p.score == null ? "—" : p.score}`) + field("AI / 交叉论文", `${p.ai_papers == null ? "—" : p.ai_papers} / ${p.cross == null ? "—" : p.cross}`) + field("h 指数 / 总被引", `${p.h == null ? "—" : p.h} / ${fmt(p.cites)}`), papers.length ? `<p class="sub-h" style="margin-top:14px">代表论文</p><ul class="papers">${papers.map(w => `<li>${link(w.doi || (/^W\d+$/.test(w.oa || "") ? "https://openalex.org/" + w.oa : ""), w.title)}<div class="meta num">${w.year || "—"} · 被引 ${fmt(w.cites)}</div></li>`).join("")}</ul>` : "")}
-      </div></div>${searchSection(p)}</div>`;
+      </div></div>${featuredSection(p)}${searchSection(p)}</div>`;
+  }
+  function featuredSection(p) {
+    const f = p.featured; if (!f) return "";
+    const w = f.weights || {};
+    const field = (label, value) => `<div><dt>${label}</dt><dd>${value}</dd></div>`;
+    const left = [
+      ["入选方向", `<b>${esc(f.direction_label)}</b> · 子方向：${esc(f.sub_direction)}（方向第 ${f.direction_rank} 位）`],
+      ["学科带头人认定", `<span class="tag ${f.leader_level === "核心顶刊带头人" ? "t1" : "t2"}">是 · ${esc(f.leader_level)}</span>`],
+      ["总发表 / 顶刊篇数", `<span class="num">总发表 ${fmt(f.works)} 篇 · 顶刊合计 ${f.total_top_count} 篇（核心 ${f.core_top_count} + 延伸 ${f.ext_top_count}）</span>`],
+      ["顶刊构成", `<span class="num">${esc(f.journal_summary)}</span>`],
+      ["带头人依据", esc(f.leader_why)],
+    ];
+    const right = [
+      ["合作契合度", `<b>${f.collab_score}</b> / 100（${esc(f.collab_tier)}） · 综合推荐指数 <b class="num">${f.overall_priority}</b>`],
+      ["华语学术背景", `<span class="num">${w.heritage?.score ?? 0}/30</span> · ${esc(w.heritage?.reason || "")}`],
+      ["中国问题研究", `<span class="num">${w.china_research?.score ?? 0}/25</span> · ${esc(w.china_research?.reason || "")}`],
+      ["对华交流与高校纽带", `<span class="num">${w.china_ties?.score ?? 0}/25</span> · ${esc(w.china_ties?.reason || "")}`],
+      ["资历与大牛豁免", `<span class="num">${w.career_stage?.score ?? 0}/20</span> · ${esc(w.career_stage?.reason || "")}`],
+    ];
+    return `<section class="search-card"><p class="card-section-title">150 人精选 · 学科带头人与合作契合度评估</p><div class="search-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+      <section class="card-section"><p class="card-section-title">学科带头人支撑</p><dl class="facts">${left.map(([k, v]) => field(k, v)).join("")}</dl></section>
+      <section class="card-section"><p class="card-section-title">合作契合度加权拆解</p><dl class="facts">${right.map(([k, v]) => field(k, v)).join("")}</dl></section>
+    </div></section>`;
   }
   function searchSection(p) {
     const s = p.search; if (!s || !D.search) return "";
@@ -865,8 +1004,108 @@ button:disabled { cursor: wait; opacity: .6; }
         <td class="c-topics"><div class="topics" title="${esc(C.detailProfile(p).research)}">${esc(C.detailProfile(p).research)}</div>${(state.themes.length || state.methods.length) ? `<span class="match-reason">命中：${esc(C.deriveResearch(p).evidence.filter(x=>(x.kind === "theme" ? state.themes : state.methods).includes(x.key)).map(x=>x.text).filter((x,i,a)=>a.indexOf(x)===i).join("；"))}</span>` : ""}</td>
       </tr>` + (open ? `<tr class="card-row"><td colspan="${COLS.length}">${card(p)}</td></tr>` : "");
     }).join("") : `<tr><td colspan="${COLS.length}" class="empty">没有符合条件的${SC ? "学者" : "记录"}。试试清除筛选或换个关键词。</td></tr>`;
+    renderFeatured150();
     renderShortlist();
   }
+
+  // Featured 150 section state & rendering
+  const F150 = D.featured_150;
+  const fState = { dir: "macro_finance", sub: "all", sort: "priority", open: null };
+  function featuredPeople() {
+    if (!F150) return [];
+    const byId = new Map();
+    for (const p of P) {
+      if (p.featured && !byId.has(p.id)) byId.set(p.id, p);
+    }
+    let list = (F150.order || []).map(id => byId.get(id)).filter(Boolean);
+    if (fState.dir !== "all") list = list.filter(p => p.featured.direction === fState.dir);
+    if (fState.dir === "fintech_ai" && fState.sub !== "all") list = list.filter(p => p.featured.sub_direction === fState.sub);
+    if (fState.sort === "collab") {
+      list.sort((a, b) => b.featured.collab_score - a.featured.collab_score || b.featured.overall_priority - a.featured.overall_priority || b.featured.total_top_count - a.featured.total_top_count);
+    } else if (fState.sort === "top") {
+      list.sort((a, b) => b.featured.total_top_count - a.featured.total_top_count || b.featured.core_top_count - a.featured.core_top_count || b.featured.overall_priority - a.featured.overall_priority);
+    } else {
+      list.sort((a, b) => b.featured.overall_priority - a.featured.overall_priority || b.featured.collab_score - a.featured.collab_score || b.featured.total_top_count - a.featured.total_top_count);
+    }
+    return list;
+  }
+
+  function renderFeatured150() {
+    const sec = $("#featured"), mSec = $("#method-f150"), navF = $("#nav-featured"), heroBtn = $("#hero-f150-btn"), heroXlsx = $("#hero-f150-xlsx");
+    if (!F150 || !F150.total) {
+      if (sec) sec.hidden = true;
+      if (mSec) mSec.hidden = true;
+      if (navF) navF.hidden = true;
+      if (heroBtn) heroBtn.hidden = true;
+      if (heroXlsx) heroXlsx.hidden = true;
+      return;
+    }
+    const byId = new Map();
+    for (const p of P) {
+      if (p.featured && !byId.has(p.id)) byId.set(p.id, p);
+    }
+    const allF = (F150.order || []).map(id => byId.get(id)).filter(Boolean);
+    $("#hero-f150").textContent = allF.length;
+    const dirs = F150.directions || [];
+    const coreTotal = allF.filter(p => p.featured.leader_level === "核心顶刊带头人").length;
+    const zhTotal = allF.filter(p => (p.featured.tags || []).includes("华人学者")).length;
+    $("#f150-summary").textContent = `共 ${allF.length} 位学科带头人（核心顶刊达标 ${coreTotal} 位 · 华人学者 ${zhTotal} 位） · ` + dirs.map(d => `${d.label.replace(/（.*）/, "")} ${allF.filter(p => p.featured.direction === d.key).length}`).join(" · ");
+
+    const tabs = [
+      ...dirs.map(d => {
+        const dList = allF.filter(p => p.featured.direction === d.key);
+        const cCount = dList.filter(p => p.featured.leader_level === "核心顶刊带头人").length;
+        const meta = d.key === "fintech_ai" ? `${dList.length} 位 · FinTech 15 / AI 15` : `${dList.length} 位 · 核心顶刊 ${cCount} 位`;
+        return { key: d.key, group: d.group, name: d.label.replace(/（.*）/, ""), meta, desc: d.desc };
+      }),
+      { key: "all", group: "汇总视图", name: "全部 150 人", meta: `${allF.length} 位 · 五大方向总览`, desc: "五大方向全部 150 位入选学科带头人汇总视图" }
+    ];
+    $("#f150-tabs").innerHTML = tabs.map(t => `<button role="tab" type="button" data-fdir="${esc(t.key)}" aria-selected="${fState.dir === t.key}"><span class="rt-group">${esc(t.group)}</span><span class="rt-name">${esc(t.name)}</span><span class="rt-meta num">${esc(t.meta)}</span></button>`).join("");
+    const activeTab = tabs.find(t => t.key === fState.dir) || tabs[0];
+    $("#f150-dir-desc").textContent = activeTab ? activeTab.desc : "";
+    $("#f150-subbar").hidden = fState.dir !== "fintech_ai";
+    document.querySelectorAll("[data-fsub]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.fsub === fState.sub)));
+    document.querySelectorAll("[data-fsort]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.fsort === fState.sort)));
+
+    const list = featuredPeople();
+    $("#f150-rows").innerHTML = list.map((p, i) => {
+      const f = p.featured;
+      const open = fState.open === key(p);
+      const dispZh = p.name_zh || f.name_zh || "";
+      const lCls = f.leader_level === "核心顶刊带头人" ? "t1" : f.leader_level === "延伸顶刊带头人" ? "t2" : "t3";
+      const w = f.weights || {};
+      const reasonLine = [w.heritage?.reason, w.china_research?.score >= 18 ? w.china_research?.reason : "", w.china_ties?.score >= 18 ? w.china_ties?.reason : ""].filter(Boolean).join("；");
+      return `<tr class="${open ? "is-open" : ""}">
+        <td class="rank">${i + 1}</td>
+        <th scope="row"><button class="person" data-fopen="${esc(key(p))}" aria-expanded="${open}">${esc(p.name)}${dispZh ? `<span class="zh"> ${esc(dispZh)}</span>` : ""}</button></th>
+        <td class="affiliation"><strong>${esc(listedInstitution(p))}</strong><span class="unit">${esc(listedPosition(p))}${C.effectiveDepartment(p) ? ` · ${esc(C.effectiveDepartment(p))}` : ""}</span></td>
+        <td class="nowrap"><span class="tag t3">${esc(f.direction_label.replace(/（.*）/, ""))}</span>${f.sub_direction !== f.direction_label.replace(/（.*）/, "") ? `<span class="tag t2" style="margin-left:5px">${esc(f.sub_direction)}</span>` : ""}</td>
+        <td><span class="tag ${lCls}">${esc(f.leader_level)}</span><span class="unit num" style="margin-top:4px">顶刊 ${f.total_top_count} 篇（核心 ${f.core_top_count} / 延伸 ${f.ext_top_count}）· 总发表 ${fmt(f.works)} 篇</span><span class="jlist">${esc(f.journal_summary)}</span></td>
+        <td class="r nowrap"><span class="fitbar"><span class="track"><i style="width:${f.collab_score}%"></i></span><span>${f.collab_score}</span></span><span class="unit">${esc(f.collab_tier)}</span></td>
+        <td class="r num nowrap"><b>${f.overall_priority.toFixed(1)}</b></td>
+        <td><div class="wtags">${(f.tags || []).map((t, idx) => `<span class="wtag${idx > 2 ? " neutral" : ""}">${esc(t)}</span>`).join("")}</div><div class="wreason" title="${esc(reasonLine)}">${esc(reasonLine)}</div></td>
+      </tr>` + (open ? `<tr class="card-row"><td colspan="8">${card(p)}</td></tr>` : "");
+    }).join("");
+  }
+
+  $("#f150-tabs").addEventListener("click", e => {
+    const b = e.target.closest("[data-fdir]"); if (!b) return;
+    fState.dir = b.dataset.fdir;
+    if (fState.dir !== "fintech_ai") fState.sub = "all";
+    fState.open = null;
+    renderFeatured150();
+  });
+  $("#f150-subbar").addEventListener("click", e => {
+    const b = e.target.closest("[data-fsub]"); if (!b) return;
+    fState.sub = b.dataset.fsub;
+    fState.open = null;
+    renderFeatured150();
+  });
+  $("#f150-sortbar").addEventListener("click", e => {
+    const b = e.target.closest("[data-fsort]"); if (!b) return;
+    fState.sort = b.dataset.fsort;
+    renderFeatured150();
+  });
 
   function renderShortlist() {
     const sl = C.sortPeople(P.filter(inSL), "score").sort((a,b)=>(a.tier ?? 99)-(b.tier ?? 99));
@@ -909,7 +1148,14 @@ button:disabled { cursor: wait; opacity: .6; }
       catch (error) { toast(`复制失败，请手动复制：${url}`, true); }
       return;
     }
-    if (e.target.closest("[data-close]")) { state.open = null; render(); return; }
+    if (e.target.closest("[data-close]")) { state.open = null; fState.open = null; render(); return; }
+    const fo = e.target.closest("[data-fopen]");
+    if (fo) {
+      const k = fo.dataset.fopen;
+      fState.open = fState.open === k ? null : k;
+      renderFeatured150();
+      return;
+    }
     const o = e.target.closest("[data-open]");
     if (o) {
       const k = o.dataset.open;
@@ -945,6 +1191,32 @@ button:disabled { cursor: wait; opacity: .6; }
   }
   $("#copy").addEventListener("click", () => { const r = filtered(); copy(tsv(r), r.length); });
   $("#copy-sl").addEventListener("click", () => { const r = P.filter(inSL).sort((a, b) => b.score - a.score); copy(tsv(r), r.length, "sl"); });
+  const F150_OUT = [
+    ["方向序号", p => p.featured?.direction_rank],
+    ["细分方向", p => p.featured?.direction_label],
+    ["子方向标签", p => p.featured?.sub_direction],
+    ["姓名", p => p.name],
+    ["中文名", p => p.name_zh || p.featured?.name_zh || ""],
+    ["现任学校 / 机构", p => listedInstitution(p)],
+    ["职称", p => listedPosition(p)],
+    ["学院 / 院系", p => C.effectiveDepartment(p) || "未记载"],
+    ["地区", p => p.region || ""],
+    ["学科带头人认定", p => p.featured ? `是 · ${p.featured.leader_level}` : ""],
+    ["总发表数", p => p.featured?.works],
+    ["核心顶刊篇数", p => p.featured?.core_top_count],
+    ["延伸顶刊篇数", p => p.featured?.ext_top_count],
+    ["顶刊合计", p => p.featured?.total_top_count],
+    ["顶刊发表构成", p => p.featured?.journal_summary],
+    ["合作契合度", p => p.featured?.collab_score],
+    ["契合度分档", p => p.featured?.collab_tier],
+    ["综合推荐指数", p => p.featured?.overall_priority],
+    ["入选与权重依据", p => p.featured?.selection_summary],
+  ];
+  $("#copy-f150").addEventListener("click", () => {
+    const r = featuredPeople();
+    const text = C.toTSV([F150_OUT.map(c => c[0]), ...r.map(p => F150_OUT.map(c => c[1](p)))]);
+    copy(text, r.length, "f150");
+  });
 
   let tt;
   function toast(msg, error = false) {
@@ -1019,7 +1291,7 @@ button:disabled { cursor: wait; opacity: .6; }
   // Nav highlight follows the section in view
   const navs = [...document.querySelectorAll("[data-nav]")];
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) navs.forEach(a => a.setAttribute("aria-current", a.dataset.nav === en.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
-  ["roster", "shortlist", "method"].forEach(id => io.observe(document.getElementById(id)));
+  ["roster", "featured", "shortlist", "method"].forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
 
   fillSchools(); render();
   // #p-<OpenAlex id> opens that researcher's card, so each card has its own link
