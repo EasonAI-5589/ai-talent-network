@@ -1,34 +1,32 @@
 # PBCSF AI Talent Dashboard
 
-An interactive pilot directory of researchers working across AI, finance, and economics, built for PBCSF (Tsinghua University PBC School of Finance).
+An interactive directory of researchers working across AI, finance, and economics, built for PBCSF (Tsinghua University PBC School of Finance).
 
 **Website:** https://easonai-5589.github.io/ai-talent-network/
 
-The bibliographic snapshot was generated on 15 October 2026 and contains 754 candidates from 38 universities: 13 in Asia (mainland China, Hong Kong, and Singapore), 23 in the United States (U.S. News 2026 Best National Universities top 20, including the four schools tied at 20th), and 2 in Europe (expansion to the rest of Europe is on hold). The default shortlist has 10 candidates per continent. Current appointment evidence is maintained separately, with its own check dates and coverage shown on the page; the latest review of current institutions, titles and departments was completed on 21 October 2026. Chinese names are shown only where a source confirms them. This is a research demo, not a fully verified faculty directory or a final recruiting recommendation.
+The bibliographic snapshot was generated on 15 October 2026 from 38 universities: 13 in Asia (mainland China, Hong Kong, and Singapore), 23 in the United States (U.S. News 2026 Best National Universities top 20, including the four schools tied at 20th), and 2 in Europe (University of Oxford and LSE). The site lists the 653 of 754 candidates whose current appointment is verified on an official university page (`apply_showcase` in `build_page.py`); the latest review of current institutions, titles and departments was completed on 21 October 2026. The default shortlist holds the top 10 researchers per continent by composite score. Chinese names are shown where a source confirms them.
 
-The site lists only researchers whose current appointment is officially verified: 653 of 754 candidates (`apply_showcase` in `build_page.py`). Each researcher's own search record (the school and query that found them, the actual value behind every screening threshold, the score breakdown, every cross paper and the appointment source) is in `data/search_evidence.json`, shown on their profile card (link: `#p-<OpenAlex id>`) and exported by `export_excel.py` to `downloads/pbcsf-ai-talent-search-evidence.xlsx` (`uvx --with openpyxl python export_excel.py`); run `uvx --with openpyxl python audit_release.py` before publishing to confirm the page and the workbook agree. The full selection process, screening thresholds and scoring formulas are documented in [docs/selection-criteria.md](docs/selection-criteria.md) (Chinese) and in the site's 评选标准 section.
+Each researcher's search record (the school and query that found them, the actual value behind every screening threshold, the score breakdown, every cross paper and the appointment source) is in `data/search_evidence.json`, shown on their profile card (link: `#p-<OpenAlex id>`) and exported by `export_excel.py` to `downloads/pbcsf-ai-talent-search-evidence.xlsx` (`uvx --with openpyxl python export_excel.py`); run `uvx --with openpyxl python audit_release.py` before publishing to confirm the page and the workbook agree. The selection process, screening thresholds and scoring formulas are documented in [docs/selection-criteria.md](docs/selection-criteria.md) (Chinese) and in the site's 评选标准 section.
 
-## School, position, and project tier
+## School, position, and tier
 
-- **Current institution and position:** supported by the linked appointment source, with a check date. Missing or conflicting evidence is shown as pending rather than inferred from a paper affiliation or an old note.
-- **Discovery affiliation:** the school used to find the candidate through publications and OpenAlex institution associations. Historical employment, visiting affiliations, and associated campuses can all appear here; this field does not establish current employment.
-- **Our tier:** L1 top awards; L2 high-impact candidates; L3 field-core candidates; L4 other candidates. Membership uses the existing award, bibliometric, and manual rules. These are project labels, not official job titles, age or career-stage claims, or hiring decisions.
+- **Current institution and position:** taken from the linked official appointment page, with its check date. Where a researcher holds several appointments, the page shows the school ranked highest in the QS World University Rankings 2027, with that school's own title and department.
+- **Search school:** the school whose publications led to the researcher in OpenAlex. It is kept separately from the current institution.
+- **Tier:** L1 top awards; L2 high-impact researchers; L3 field-core researchers; L4 others. Tiers follow the award and bibliometric rules in the 评选标准 section.
 
-Legacy verification notes remain expandable for provenance. In particular, an old note saying that no individual search was performed is not treated as verified employment. The initial shortlist remains a review queue, including records whose current appointments need checking.
+## Use the site
 
-## Use the demo
+- Search by name, current institution, position, and research topic; combine filters for region, search school, current institution, title, research theme, method, and department.
+- Expand a researcher to see the appointment source, search evidence, score breakdown, and papers.
+- Edit the shortlist and copy results to a spreadsheet, or download the Excel workbook.
 
-- Search by name, current institution, position, and research topic; filter separately by discovery school, current institution, discipline, project tier, and appointment evidence status.
-- Expand a researcher to inspect papers and public source links.
-- Edit the shortlist and copy results to a spreadsheet.
-
-Shortlist edits are saved in the current browser only. They are not shared with other visitors. A new browser or domain starts with the default shortlist.
+Shortlist edits are saved in the current browser only. A new browser or domain starts with the default shortlist.
 
 ## Hosting and updates
 
-GitHub Pages serves `index.html` directly from the root of `main`. The page includes its styles, scripts, and dataset; it does not require a backend, an API key, or a Claude account. Google Fonts is optional and has local font fallbacks.
+GitHub Pages serves `index.html` directly from the root of `main`. The page includes its styles, scripts, and dataset; it does not require a backend or an API key. Google Fonts loads without blocking the page, and system fonts are used where it is unavailable.
 
-The publication sources are `src/template.html`, `src/catalog.js` and `data/talent.json`. Appointment corrections are stored independently in `data/current_roles_verified.json`; each record includes the institution, position, source URL, check date, and evidence status. Dated outcomes for people whose current post could not be confirmed are in `data/role_search_log.json`; `data/profile_discovery.json` holds official homepage links, and `display_affiliation.py` with `data/qs_world_rankings.json` chooses the one school shown for people with several appointments. To rebuild after editing them:
+The publication sources are `src/template.html`, `src/catalog.js` and `data/talent.json`. Appointment records are stored independently in `data/current_roles_verified.json`; each record includes the institution, position, department (Chinese, with the official English wording in `*_en` fields), source URL, check date, and evidence status. Dated outcomes for people whose current post could not be confirmed are in `data/role_search_log.json`; `data/profile_discovery.json` holds official homepage links, and `display_affiliation.py` with `data/qs_world_rankings.json` chooses the one school shown for people with several appointments. To rebuild after editing them:
 
 ```sh
 python3 build_page.py
@@ -43,8 +41,8 @@ python3 -m http.server 8765 --bind 127.0.0.1
 
 Review the local page, commit the sources and updated `index.html`, and push `main` to deploy. The import validates the embedded dataset and preserves local appointment evidence; it does not crawl external sources. A successful push is not deployment verification: check the Pages run and the live page.
 
-## Sources and limitations
+## Sources
 
-Bibliographic data comes from [OpenAlex](https://openalex.org/) (CC0), supplemented by public institutional sources linked in the demo. Affiliation, title, author identity, and relevance can be incomplete or outdated; consult the record-level notes and original sources. The current snapshot includes duplicate author records and unresolved verification flags.
+Bibliographic data comes from [OpenAlex](https://openalex.org/) (CC0); current appointments come from the official university pages linked on each profile card.
 
 Only the website sources, public researcher data/evidence, and publication instructions are stored here. Local credentials, crawler caches, environments, and conversation records are excluded.

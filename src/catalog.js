@@ -4,9 +4,9 @@
   else root.TalentCatalog = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
-  const TITLE_LABELS = {assistant:'助理教授',associate:'副教授',professor:'教授',honorary:'荣誉 / 名誉 / 退休教职',other:'其他已记载职称',unknown:'职称未知'};
+  const TITLE_LABELS = {assistant:'助理教授',associate:'副教授',professor:'教授',honorary:'荣休 / 荣誉 / 退休教职',other:'其他职称',unknown:'职称未知'};
   const THEME_LABELS = {asset_pricing:'资产定价',corporate_finance:'公司金融',macro:'宏观经济 / 宏观金融',labour:'劳动经济',development:'发展经济',econometrics:'计量 / 统计',banking:'银行 / 金融中介',household:'家庭金融',trade:'国际贸易',behavioural:'行为经济 / 金融',market_design:'市场设计 / 博弈论'};
-  const METHOD_LABELS = {ai_method:'AI / 机器学习方法',ai_impact:'AI 的经济与社会影响',ai_unspecified:'其他 AI 线索（方法待核）',fintech:'金融科技',causal:'因果推断',structural:'结构估计'};
+  const METHOD_LABELS = {ai_method:'AI / 机器学习方法',ai_impact:'AI 的经济与社会影响',ai_unspecified:'其他 AI 相关研究',fintech:'金融科技',causal:'因果推断',structural:'结构估计'};
   const themeRules = [
     ['asset_pricing', /asset pric|derivative pric|资产定价|衍生品定价/i], ['corporate_finance', /corporate financ|corporate govern|公司金融|公司治理/i],
     ['macro', /macroeconom|macro.financ|宏观/i], ['labour', /labo[u]?r|employment|wage|劳动|就业|工资/i],
@@ -93,6 +93,8 @@
       title: value(p.display_role?.position || (roleState(p) === 'bad' ? '官方页面职称不唯一' : roleState(p) === 'ok' ? effectivePosition(p)
         : r.academic_title_raw ? `${r.academic_title_raw}（表内记载）` : searched(p) ? NOT_FOUND : effectivePosition(p))),
       department: value(effectiveDepartment(p)),
+      // an administrative post recorded with the appointment shown, never one from another institution
+      adminRole: roleState(p) === 'ok' && p.current_role?.admin_role && (!p.display_role || p.display_role.institution === p.current_role.institution) ? String(p.current_role.admin_role) : '',
       phdInstitution: value(r.phd_institution_raw),
       phdYear: value(r.phd_year),
       firstAssistantProfessor: value(r.first_assistant_professor_raw),
@@ -110,7 +112,7 @@
     if (!texts.length) texts.push(p.display_role ? p.display_role.position || '' : verifiedText(p, 'position') || p.reference?.academic_title_raw || '');
     return [...new Set(texts.map(text => {
       if (!text) return 'unknown';
-      if (/honorary|emerit|retired|荣誉|名誉|退休/i.test(text)) return 'honorary';
+      if (/honorary|emerit|retired|荣誉|名誉|荣休|退休/i.test(text)) return 'honorary';
       if (/assistant professor|助理教授/i.test(text)) return 'assistant';
       if (/associate professor|副教授/i.test(text)) return 'associate';
       if (/professor|教授/i.test(text)) return 'professor';

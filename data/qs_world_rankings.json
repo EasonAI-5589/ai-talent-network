@@ -333,8 +333,8 @@
       "note": "不是独立QS大学候选；不借所在城市、合作大学或相似名称赋予排名。尤其IAS不等于Princeton University。"
     },
     {
-      "institution": "Banco de España",
-      "canonical_name": "Banco de España",
+      "institution": "西班牙银行",
+      "canonical_name": "西班牙银行",
       "institution_en": "Banco de España",
       "aliases": [
         "Bank of Spain",
@@ -350,8 +350,8 @@
       "note": "不是独立QS大学候选；不借所在城市、合作大学或相似名称赋予排名。尤其IAS不等于Princeton University。"
     },
     {
-      "institution": "Institute for Advanced Study",
-      "canonical_name": "Institute for Advanced Study",
+      "institution": "普林斯顿高等研究院",
+      "canonical_name": "普林斯顿高等研究院",
       "institution_en": "Institute for Advanced Study",
       "aliases": [
         "IAS",
