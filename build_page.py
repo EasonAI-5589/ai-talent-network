@@ -23,6 +23,7 @@ QS_RANKINGS_PATH = ROOT / "data" / "qs_world_rankings.json"
 # per-person search record replayed from the OpenAlex cache (pipeline/explain_search.py in the private repo)
 SEARCH_EVIDENCE_PATH = ROOT / "data" / "search_evidence.json"
 FEATURED_150_PATH = ROOT / "data" / "featured_150.json"
+SHIZIKU_KB_PATH = ROOT / "data" / "shiziku_2026_public.json"
 OUTPUT_PATH = ROOT / "index.html"
 
 PROFILE_STATUSES = {
@@ -324,7 +325,7 @@ def merge_search_evidence(merged, evidence):
 
 
 def merge_featured_150(merged):
-    """Attach the 150 featured scholars evaluation (5 directions x 30 scholars) when present."""
+    """Attach the 180 featured scholars evaluation and the 师资库2026 knowledge base extension when present."""
     if not FEATURED_150_PATH.exists():
         return merged
     featured = json.loads(FEATURED_150_PATH.read_text(encoding="utf-8"))
@@ -336,9 +337,29 @@ def merge_featured_150(merged):
             person["featured"] = copy.deepcopy(rec)
             matched.append(person["id"])
     if matched:
+        kb_people = []
+        if SHIZIKU_KB_PATH.exists():
+            kb_data = json.loads(SHIZIKU_KB_PATH.read_text(encoding="utf-8"))
+            enrichment = kb_data.get("enrichment") or {}
+            for person in merged["people"]:
+                if person["id"] in enrichment and "profile" not in person:
+                    person["profile"] = copy.deepcopy(enrichment[person["id"]])
+            for kp in kb_data.get("people") or []:
+                kp_copy = copy.deepcopy(kp)
+                rec = scholars.get(kp_copy["id"])
+                if rec is not None:
+                    kp_copy["featured"] = copy.deepcopy(rec)
+                    matched.append(kp_copy["id"])
+                kb_people.append(kp_copy)
+            merged["knowledge_base"] = {
+                "total": len(merged["people"]) + len(kb_people),
+                "added": len(kb_people),
+                "people": kb_people,
+            }
         present = set(matched)
         merged["featured_150"] = {
             "total": len(present),
+            "kb_total": len(merged["people"]) + len(kb_people),
             "generated_at": featured.get("generated_at"),
             "directions": copy.deepcopy(featured.get("directions") or []),
             "order": [aid for aid in (featured.get("order") or []) if aid in present],

@@ -69,7 +69,8 @@ SHEET_TITLES = {
     "asset_pricing": "资产定价（30）",
     "corporate_finance": "公司金融（30）",
     "market_microstructure": "市场微观结构（30）",
-    "fintech_ai": "金融科技 FinTech&AI（30）",
+    "fintech": "金融科技-FinTech（30）",
+    "ai_finance": "金融科技-AI（30）",
 }
 
 
@@ -102,7 +103,7 @@ def build_row(item, roles):
     aid = item["id"]
     role = roles.get(aid) or {}
     w = item["weights"]
-    source_url = role.get("source_url") or ""
+    source_url = item.get("source_url") or role.get("source_url") or ""
     return [
         item["direction_rank"],
         item["direction_group"],
@@ -132,32 +133,35 @@ def build_row(item, roles):
         f"{w['career_stage']['score']}/20：{w['career_stage']['reason']}",
         item["selection_summary"],
         "；".join(item.get("rep_top_papers") or []),
-        item["h"],
-        item["cites"],
-        item["fit"],
+        item.get("h"),
+        item.get("cites"),
+        item.get("fit"),
         source_url,
         ("打开档案卡", f"{SITE}#p-{aid}"),
     ]
 
 
 def write_guide_sheet(ws, featured):
+    total_n = featured.get("total", 180)
+    kb_total = featured.get("kb_total", 4669)
     rows = [
-        ("PBCSF 150 人精选学者名单（学科带头人 × 合作契合度）", ""),
-        ("生成日期", featured.get("generated_at", "2026-10-26")),
-        ("总人数与方向结构", "共 150 位不重复学者，按 5 个方向各选拔 30 人：宏观金融（30）、资产定价（30）、公司金融（30）、市场微观结构（30）、金融科技 FinTech & AI（30，含 FinTech 15 人与 AI 15 人）"),
+        (f"PBCSF {total_n} 人精选学者名单（6 大子方向 × 30 人 · 学科带头人 × 合作契合度）", ""),
+        ("生成日期", featured.get("generated_at", "2026-10-27")),
+        ("总知识库规模", f"合并五道口《师资库2026.xlsx》（7 大地区 84 所高校 4,142 条）与 AI×金融库（652 位），去重后共 {kb_total:,} 位学者"),
+        ("总人数与方向结构", f"共 {total_n} 位不重复学科带头人，按 6 个子方向各选拔 30 人：宏观金融（30）、资产定价（30）、公司金融（30）、市场微观结构（30）、金融科技·FinTech（30）、金融科技·AI（30）"),
         ("", ""),
         ("一、学科带头人认定标准（学术底线）", ""),
-        ("总发表量门槛", "OpenAlex 总发表论文数 > 10 篇（double-digit publications）"),
+        ("总发表量门槛", "总发表论文数 > 10 篇（double-digit publications）"),
         ("核心顶刊带头人（一线标准）", "总发表 > 10 篇，且金融 Top 3（JF、JFE、RFS）与经济 Top 5（AER、ECTA、QJE、JPE、REStud）核心顶刊发表 ≥ 6 篇"),
         ("延伸顶刊带头人（延伸标准）", "总发表 > 10 篇，且计入 Management Science（MS）、JFQA、Operations Research（OR）、REStat、JME、JoE、Review of Finance（RF）等延伸顶刊后合计 ≥ 5 篇"),
         ("高影响力带头人（交叉/AI标准）", "总发表 > 10 篇，且达到 L1/L2 顶级奖项或高影响力标准（经济金融 h≥45 / 被引≥1.5 万，计算机与交叉 h≥60 / 被引≥2.5 万）"),
         ("", ""),
         ("二、合作契合度加权体系（0–100 分，非等权加权）", ""),
-        ("加权一：华语学术背景（0–30 分）", "华人学者、具中文姓名或华语高校学位背景赋 30 分；全职任教于亚洲高校赋 20 分；其余国际学者赋 10 分"),
-        ("加权二：中国问题研究（0–25 分）", "发表 2 篇及以上中国金融/经济问题论文赋 25 分；发表 1 篇中国主题论文赋 20 分；研究领域含中国问题赋 18 分；方法可迁移应用赋 8 分"),
-        ("加权三：对华交流与高校纽带（0–25 分）", "现任职于国内顶尖高校赋 25 分、香港高校赋 23 分、新加坡高校赋 21 分；海外学者与国内高校（清华、北大、上交、复旦等）有 2 所及以上合作署名赋 22 分、1 所合作署名赋 18 分；其余赋 10 分"),
-        ("加权四：资历阶段与大牛豁免（0–20 分）", "诺奖/图灵奖/克拉克奖或核心顶刊 ≥ 8 篇、顶刊总计 ≥ 12 篇、h ≥ 50 的顶尖大牛学者适用“年龄不设限”规则赋满分 20 分；2010 年及以后获博士学位的中青年正教授/副教授赋 18–19 分；其余资深教授赋 16 分"),
-        ("综合推荐指数", "0.55 × 合作契合度 + 0.45 × 学术带头人实力分（基于核心顶刊、延伸顶刊与 AI×金融综合分折算），兼顾学术底线与合作落地潜力"),
+        ("加权一：华语学术背景（0–30 分）", "华人学者、具中文姓名或华语高校学位背景赋 30 分；全职任教于亚太高校赋 20 分；其余国际学者赋 10 分"),
+        ("加权二：中国问题研究（0–25 分）", "发表 2 篇及以上中国金融/经济问题论文赋 25 分；研究领域明确聚焦中国经济与金融市场赋 22 分；发表 1 篇中国主题论文赋 20 分；方法可迁移应用赋 8 分"),
+        ("加权三：对华交流与高校纽带（0–25 分）", "在海外名校与国内高校均有双聘/兼职记录或现任职于国内顶尖高校赋 25 分、香港高校赋 23 分、新加坡高校赋 21 分；海外学者与国内高校有合作署名研究赋 18–22 分；其余赋 12 分"),
+        ("加权四：资历阶段与大牛豁免（0–20 分）", "诺奖/图灵奖/克拉克奖或核心顶刊 ≥ 8 篇、顶刊总计 ≥ 12 篇、h ≥ 50 的顶尖大牛学者适用“年龄不设限”规则赋满分 20 分；2008 年及以后获博士学位的中青年正教授/副教授赋 18–19 分；其余资深教授赋 16 分"),
+        ("综合推荐指数", "0.55 × 合作契合度 + 0.45 × 学术带头人实力分（基于核心顶刊、延伸顶刊与综合分折算），兼顾学术底线与合作落地潜力"),
         ("", ""),
         ("线上看板地址", SITE),
     ]
@@ -183,7 +187,7 @@ def export_featured(output: Path = OUTPUT_PATH):
 
     wb = Workbook()
     ws_all = wb.active
-    ws_all.title = "150人精选总表"
+    ws_all.title = f"{len(all_items)}人精选总表"
     write_table(ws_all, COLUMNS, [build_row(item, roles) for item in all_items])
 
     for d in featured["directions"]:
@@ -198,11 +202,15 @@ def export_featured(output: Path = OUTPUT_PATH):
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     wb.save(output)
+    alt_out = output.parent / "pbcsf-180-featured-scholars.xlsx"
+    if alt_out != output:
+        wb.save(alt_out)
 
     if PUBLIC_REPO.exists():
-        pub_out = PUBLIC_REPO / "downloads" / output.name
-        pub_out.parent.mkdir(parents=True, exist_ok=True)
-        wb.save(pub_out)
+        for fn in (output.name, "pbcsf-180-featured-scholars.xlsx"):
+            pub_out = PUBLIC_REPO / "downloads" / fn
+            pub_out.parent.mkdir(parents=True, exist_ok=True)
+            wb.save(pub_out)
 
     return {"scholars": len(all_items), "sheets": wb.sheetnames, "output": str(output)}
 

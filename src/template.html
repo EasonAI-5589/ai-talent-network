@@ -316,26 +316,27 @@ button:disabled { cursor: wait; opacity: .6; }
 .sl-bar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; border-block: 1px solid var(--line); padding-block: 14px; margin-bottom: 28px; font-size: 13px; color: var(--soft); }
 .sl-bar .acts { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; }
 
-/* Featured 150 */
-.f150-tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid var(--strong-line); border-radius: var(--radius); overflow: hidden; margin-bottom: 18px; }
-.f150-tabs button { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; border: 0; background: var(--tint); padding: 13px 15px; text-align: left; position: relative; min-width: 0; }
+/* Featured 180 */
+.f150-tabs { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border: 1px solid var(--strong-line); border-radius: var(--radius); overflow: hidden; margin-bottom: 18px; }
+.f150-tabs button { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; border: 0; background: var(--tint); padding: 12px 13px; text-align: left; position: relative; min-width: 0; }
 .f150-tabs button + button { border-left: 1px solid var(--line); }
 .f150-tabs button[aria-selected="true"] { background: var(--paper); }
 .f150-tabs button[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--brand); }
 .f150-tabs .rt-group { font-size: 11px; color: var(--muted); font-family: var(--mono); }
-.f150-tabs .rt-name { font-size: 15px; font-weight: 600; line-height: 1.25; }
-.f150-tabs .rt-meta { font-size: 12px; color: var(--muted); }
-@media (max-width: 960px) {
-  .f150-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .f150-tabs button:nth-child(4) { border-left: 0; }
-  .f150-tabs button:nth-child(n+4) { border-top: 1px solid var(--line); }
+.f150-tabs .rt-name { font-size: 14px; font-weight: 600; line-height: 1.25; }
+.f150-tabs .rt-meta { font-size: 11px; color: var(--muted); }
+@media (max-width: 1060px) {
+  .f150-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .f150-tabs button:nth-child(5) { border-left: 0; }
+  .f150-tabs button:nth-child(n+5) { border-top: 1px solid var(--line); }
 }
-@media (max-width: 580px) {
+@media (max-width: 640px) {
   .f150-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .f150-tabs button:nth-child(odd) { border-left: 0; }
   .f150-tabs button:nth-child(even) { border-left: 1px solid var(--line); }
   .f150-tabs button:nth-child(n+3) { border-top: 1px solid var(--line); }
 }
+.pager-bar { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; justify-content: center; margin-top: 18px; padding-block: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--soft); }
 .f150-toolbar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; margin-bottom: 16px; font-size: 13px; color: var(--soft); }
 .pill-group { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .pill-btn { border: 1px solid var(--line); background: var(--paper); color: var(--soft); padding: 5px 11px; border-radius: 3px; font-size: 12px; line-height: 1.4; }
@@ -397,8 +398,8 @@ button:disabled { cursor: wait; opacity: .6; }
   <nav class="nav container" aria-label="主导航">
     <a class="wordmark" href="#top">PBCSF AI Talent<span>Dashboard</span></a>
     <div class="nav-links">
-      <a href="#featured" data-nav="featured" id="nav-featured">150 人精选</a>
-      <a href="#roster" data-nav="roster">人才库</a>
+      <a href="#featured" data-nav="featured" id="nav-featured">180 人精选</a>
+      <a href="#roster" data-nav="roster">全量知识库</a>
       <a href="#shortlist" data-nav="shortlist">Shortlist</a>
       <a href="#method" data-nav="method">评选标准</a>
     </div>
@@ -411,9 +412,9 @@ button:disabled { cursor: wait; opacity: .6; }
     <h1>PBCSF AI Talent Dashboard</h1>
     <p class="hero-description" id="hero-desc"></p>
     <div class="hero-actions">
-      <a class="button primary" href="#featured" id="hero-f150-btn">150 人精选 <span class="num" id="hero-f150">150</span></a>
-      <a class="button" href="#roster">查看人才库 <span>→</span></a>
-      <a class="button" href="downloads/pbcsf-150-featured-scholars.xlsx" id="hero-f150-xlsx" download>下载 150 人精选 Excel <span>↓</span></a>
+      <a class="button primary" href="#featured" id="hero-f150-btn">180 人精选 <span class="num" id="hero-f150">180</span></a>
+      <a class="button" href="#roster">全量知识库 <span>→</span></a>
+      <a class="button" href="downloads/pbcsf-180-featured-scholars.xlsx" id="hero-f150-xlsx" download>下载 180 人精选 Excel <span>↓</span></a>
       <a class="button" href="#shortlist">Shortlist <span class="num" id="hero-sl"></span></a>
       <a class="button" id="backup" href="/api/backup" hidden>备份数据库 <span>↓</span></a>
     </div>
@@ -428,26 +429,21 @@ button:disabled { cursor: wait; opacity: .6; }
   <section class="section container" id="featured">
     <div class="section-heading">
       <div>
-        <p class="kicker">01 · 150 人精选</p>
-        <h2>潜在合作学者名单，按五大方向分组</h2>
+        <p class="kicker">01 · 180 人精选</p>
+        <h2>潜在合作学者名单，按六大子方向分组</h2>
       </div>
-      <p class="lead" id="f150-lead">围绕宏观金融、资产定价、公司金融、市场微观结构与金融科技（细分 FinTech 与 AI）五大方向，从已核实学者中各选拔 30 位（共 150 位）学科带头人，综合展示顶刊代表作与合作契合度加权依据。</p>
+      <p class="lead" id="f150-lead">基于合并后的全量知识库（4,669 位学者），围绕宏观金融、资产定价、公司金融、市场微观结构、金融科技·FinTech 与金融科技·AI 六个子方向，各选拔 30 位（共 180 位）学科带头人，综合展示顶刊代表作与合作契合度加权依据。</p>
     </div>
     <div class="sl-bar">
       <span id="f150-summary"></span>
       <span class="acts">
         <button class="text-button" id="copy-f150" type="button">复制当前方向名单（可粘贴到 Excel）</button>
-        <a class="text-button" id="dl-f150" href="downloads/pbcsf-150-featured-scholars.xlsx" download style="color:var(--brand);font-weight:600">下载 150 人精选 Excel（含五方向分表与权重依据）</a>
+        <a class="text-button" id="dl-f150" href="downloads/pbcsf-180-featured-scholars.xlsx" download style="color:var(--brand);font-weight:600">下载 180 人精选 Excel（含六方向分表与权重依据）</a>
       </span>
     </div>
-    <div class="f150-tabs" id="f150-tabs" role="tablist" aria-label="五大方向"></div>
+    <div class="f150-tabs" id="f150-tabs" role="tablist" aria-label="六大子方向"></div>
     <div class="f150-toolbar">
-      <div class="pill-group" id="f150-subbar" hidden>
-        <span>金融科技子方向：</span>
-        <button type="button" class="pill-btn" data-fsub="all" aria-pressed="true">全部（30）</button>
-        <button type="button" class="pill-btn" data-fsub="FinTech" aria-pressed="false">FinTech（15）</button>
-        <button type="button" class="pill-btn" data-fsub="AI" aria-pressed="false">AI（15）</button>
-      </div>
+      <div class="pill-group" id="f150-subbar" hidden></div>
       <span id="f150-dir-desc" class="unit" style="font-size:13px"></span>
       <div class="pill-group" id="f150-sortbar" style="margin-left:auto">
         <span>排序方式：</span>
@@ -478,10 +474,20 @@ button:disabled { cursor: wait; opacity: .6; }
   <section class="section container ruled" id="roster">
     <div class="section-heading">
       <div>
-        <p class="kicker">02 · 人才库</p>
+        <p class="kicker">02 · 全量知识库</p>
         <h2>按特性查找，按职称浏览</h2>
       </div>
-      <p class="lead">地区、学校、院系、职称和研究方向可以任意组合筛选。点击姓名展开档案卡，查看现职来源、检索依据和评分拆解；分层与评分规则见“评选标准”。</p>
+      <p class="lead">整合五道口《师资库2026》（7 大地区 84 所高校）与 OpenAlex AI×金融交叉学者库。地区、学校、院系、职称、博士年份和研究方向可以任意组合筛选；点击姓名展开档案卡。</p>
+    </div>
+
+    <div class="f150-toolbar" id="kb-scopebar" hidden style="margin-bottom:20px;padding:12px 16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--tint)">
+      <div class="pill-group">
+        <span style="font-weight:600;color:var(--ink)">知识库范围：</span>
+        <button type="button" class="pill-btn" data-kbscope="all" aria-pressed="true" id="kb-btn-all">全量知识库</button>
+        <button type="button" class="pill-btn" data-kbscope="ai" aria-pressed="false" id="kb-btn-ai">AI × 金融核心库</button>
+        <button type="button" class="pill-btn" data-kbscope="szk" aria-pressed="false" id="kb-btn-szk">师资库2026扩展</button>
+      </div>
+      <span class="unit" id="kb-scope-note">涵盖全球 84 所高校经济、金融与 AI 交叉学者，支持全量搜索与组合筛选</span>
     </div>
 
     <div class="dist">
@@ -532,6 +538,7 @@ button:disabled { cursor: wait; opacity: .6; }
         <tbody id="rows"></tbody>
       </table>
     </div>
+    <div class="pager-bar" id="roster-pager" hidden></div>
     <div id="copy-fallback"></div>
   </section>
 
@@ -631,8 +638,8 @@ button:disabled { cursor: wait; opacity: .6; }
     </div>
 
     <div id="method-f150">
-      <h3 class="crit-title">五、150 人精选（学科带头人 × 合作契合度）</h3>
-      <p class="crit-lead">面向宏观金融、资本市场（资产定价、公司金融、市场微观结构）与金融科技（FinTech、AI）五大方向，从现职已官方核实的学者中各选拔 30 位（共 150 位不重复学者），同步评估学术带头人底线与合作契合度。完整工作簿可 <a class="text-link" href="downloads/pbcsf-150-featured-scholars.xlsx" download>下载 150 人精选 Excel</a>。</p>
+      <h3 class="crit-title">五、180 人精选（6 大子方向 × 30 人 · 学科带头人 × 合作契合度）</h3>
+      <p class="crit-lead">基于合并后的全量知识库（4,669 位学者），面向宏观金融、资产定价、公司金融、市场微观结构、金融科技·FinTech 与金融科技·AI 六个子方向各选拔 30 位（共 180 位不重复学者），同步评估学术带头人底线与合作契合度。完整工作簿可 <a class="text-link" href="downloads/pbcsf-180-featured-scholars.xlsx" download>下载 180 人精选 Excel</a>。</p>
       <div class="method-grid" style="margin-top:18px">
         <div class="box">
           <div class="box-head">维度一 · 学科带头人认定（学术底线）</div>
@@ -673,7 +680,9 @@ button:disabled { cursor: wait; opacity: .6; }
 <script>
 (() => {
   const D = JSON.parse(document.getElementById("data").textContent);
-  const P = D.people;
+  const OA_P = D.people;
+  const KB_EXTRA = D.knowledge_base?.people || [];
+  const P = KB_EXTRA.length ? [...OA_P, ...KB_EXTRA] : OA_P;
   const C = TalentCatalog;
   const DB = Boolean(D.database?.enabled);
   const SC = D.showcase;
@@ -703,7 +712,7 @@ button:disabled { cursor: wait; opacity: .6; }
   const saveOv = () => { try { localStorage.setItem(LS, JSON.stringify(overrides)); } catch (e) {} };
   const inSL = p => Boolean(DB ? p.shortlist : key(p) in overrides ? overrides[key(p)] : p.shortlist);
 
-  const defaults = () => ({ q: "", region: "全部", school: "全部", source: "all", currentSchool: "全部", tier: null, home: null, sort: "position", hideEarly: false, vf: "all", open: null, titles: [], themes: [], methods: [], department: "all", yearStatus: "all", phdFrom: "", phdTo: "" });
+  const defaults = () => ({ q: "", region: "全部", school: "全部", source: "all", kbScope: "all", limit: 100, currentSchool: "全部", tier: null, home: null, sort: "position", hideEarly: false, vf: "all", open: null, titles: [], themes: [], methods: [], department: "all", yearStatus: "all", phdFrom: "", phdTo: "" });
   const state = defaults();
   const vst = p => p.verify ? p.verify.status : null;
   const vok = p => C.roleState(p) === "ok";
@@ -735,13 +744,18 @@ button:disabled { cursor: wait; opacity: .6; }
   syncTheme();
 
   // Hero, stats
-  const schools = D.stats;
+  const allSchoolSet = new Map();
+  for (const s of (D.stats || [])) allSchoolSet.set(s.school, { school: s.school, school_zh: s.school_zh, region: s.region });
+  for (const p of KB_EXTRA) {
+    if (p.school && !allSchoolSet.has(p.school)) allSchoolSet.set(p.school, { school: p.school, school_zh: p.school_zh || p.school, region: p.region || "北美" });
+  }
+  const schools = [...allSchoolSet.values()];
   const referencePeople = P.filter(isRef);
-  $("#hero-desc").textContent = "我们搭建了 PBCSF AI Talent Dashboard（AI × 金融经济人才库），希望检索到在经济金融与 AI 交叉方向做研究的学者，为这一方向建立人才储备。";
+  $("#hero-desc").textContent = "我们搭建了 PBCSF AI Talent Dashboard（五道口金融经济与 AI 人才知识库），整合全球顶尖高校金融经济师资底库与 AI×金融交叉学者，为学科建设与人才引进建立全景储备。";
   $("#launch-note").innerHTML = SC
-    ? `<span class="status-mark"></span>${schools.length} 所学校<span class="sep">·</span>${P.length} 位学者<span class="sep">·</span>现职全部经官方核实`
-    : `<span class="status-mark"></span>${schools.length} 所资料关联学校<span class="sep">·</span>统一人才表 ${P.length} 条记录`;
-  const slCount = () => P.filter(inSL).length;
+    ? `<span class="status-mark"></span>${schools.length} 所全球高校<span class="sep">·</span>${fmt(P.length)} 位学者（含 AI×金融核心库 ${OA_P.length} 位 + 师资库扩展 ${fmt(KB_EXTRA.length)} 位）<span class="sep">·</span>180 人精选`
+    : `<span class="status-mark"></span>${schools.length} 所资料关联学校<span class="sep">·</span>统一人才表 ${fmt(P.length)} 条记录`;
+  const slCount = () => OA_P.filter(inSL).length;
   const roleCounts = (() => {
     const ok = P.filter(vok).length, bad = P.filter(p => roleState(p) === "bad").length;
     const notFound = P.filter(p => roleState(p) !== "ok" && roleState(p) !== "bad" && C.searched(p)).length;
@@ -749,37 +763,58 @@ button:disabled { cursor: wait; opacity: .6; }
   })();
   const regionSchools = `亚洲 ${schools.filter(x => x.region === "亚洲").length} · 北美 ${schools.filter(x => x.region === "北美").length} · 欧洲 ${schools.filter(x => x.region === "欧洲").length}`;
   $("#stats").innerHTML = SC ? `
-    <div><strong class="num">${P.length}<small>位</small></strong><span>学者，现职全部经学校官方页面核实</span></div>
-    <div><strong class="num">${schools.length}<small>所</small></strong><span>学校（${regionSchools}）</span></div>
-    <div><strong class="num">${P.filter(p => p.tier === 1 || p.tier === 2).length}<small>位</small></strong><span>L1–L2：诺贝尔奖、图灵奖、克拉克奖得主与高影响力学者</span></div>
-    <div><strong class="num">${D.featured_150?.total || P.filter(p => p.shortlist).length}<small>位</small></strong><span>${D.featured_150?.total ? "150 人精选：五大方向各 30 位潜在合作学科带头人" : `Shortlist：每个大洲综合分前 ${SC.per_region} 位`}</span></div>` : `
-    <div><strong class="num">${P.length}</strong><span>人才记录（未按人员去重）</span></div>
+    <div><strong class="num">${fmt(P.length)}<small>位</small></strong><span>全量知识库学者（AI×金融 ${OA_P.length} + 师资库2026 ${fmt(KB_EXTRA.length)}）</span></div>
+    <div><strong class="num">${schools.length}<small>所</small></strong><span>全球高校（${regionSchools}）</span></div>
+    <div><strong class="num">${P.filter(p => p.tier === 1 || p.tier === 2).length}<small>位</small></strong><span>讲席教授、顶刊高产学者与顶级奖项得主</span></div>
+    <div><strong class="num">${D.featured_150?.total || OA_P.filter(p => p.shortlist).length}<small>位</small></strong><span>${D.featured_150?.total ? "180 人精选：六大子方向各 30 位潜在合作学科带头人" : `Shortlist：每个大洲综合分前 ${SC.per_region} 位`}</span></div>` : `
+    <div><strong class="num">${fmt(P.length)}</strong><span>人才记录（未按人员去重）</span></div>
     <div><strong class="num">${schools.length}<small>所</small></strong><span>学校（${regionSchools}）</span></div>
     <div><strong class="num">${roleCounts.ok}<small>条</small></strong><span>任职状态已官方核实（含明确标注的荣休、退休）</span></div>
     <div><strong class="num">${P.length - roleCounts.ok}<small>条</small></strong><span>未能官方核实：官方页面不唯一 ${roleCounts.bad} · 现职未能核实 ${roleCounts.notFound}${roleCounts.todo ? ` · 尚未检索 ${roleCounts.todo}` : ""}</span></div>`;
   $("#stats-source").textContent = SC
-    ? `只收录现职经学校官方页面核实的学者。可按地区、学校、院系、职称和研究特性筛选。`
+    ? `整合五道口《师资库2026》与 OpenAlex 检索核验学者。可按知识库范围、地区、学校、院系、职称、博士年份和研究特性组合筛选。`
     : `统一人才表 ${P.length} 条记录，按地区、学校、院系、职称和研究特性筛选；疑似重复保留原行。`;
   $("#foot").innerHTML = `${DB ? "本机人才数据库 · " : ""}数据来源：<a class="text-link" href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> 与各校官方页面${D.role_checked_at ? ` · 现职核验截至 ${esc(D.role_checked_at)}` : ""}`;
 
+  function scopePool() {
+    if (state.kbScope === "ai") return OA_P;
+    if (state.kbScope === "szk") return KB_EXTRA;
+    return P;
+  }
+  if (KB_EXTRA.length) {
+    $("#kb-scopebar").hidden = false;
+    $("#kb-btn-all").textContent = `全量知识库（${fmt(P.length)}）`;
+    $("#kb-btn-ai").textContent = `AI × 金融核心库（${fmt(OA_P.length)}）`;
+    $("#kb-btn-szk").textContent = `师资库2026扩展（${fmt(KB_EXTRA.length)}）`;
+    $("#kb-scopebar").addEventListener("click", e => {
+      const b = e.target.closest("[data-kbscope]"); if (!b) return;
+      state.kbScope = b.dataset.kbscope;
+      state.limit = 100;
+      document.querySelectorAll("[data-kbscope]").forEach(el => el.setAttribute("aria-pressed", String(el.dataset.kbscope === state.kbScope)));
+      render();
+    });
+  }
+
   // Distribution bars (also filters)
   function drawDist() {
-    const R = P.filter(p => (state.region === "全部" || p.region === state.region) && (state.source === "all" || C.sourceKind(p) === state.source));
+    const pool = scopePool();
+    const R = pool.filter(p => (state.region === "全部" || p.region === state.region) && (state.source === "all" || C.sourceKind(p) === state.source));
     const tc = [1, 2, 3, 4].map(t => R.filter(p => p.tier === t).length), tmax = Math.max(1, ...tc);
-    $("#dist-tier").innerHTML = [1, 2, 3, 4].map((t, i) => !P.some(p => p.tier === t) ? "" : `<button class="bar-row" data-tier="${t}" aria-pressed="${state.tier === t}"><span class="lab"><b>L${t}</b>${TIERS[t]}</span><span class="track"><i style="width:${tc[i] ? Math.max(1.5, tc[i] / tmax * 100) : 0}%;background:var(${TIER_COLOR[t]})"></i></span><span class="n">${tc[i]}</span></button>`).join("");
-    if (P.some(p => p.tier == null)) $("#dist-tier").innerHTML += `<button class="bar-row" data-tier="unknown" aria-pressed="${state.tier === "unknown"}"><span class="lab">未分层</span><span class="track"></span><span class="n">${R.filter(p => p.tier == null).length}</span></button>`;
+    $("#dist-tier").innerHTML = [1, 2, 3, 4].map((t, i) => !pool.some(p => p.tier === t) ? "" : `<button class="bar-row" data-tier="${t}" aria-pressed="${state.tier === t}"><span class="lab"><b>L${t}</b>${TIERS[t]}</span><span class="track"><i style="width:${tc[i] ? Math.max(1.5, tc[i] / tmax * 100) : 0}%;background:var(${TIER_COLOR[t]})"></i></span><span class="n">${tc[i]}</span></button>`).join("");
+    if (pool.some(p => p.tier == null)) $("#dist-tier").innerHTML += `<button class="bar-row" data-tier="unknown" aria-pressed="${state.tier === "unknown"}"><span class="lab">未分层</span><span class="track"></span><span class="n">${R.filter(p => p.tier == null).length}</span></button>`;
     const hc = HOMES.map(h => R.filter(p => p.home === h).length), hmax = Math.max(1, ...hc);
     $("#dist-home").innerHTML = HOMES.map((h, i) => `<button class="bar-row" data-home="${esc(h)}" aria-pressed="${state.home === h}"><span class="lab">${esc(HOME_SHORT[h])}</span><span class="track"><i style="width:${hc[i] / hmax * 100}%;background:var(${HOME_COLOR[h]})"></i></span><span class="n">${hc[i]}</span></button>`).join("");
   }
-  $("#dist-tier").addEventListener("click", e => { const b = e.target.closest("[data-tier]"); if (!b) return; const t = b.dataset.tier === "unknown" ? "unknown" : +b.dataset.tier; state.tier = state.tier === t ? null : t; render(); });
-  $("#dist-home").addEventListener("click", e => { const b = e.target.closest("[data-home]"); if (!b) return; state.home = state.home === b.dataset.home ? null : b.dataset.home; render(); });
+  $("#dist-tier").addEventListener("click", e => { const b = e.target.closest("[data-tier]"); if (!b) return; const t = b.dataset.tier === "unknown" ? "unknown" : +b.dataset.tier; state.tier = state.tier === t ? null : t; state.limit = 100; render(); });
+  $("#dist-home").addEventListener("click", e => { const b = e.target.closest("[data-home]"); if (!b) return; state.home = state.home === b.dataset.home ? null : b.dataset.home; state.limit = 100; render(); });
 
   // Controls
   function drawRegionTabs() {
+    const pool = scopePool();
     $("#region-tabs").innerHTML = ["全部", ...REGIONS].map(r => {
-      const n = r === "全部" ? P.length : P.filter(p => p.region === r).length;
+      const n = r === "全部" ? pool.length : pool.filter(p => p.region === r).length;
       const k = r === "全部" ? schools.length : schools.filter(x => x.region === r).length;
-      return `<button role="tab" data-region="${r}" aria-selected="${state.region === r}"><span class="rt-name">${r === "全部" ? "全部" : r}</span><span class="rt-meta num">${n} ${UNIT} · ${k} 所学校</span></button>`;
+      return `<button role="tab" data-region="${r}" aria-selected="${state.region === r}"><span class="rt-name">${r === "全部" ? "全部" : r}</span><span class="rt-meta num">${fmt(n)} ${UNIT} · ${k} 所学校</span></button>`;
     }).join("");
   }
   $("#region-tabs").addEventListener("click", e => {
@@ -856,7 +891,7 @@ button:disabled { cursor: wait; opacity: .6; }
   }
   $("#thead").addEventListener("click", e => { const b = e.target.closest("[data-sort]"); if (!b) return; state.sort = b.dataset.sort; render(); });
 
-  function filtered() { return C.sortPeople(C.filterPeople(P, state), state.sort); }
+  function filtered() { return C.sortPeople(C.filterPeople(scopePool(), state), state.sort); }
 
   const vtag = p => `<span class="tag ${vok(p) ? "ok" : roleState(p) === "bad" ? "warn" : "pending"}">${evidenceLabel(p)}</span>`;
   const tierTag = t => t == null ? '<span class="tag pending">未分层</span>' : `<span class="tag t${t}" title="${esc(TIER_DEF[t])}">L${t} ${TIERS[t]}</span>`;
@@ -919,7 +954,7 @@ button:disabled { cursor: wait; opacity: .6; }
       ["对华交流与高校纽带", `<span class="num">${w.china_ties?.score ?? 0}/25</span> · ${esc(w.china_ties?.reason || "")}`],
       ["资历与大牛豁免", `<span class="num">${w.career_stage?.score ?? 0}/20</span> · ${esc(w.career_stage?.reason || "")}`],
     ];
-    return `<section class="search-card"><p class="card-section-title">150 人精选 · 学科带头人与合作契合度评估</p><div class="search-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    return `<section class="search-card"><p class="card-section-title">180 人精选 · 学科带头人与合作契合度评估</p><div class="search-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
       <section class="card-section"><p class="card-section-title">学科带头人支撑</p><dl class="facts">${left.map(([k, v]) => field(k, v)).join("")}</dl></section>
       <section class="card-section"><p class="card-section-title">合作契合度加权拆解</p><dl class="facts">${right.map(([k, v]) => field(k, v)).join("")}</dl></section>
     </div></section>`;
@@ -983,10 +1018,12 @@ button:disabled { cursor: wait; opacity: .6; }
 
   function render() {
     drawRegionTabs(); drawDist(); drawHead();
+    const pool = scopePool();
     const rows = filtered();
+    const shownRows = state.open ? rows : rows.slice(0, state.limit);
     const chips = [state.tier && (state.tier === "unknown" ? "未分层" : `L${state.tier} ${TIERS[state.tier]}`), state.home && HOME_SHORT[state.home], ...state.titles.map(x=>C.TITLE_LABELS[x]), ...state.themes.map(x=>C.THEME_LABELS[x]), ...state.methods.map(x=>C.METHOD_LABELS[x])].filter(Boolean);
-    $("#meta").textContent = `显示 ${rows.length} / ${P.length} ${UNIT}` + (chips.length ? ` · ${chips.join("、")}` : "") + (state.phdFrom && state.phdTo && +state.phdFrom > +state.phdTo ? " · 起始年份大于结束年份，请调整" : "");
-    $("#rows").innerHTML = rows.length ? rows.map((p, i) => {
+    $("#meta").textContent = `匹配 ${fmt(rows.length)} / ${fmt(pool.length)} ${UNIT}${rows.length > shownRows.length ? `（当前渲染前 ${fmt(shownRows.length)} ${UNIT}）` : ""}` + (chips.length ? ` · ${chips.join("、")}` : "") + (state.phdFrom && state.phdTo && +state.phdFrom > +state.phdTo ? " · 起始年份大于结束年份，请调整" : "");
+    $("#rows").innerHTML = shownRows.length ? shownRows.map((p, i) => {
       const open = state.open === key(p);
       return `<tr class="${open ? "is-open" : ""}">
         <td class="rank">${i + 1}</td>
@@ -1004,6 +1041,17 @@ button:disabled { cursor: wait; opacity: .6; }
         <td class="c-topics"><div class="topics" title="${esc(C.detailProfile(p).research)}">${esc(C.detailProfile(p).research)}</div>${(state.themes.length || state.methods.length) ? `<span class="match-reason">命中：${esc(C.deriveResearch(p).evidence.filter(x=>(x.kind === "theme" ? state.themes : state.methods).includes(x.key)).map(x=>x.text).filter((x,i,a)=>a.indexOf(x)===i).join("；"))}</span>` : ""}</td>
       </tr>` + (open ? `<tr class="card-row"><td colspan="${COLS.length}">${card(p)}</td></tr>` : "");
     }).join("") : `<tr><td colspan="${COLS.length}" class="empty">没有符合条件的${SC ? "学者" : "记录"}。试试清除筛选或换个关键词。</td></tr>`;
+    const pager = $("#roster-pager");
+    if (pager) {
+      if (rows.length > shownRows.length) {
+        pager.hidden = false;
+        pager.innerHTML = `<span>已显示前 <b class="num">${fmt(shownRows.length)}</b> / <b class="num">${fmt(rows.length)}</b> ${UNIT}</span><button type="button" class="small-btn" id="pager-more">继续加载 +200 ${UNIT}</button><button type="button" class="small-btn" id="pager-all">展开全部 ${fmt(rows.length)} ${UNIT}</button>`;
+        $("#pager-more").onclick = () => { state.limit += 200; render(); };
+        $("#pager-all").onclick = () => { state.limit = rows.length; render(); };
+      } else {
+        pager.hidden = true;
+      }
+    }
     renderFeatured150();
     renderShortlist();
   }
@@ -1058,7 +1106,7 @@ button:disabled { cursor: wait; opacity: .6; }
         const meta = d.key === "fintech_ai" ? `${dList.length} 位 · FinTech 15 / AI 15` : `${dList.length} 位 · 核心顶刊 ${cCount} 位`;
         return { key: d.key, group: d.group, name: d.label.replace(/（.*）/, ""), meta, desc: d.desc };
       }),
-      { key: "all", group: "汇总视图", name: "全部 150 人", meta: `${allF.length} 位 · 五大方向总览`, desc: "五大方向全部 150 位入选学科带头人汇总视图" }
+      { key: "all", group: "汇总视图", name: `全部 ${allF.length} 人`, meta: `${allF.length} 位 · 六大方向总览`, desc: `六大子方向全部 ${allF.length} 位入选学科带头人汇总视图` }
     ];
     $("#f150-tabs").innerHTML = tabs.map(t => `<button role="tab" type="button" data-fdir="${esc(t.key)}" aria-selected="${fState.dir === t.key}"><span class="rt-group">${esc(t.group)}</span><span class="rt-name">${esc(t.name)}</span><span class="rt-meta num">${esc(t.meta)}</span></button>`).join("");
     const activeTab = tabs.find(t => t.key === fState.dir) || tabs[0];
@@ -1108,7 +1156,7 @@ button:disabled { cursor: wait; opacity: .6; }
   });
 
   function renderShortlist() {
-    const sl = C.sortPeople(P.filter(inSL), "score").sort((a,b)=>(a.tier ?? 99)-(b.tier ?? 99));
+    const sl = C.sortPeople(OA_P.filter(inSL), "score").sort((a,b)=>(a.tier ?? 99)-(b.tier ?? 99));
     $("#hero-sl").textContent = sl.length;
     $("#sl-count").textContent = `共 ${sl.length} ${UNIT} · ` + REGIONS.map(r => `${r} ${sl.filter(p => p.region === r).length}`).join(" · ");
     $("#sl").innerHTML = sl.length ? REGIONS.map(r => {
@@ -1225,14 +1273,14 @@ button:disabled { cursor: wait; opacity: .6; }
   }
 
   // Method section: selection criteria
-  const tierCount = t => P.filter(p => p.tier === t).length;
+  const tierCount = t => OA_P.filter(p => p.tier === t).length;
   const STEPS = [
-    ["确定学校范围", `共 ${schools.length} 所：${REGIONS.map(r => `${r} ${schools.filter(s => s.region === r).length} 所`).join("、")}。亚洲取 QS 2026 亚洲前 20 中的中国大陆、香港、新加坡高校，另加中国科学技术大学；北美取 U.S. News 2026 全美大学前 20（并列第 20 的 4 所全部纳入）；欧洲为牛津大学和伦敦政治经济学院（LSE）。`],
+    ["确定学校范围", `AI×金融核心库覆盖 ${D.stats.length} 所高校；合并五道口《师资库2026》后全量知识库覆盖全球 ${schools.length} 所高校（共 ${fmt(P.length)} 位学者）。`],
     ["从论文发现学者", `在 OpenAlex 检索各校 ${D.since.slice(0, 4)} 年以来的两类论文：经济金融领域中使用 AI / 机器学习的论文；计算机与经济金融的交叉论文。`],
     ["入库门槛", "逐校筛选作者，6 项条件须同时满足（见下方“入库门槛”）。OpenAlex 机构记录有误、学校检索未覆盖的学者改用作者检索，按论文署名确认学校，同样须满足这些条件。"],
     ["两个维度评价", "按“学术影响力”分 L1–L4 层，按“AI × 金融相关性”打 0–100 分，两者合成综合分（见下方“评价维度”）。"],
     ["现职核验", "逐条检索学校官方页面（院系教师名录、个人主页），核对当前学校、职称和院系，记录来源网址和核验日期。"],
-    ...(SC ? [["只收录已核实学者", `现职经学校官方页面核实的学者才在网站展示。${SC.pool} 位候选中收录 ${P.length} 位。`]] : []),
+    ...(SC ? [["只收录已核实学者", `现职经学校官方页面核实的学者才在网站展示。AI×金融核心库 ${SC.pool} 位候选中收录 ${OA_P.length} 位；合并《师资库2026》去重后全量知识库共 ${fmt(P.length)} 位。`]] : []),
     ["生成 Shortlist", `每个大洲按综合分从高到低取前 10 人${SC ? "（在已核实学者中选）" : ""}；核对发现已调离、非本校、非教职或方向不符的人不入选。`],
   ];
   $("#method-lead").textContent = `人才库中每位学者都经过同一套流程筛选和评价。以下规则可作为后续评审的统一口径。`;
@@ -1242,8 +1290,8 @@ button:disabled { cursor: wait; opacity: .6; }
   const scores = P.map(p => p.score).filter(x => x != null);
   if (scores.length) $("#score-range").textContent = `当前综合分范围 ${Math.min(...scores)}–${Math.max(...scores)}。`;
   $("#role-gate").innerHTML = SC ? `
-    <div><dt>候选</dt><dd>${SC.pool} 位</dd></div>
-    <div><dt>收录（现职已官方核实）</dt><dd>${P.length} 位</dd></div>` : `
+    <div><dt>AI×金融候选 / 核实</dt><dd>${SC.pool} 位 / ${OA_P.length} 位</dd></div>
+    <div><dt>全量知识库（含师资库2026）</dt><dd>${fmt(P.length)} 位</dd></div>` : `
     <div><dt>已官方核实</dt><dd>${roleCounts.ok} 条</dd></div>
     <div><dt>官方页面不唯一</dt><dd>${roleCounts.bad} 条</dd></div>
     <div><dt>现职未能核实</dt><dd>${roleCounts.notFound} 条</dd></div>${roleCounts.todo ? `
@@ -1294,9 +1342,9 @@ button:disabled { cursor: wait; opacity: .6; }
   ["roster", "featured", "shortlist", "method"].forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
 
   fillSchools(); render();
-  // #p-<OpenAlex id> opens that researcher's card, so each card has its own link
+  // #p-<id> opens that researcher's card, so each card has its own link
   function openFromHash() {
-    const m = /^#p-(A\d+)$/.exec(location.hash);
+    const m = /^#p-([A-Za-z0-9_]+)$/.exec(location.hash);
     const p = m && P.find(x => x.id === m[1]);
     if (!p) return;
     clearFilters(); state.open = key(p); render();
