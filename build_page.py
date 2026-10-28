@@ -266,6 +266,9 @@ SHORTLIST_PER_REGION = 10
 # Verified records the project owner chose not to show on the public site (data files keep them).
 HIDDEN_FROM_SHOWCASE = {
     "A5110659752",  # Craig Wright, hidden 2026-10-26 at the owner's request
+    # Second OpenAlex profile of a person already listed (same official page); keep the fuller profile.
+    "A5068264437",  # David Parkes -> kept as A5086173064 David C. Parkes
+    "A5101804407",  # Peng Cheng Luo -> kept as A5103140655 Peng Luo
 }
 
 

@@ -430,9 +430,9 @@ button:disabled { cursor: wait; opacity: .6; }
     <div class="section-heading">
       <div>
         <p class="kicker">01 · 180 人精选</p>
-        <h2>潜在合作学者名单，按六大子方向分组</h2>
+        <h2>合作学者名单，按六大子方向分组</h2>
       </div>
-      <p class="lead" id="f150-lead">基于合并后的全量知识库（4,669 位学者），围绕宏观金融、资产定价、公司金融、市场微观结构、金融科技·FinTech 与金融科技·AI 六个子方向，各选拔 30 位（共 180 位）学科带头人，综合展示顶刊代表作与合作契合度加权依据。</p>
+      <p class="lead" id="f150-lead">从全量知识库中，按宏观金融、资产定价、公司金融、市场微观结构、金融科技·FinTech、金融科技·AI 六个方向各选 30 位学科带头人，共 180 位，列出顶刊发表与合作契合度依据。</p>
     </div>
     <div class="sl-bar">
       <span id="f150-summary"></span>
@@ -524,7 +524,7 @@ button:disabled { cursor: wait; opacity: .6; }
       <fieldset class="filter-group"><legend>研究方法 / AI 类型（可多选）</legend><div class="filter-options" id="method-options"></div></fieldset>
       <div class="controls">
         <label>院系 <select id="department"></select></label>
-        <label class="phd-filter">博士毕业年份 <select id="year-status"><option value="all">全部（含未知）</option><option value="known">已记载年份</option><option value="unknown">仅年份未知</option></select></label>
+        <label class="phd-filter">博士毕业年份 <select id="year-status"><option value="all">全部</option><option value="known">已记载年份</option><option value="unknown">无年份记录</option></select></label>
         <label class="phd-filter">从 <input id="phd-from" type="number" min="1900" max="2100" placeholder="不限" aria-label="博士毕业起始年份"></label>
         <label class="phd-filter">至 <input id="phd-to" type="number" min="1900" max="2100" placeholder="不限" aria-label="博士毕业结束年份"></label>
         <button class="text-button" id="clear-all" type="button">清除全部筛选</button>
@@ -585,7 +585,7 @@ button:disabled { cursor: wait; opacity: .6; }
     <div class="box"><div class="box-body table-scroll">
       <table class="mini"><thead><tr><th>条件</th><th>规则</th><th>目的</th></tr></thead><tbody>
         <tr><td>交叉论文</td><td>以该校署名发表至少 2 篇交叉论文（2018 年以来）</td><td>有持续的交叉研究</td></tr>
-        <tr><td>当前关联</td><td>OpenAlex 最近关联机构包含该校</td><td>排除已调离或仅合作署名的作者</td></tr>
+        <tr><td>当前关联</td><td>OpenAlex 最近关联机构包含该校</td><td>排除已调离或只是合作署名的作者</td></tr>
         <tr><td>研究资历</td><td>h 指数 ≥ 6</td><td>排除以学生为主的作者</td></tr>
         <tr><td>领域对口</td><td>医学、环境、物理等非目标领域的主题占比 &lt; 40%</td><td>排除只是顺带用到经济或 AI 的其他领域学者</td></tr>
         <tr><td>经济金融背景</td><td>经济金融相关主题占比 ≥ 15%；计算机背景的学者还须有 ≥ 3 篇交叉论文</td><td>排除不了解经济金融的纯计算机学者</td></tr>
@@ -639,12 +639,12 @@ button:disabled { cursor: wait; opacity: .6; }
 
     <div id="method-f150">
       <h3 class="crit-title">五、180 人精选（6 大子方向 × 30 人 · 学科带头人 × 合作契合度）</h3>
-      <p class="crit-lead">基于合并后的全量知识库（4,669 位学者），面向宏观金融、资产定价、公司金融、市场微观结构、金融科技·FinTech 与金融科技·AI 六个子方向各选拔 30 位（共 180 位不重复学者），同步评估学术带头人底线与合作契合度。完整工作簿可 <a class="text-link" href="downloads/pbcsf-180-featured-scholars.xlsx" download>下载 180 人精选 Excel</a>。</p>
+      <p class="crit-lead"><span id="f150-method-scope">从全量知识库中</span>，按六个方向各选 30 位、共 180 位不重复的学科带头人。方向以学者本人主页填写的研究领域为准，论文标题作补充；AI 与 FinTech 两个方向只收研究对象是金融的学者。完整工作簿可 <a class="text-link" href="downloads/pbcsf-180-featured-scholars.xlsx" download>下载 180 人精选 Excel</a>。</p>
       <div class="method-grid" style="margin-top:18px">
         <div class="box">
           <div class="box-head">维度一 · 学科带头人认定（学术底线）</div>
           <div class="box-body">
-            <p class="box-note">要求总发表量 &gt; 10 篇（double-digit publications），并按顶级期刊产出分级认定：</p>
+            <p class="box-note">发表数和顶刊篇数均取自 OpenAlex 作者档案，要求论文数 &gt; 10 篇，按顶级期刊发表分级：</p>
             <table class="mini"><thead><tr><th>认定等级</th><th>标准</th></tr></thead><tbody>
               <tr><td>核心顶刊带头人</td><td>总发表 &gt; 10 篇，且金融 Top 3（JF、JFE、RFS）与经济 Top 5（AER、ECTA、QJE、JPE、REStud）核心顶刊 ≥ 6 篇</td></tr>
               <tr><td>延伸顶刊带头人</td><td>总发表 &gt; 10 篇，且计入 Management Science（MS）、JFQA、Operations Research（OR）、REStat、JME、JoE、Review of Finance（RF）等延伸顶刊后合计 ≥ 5 篇</td></tr>
@@ -655,12 +655,12 @@ button:disabled { cursor: wait; opacity: .6; }
         <div class="box">
           <div class="box-head">维度二 · 合作契合度（0–100 分，非等权加权）</div>
           <div class="box-body">
-            <p class="box-note">基于公开学术档案与合作网络，从 4 个维度合成合作契合度：</p>
+            <p class="box-note">由 4 项事实加总，每项只依据主页、名录或论文署名中的记载：</p>
             <table class="mini"><thead><tr><th>加权项</th><th class="r">满分</th><th>评分依据</th></tr></thead><tbody>
-              <tr><td>华语学术背景</td><td class="r">30</td><td>华人学者、具中文姓名或华语高校本硕博背景计 30 分；全职任教于亚洲高校计 20 分；其余计 10 分</td></tr>
-              <tr><td>中国问题研究</td><td class="r">25</td><td>发表 2 篇及以上中国金融/经济主题论文计 25 分，1 篇计 20 分；研究领域含中国问题计 18 分；方法可迁移应用计 8 分</td></tr>
-              <tr><td>对华交流与高校纽带</td><td class="r">25</td><td>国内顶尖高校在职计 25 分，香港高校计 23 分，新加坡高校计 21 分；海外学者与国内高校有合作署名研究计 18–22 分</td></tr>
-              <tr><td>资历阶段与大牛豁免</td><td class="r">20</td><td>顶刊 ≥ 12 篇、核心顶刊 ≥ 8 篇、h ≥ 50 或获顶级奖项的大牛学者适用“年龄不设限”计 20 分；中青年活跃正/副教授计 18–19 分</td></tr>
+              <tr><td>华语学术背景</td><td class="r">30</td><td>华人学者计 30 分；任职于亚洲高校计 20 分；其余计 10 分</td></tr>
+              <tr><td>中国问题研究</td><td class="r">25</td><td>中国主题论文 2 篇及以上计 25 分；主页研究领域含中国经济与金融计 22 分；中国主题论文 1 篇计 20 分；无记载计 0 分</td></tr>
+              <tr><td>对华交流与高校纽带</td><td class="r">25</td><td>任职于内地高校或同时在内地/香港任职计 25 分，香港高校 23 分，新加坡高校 21 分；论文署名单位含国内高校计 18–22 分；无记载计 0 分</td></tr>
+              <tr><td>资历阶段与大牛豁免</td><td class="r">20</td><td>顶刊 ≥ 12 篇、核心顶刊 ≥ 8 篇、h ≥ 50 或获顶级奖项，不设年龄限制，计 20 分；2008 年后获博士学位或现任副教授、助理教授计 18–19 分；其余 16 分</td></tr>
             </tbody></table>
           </div>
         </div>
@@ -731,7 +731,7 @@ button:disabled { cursor: wait; opacity: .6; }
   const affiliationNote = p => {
     const region = p.region || "地区未记载";
     if (!institutionKnown(p)) return `${region} · ${roleState(p) === "bad" ? "官方页面机构不唯一" : C.searched(p) ? C.NOT_FOUND : "现任待核实"}`;
-    return p.school_zh && p.school_zh !== institution(p) ? `检索关联：${p.school_zh}（${p.school_region || region}）` : region;
+    return region;
   };
   $("#backup").hidden = !DB;
   $("#shortlist-lead").textContent = (SC ? `默认收录每个大洲综合分前 ${SC.per_region} 位学者，按地区分组。点 ☆ 可加入或移出，` : "点 ☆ 管理需要继续查看的记录，按地区分组。") + (DB ? "改动写入本机数据库，刷新后保留；可下载数据库备份。" : "改动保存在当前浏览器。");
@@ -766,7 +766,7 @@ button:disabled { cursor: wait; opacity: .6; }
     <div><strong class="num">${fmt(P.length)}<small>位</small></strong><span>全量知识库学者（AI×金融 ${OA_P.length} + 师资库2026 ${fmt(KB_EXTRA.length)}）</span></div>
     <div><strong class="num">${schools.length}<small>所</small></strong><span>全球高校（${regionSchools}）</span></div>
     <div><strong class="num">${P.filter(p => p.tier === 1 || p.tier === 2).length}<small>位</small></strong><span>讲席教授、顶刊高产学者与顶级奖项得主</span></div>
-    <div><strong class="num">${D.featured_150?.total || OA_P.filter(p => p.shortlist).length}<small>位</small></strong><span>${D.featured_150?.total ? "180 人精选：六大子方向各 30 位潜在合作学科带头人" : `Shortlist：每个大洲综合分前 ${SC.per_region} 位`}</span></div>` : `
+    <div><strong class="num">${D.featured_150?.total || OA_P.filter(p => p.shortlist).length}<small>位</small></strong><span>${D.featured_150?.total ? "180 人精选：六大子方向各 30 位学科带头人" : `Shortlist：每个大洲综合分前 ${SC.per_region} 位`}</span></div>` : `
     <div><strong class="num">${fmt(P.length)}</strong><span>人才记录（未按人员去重）</span></div>
     <div><strong class="num">${schools.length}<small>所</small></strong><span>学校（${regionSchools}）</span></div>
     <div><strong class="num">${roleCounts.ok}<small>条</small></strong><span>任职状态已官方核实（含明确标注的荣休、退休）</span></div>
@@ -1056,6 +1056,7 @@ button:disabled { cursor: wait; opacity: .6; }
     renderShortlist();
   }
 
+  if (D.featured_150?.kb_total) { const el = document.getElementById("f150-method-scope"); if (el) el.textContent = `从全量知识库 ${fmt(D.featured_150.kb_total)} 位学者中`; }
   // Featured 150 section state & rendering
   const F150 = D.featured_150;
   const fState = { dir: "macro_finance", sub: "all", sort: "priority", open: null };
@@ -1333,7 +1334,7 @@ button:disabled { cursor: wait; opacity: .6; }
     ].map(([k, v], i, a) => `<div${i === a.length - 1 ? ' class="hl"' : ""}><dt>${k}</dt><dd>${v}</dd></div>`).join("");
     $("#search-schools").innerHTML = SR.stats.map(s => `<tr><td>${esc(s.school_zh)}</td><td>${esc(s.region)}</td><td class="r">${n(s.q1)}</td><td class="r">${n(s.q2)}</td><td class="r">${n(s.works)}</td><td class="r">${n(s.candidates)}</td><td class="r">${n(s.kept)}</td><td class="r">${n(s.shown)}</td></tr>`).join("");
     $("#xlsx").hidden = false;
-    $("#xlsx-note").innerHTML = `完整数据可 <a class="text-link" href="downloads/pbcsf-ai-talent-search-evidence.xlsx" download>下载 Excel</a>：每位学者一行，另附全部参考论文。`;
+    $("#xlsx-note").innerHTML = `完整数据可 <a class="text-link" href="downloads/pbcsf-ai-talent-search-evidence.xlsx" download>下载 Excel</a>：每位学者一行，另附全部交叉论文。`;
   }
 
   // Nav highlight follows the section in view
